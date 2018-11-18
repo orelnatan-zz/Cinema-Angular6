@@ -1,0 +1,17 @@
+
+%root {
+    display: block;
+    min-width: 1224px;
+}
+
+%page {
+    display: block;
+    width: 100%;
+    padding: 40px 0px 40px 0px;
+
+    %body {
+        display: block;
+        width: 1024px;
+        margin: 0 auto;
+    }
+} 

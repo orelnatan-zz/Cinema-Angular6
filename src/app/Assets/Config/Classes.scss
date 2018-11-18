@@ -1,0 +1,189 @@
+
+////////////////////////////////////////// Grid-Position ////////////////////////////////////////
+
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.fixed {
+    position: fixed;
+}
+
+.static {
+    position: fixed;
+}
+
+.sticky {
+    position: fixed;
+}
+
+////////////////////////////////////////// Grid-Display ////////////////////////////////////////
+
+.block-container {
+    display: block;
+}
+
+.inline-container {
+    display: inline;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.none {
+    display: none;
+}
+
+////////////////////////////////////////// Grid-Shape ////////////////////////////////////////
+
+.row {
+    flex-direction: row;
+}
+
+.row-r {
+    flex-direction: row-reverse;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.column-r {
+    flex-direction: column-reverse;
+}
+
+////////////////////////////////////////// Content ////////////////////////////////////////
+
+.items-start {
+    align-items: flex-start;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.items-end {
+    align-items: flex-end;
+}
+
+.flex-start {
+    justify-content: flex-start;
+}
+
+.flex-end {
+    justify-content: flex-end;
+}
+
+.flex-center {
+    justify-content: center;
+}
+
+.margin-center {
+    margin: 0 auto;
+}
+
+////////////////////////////////////////// Direction ///////////////////////////////////////
+
+.ltr {
+    direction: ltr;
+}
+
+.rtl {
+    direction: rtl;
+}
+
+////////////////////////////////////////// Images ////////////////////////////////////////
+
+.vertically-bottom {
+    vertical-align: sub;
+}
+
+.vertically-center {
+    vertical-align: middle;
+}
+
+.vertically-top {
+    vertical-align: super;
+}
+
+// ...
+
+////////////////////////////////////////// Text ////////////////////////////////////////
+
+.text-start {
+    text-align: start;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-end {
+    text-align: end;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.italic {
+    font-style: italic
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+////////////////////////////////////////// Measurements ////////////////////////////////////////
+
+.full {
+    width: 100%;
+}
+
+.three-quarters {
+    width: 75%;
+}
+
+.half {
+    width: 50%;
+}
+
+.third {
+    width: 33.33%;
+}
+
+.quarter {
+    width: 25%;
+}
+
+.eighth {
+    width: 12.5%;
+}
+
+.tenth {
+    width: 10%;
+}
+
+////////////////////////////////////////// Querys ////////////////////////////////////////
+
+.show-for-desktop {
+    @media screen and (max-width: 900px) {
+        display: none;
+    }
+}
+
+.show-for-mobile {
+    @media screen and (min-width: 700px) {
+        display: none;
+    }
+}
+
+////////////////////////////////////////// Custom ////////////////////////////////////////
+
+
+// ...
