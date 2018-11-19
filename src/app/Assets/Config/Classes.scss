@@ -172,13 +172,13 @@
 ////////////////////////////////////////// Querys ////////////////////////////////////////
 
 .show-for-desktop {
-    @media screen and (max-width: 900px) {
+    @media screen and (min-width: 900px) {
         display: none;
     }
 }
 
 .show-for-mobile {
-    @media screen and (min-width: 700px) {
+    @media screen and (max-width: 899px) {
         display: none;
     }
 }

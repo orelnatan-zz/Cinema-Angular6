@@ -1,0 +1,10 @@
+@import '../../Assets/Config/Utils';
+
+.page {
+    @extend %page;
+
+    .body {
+        @extend %body;
+    }
+    
+}
