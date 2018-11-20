@@ -4,14 +4,14 @@ import { Observable } from 'rxjs/Rx'; // npm install rxjs-compat
 import { environment } from '../../environments/environment';
 
 @Injectable()
-export class Books {
+export class Movies {
 
     constructor(private http: Http){
 
     }
 
-    getBooks(): Observable<any>{
-        return this.http.get(environment.apis.booksApi).map((response) => {
+    getMovies(): Observable<any>{
+        return this.http.get(environment.apis.moviesApi).map((response) => {
             return response.json();
         }).catch(this.handleError);
     }

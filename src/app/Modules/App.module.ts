@@ -7,12 +7,12 @@ import { RoutingModule } from './Routing.module';
 import { MomentModule } from 'angular2-moment'; // npm i angular2-moment // https://www.npmjs.com/package/angular2-moment
 
 import { AppRoot } from '../Core/AppRoot';
-import { Library } from '../Pages/Library';
+import { Cinema } from '../Pages/Cinema';
 
 @NgModule({
   declarations: [
     AppRoot,
-    Library,
+    Cinema,
   ],
 
   imports: [
