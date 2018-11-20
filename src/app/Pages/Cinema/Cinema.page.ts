@@ -13,7 +13,7 @@ export class Cinema {
     
   constructor(private Movies: Movies){
     this.Movies.getMovies().subscribe((response) => {
-      console.log(response);
+      console.log('response', response);
     })
   }
 

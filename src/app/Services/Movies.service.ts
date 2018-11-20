@@ -3,7 +3,7 @@ import { Injectable, }  from '@angular/core';
 import { Observable } from 'rxjs/Rx'; // npm install rxjs-compat
 import { environment } from '../../environments/environment';
 
-@Injectable()
+@Injectable() 
 export class Movies {
 
     constructor(private http: Http){
