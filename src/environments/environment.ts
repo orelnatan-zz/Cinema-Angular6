@@ -5,7 +5,11 @@
 export const environment = {
   production: false,
   apis: {
-    moviesApi: "assets/movies.json",
+    movies: {
+      moviesIds: "assets/moviesIds.json",
+      moviesData: "assets/moviesData.json"
+    }
+
   }
 };
 

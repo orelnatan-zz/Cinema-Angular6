@@ -1,6 +1,6 @@
 import { Http, } from '@angular/http';
 import { Injectable, }  from '@angular/core';
-import { Observable } from 'rxjs/Rx'; // npm install rxjs-compat
+import { Observable } from 'rxjs/Rx';   // npm install rxjs-compat
 import { environment } from '../../environments/environment';
 
 @Injectable() 
@@ -11,7 +11,7 @@ export class Movies {
     }
 
     getMovies(): Observable<any>{
-        return this.http.get(environment.apis.moviesApi).map((response) => {
+        return this.http.get(environment.apis.movies.moviesIds).map((response) => {
             return response.json();
         }).catch(this.handleError);
     }
