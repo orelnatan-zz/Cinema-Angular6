@@ -6,7 +6,7 @@ import * as moment from 'moment';
   selector: 'cinema',
   templateUrl: './Cinema.page.html',
   styleUrls: ['./Cinema.page.scss'],
-  providers: [Movies, ]
+  providers: [ Movies, ]
 })
 
 export class Cinema {
