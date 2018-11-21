@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment';
 // 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.descmovie&api_key=cfe422613b250f702980a3bbf9e90716'
 //  'http://www.omdbapi.com/?i=tt3896198&apikey=c952ede0'
 
-@Injectable() 
+@Injectable()
 export class Movies {
 
     constructor(private http: Http){

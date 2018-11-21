@@ -6,10 +6,8 @@ export const environment = {
   production: false,
   apis: {
     movies: {
-      moviesIds: "assets/moviesIds.json",
-      moviesData: "assets/moviesData.json"
+      moviesData: "assets/movies.json",
     }
-
   }
 };
 

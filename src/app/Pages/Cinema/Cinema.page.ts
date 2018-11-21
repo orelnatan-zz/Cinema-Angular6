@@ -10,10 +10,10 @@ import * as moment from 'moment';
 })
 
 export class Cinema {
-    
+
   constructor(private Movies: Movies){
     this.Movies.getMovies().subscribe((response) => {
-      console.log('response from server:', response);
+      console.log(response);
     })
   }
 
