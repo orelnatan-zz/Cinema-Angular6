@@ -1,0 +1,13 @@
+@import '../../assets/config/utils';
+
+.input-text-textbox {
+    height: 30px;
+    width: 100%;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    outline-style: none;
+    border: thin solid $color-white;
+    margin-bottom: 7px;
+    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.2), 0 4px 10px 0 rgba(0,0,0,0.19);
+}

@@ -1,0 +1,20 @@
+@import '../assets/config/utils';
+
+.validation {
+    position: absolute;
+    color: $color-error;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.red-box {
+    border-color: $color-error;
+    color: $color-error;
+}
+
+.input-title {
+    height: 28px;
+}
+
+
+

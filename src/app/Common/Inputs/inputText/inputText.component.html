@@ -1,0 +1,14 @@
+
+<div class="block-container relative full">
+    <div class="input-title" *ngIf="showTitle"> <h3>{{title}}</h3> </div>
+    <div> 
+     <input class="input-text-textbox" 
+            type="text" 
+            (input)="onChange.emit($event.target.value)"
+            value="{{value}}"
+            placeholder="{{placeholder}}"
+            [ngClass]="{'red-box': invalid && submitted}" /> 
+    </div>
+    <div *ngIf="showValidation && invalid && submitted"> <span class="validation">{{validation}}</span> </div>
+</div>
+
