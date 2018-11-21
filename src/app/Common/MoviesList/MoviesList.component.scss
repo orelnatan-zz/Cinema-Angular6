@@ -1,0 +1,12 @@
+@import '../../Assets/Config/Utils';
+
+.movieslist-movie {
+  display: block;
+  width: 300px;
+  margin: 20px;
+  transition: 0.3s;
+
+  &:hover {
+    box-shadow: 10px 10px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
+  }
+}

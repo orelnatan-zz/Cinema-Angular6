@@ -1,7 +1,12 @@
 
 <div class="page">
     <div class="body">
-        <div>@@@@@@@</div>
-        <span class="icon icon-bin"> </span>
+        <header [header]="'My Movies'"> </header>
+
+        <div class="block-container">
+            <span class="global-separator"></span>
+            <movies-list [movies]="movies"> </movies-list>
+        </div>
+
     </div>
 </div>

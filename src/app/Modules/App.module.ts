@@ -1,25 +1,32 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule, JsonpModule, } from '@angular/http';             
+import { HttpModule, JsonpModule, } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RoutingModule } from './Routing.module';
 import { MomentModule } from 'angular2-moment'; // npm i angular2-moment // https://www.npmjs.com/package/angular2-moment
 
 import { AppRoot } from '../Core/AppRoot';
 import { Cinema } from '../Pages/Cinema';
+import { MoviesList } from '../Common/MoviesList';
+import { Header } from '../Common/header';
+import { MovieItem } from '../Common/MoviesList/SubComponents/MovieItem';
 
 @NgModule({
   declarations: [
     AppRoot,
     Cinema,
+    MoviesList,
+    Header,
+    MovieItem,
+
   ],
 
   imports: [
-    BrowserModule, 
-    HttpModule, 
-    JsonpModule, 
-    ReactiveFormsModule, 
+    BrowserModule,
+    HttpModule,
+    JsonpModule,
+    ReactiveFormsModule,
     FormsModule,
     RoutingModule,
     MomentModule,
@@ -29,9 +36,9 @@ import { Cinema } from '../Pages/Cinema';
   providers: [
 
   ],
-  
-  bootstrap: [ 
-    AppRoot 
+
+  bootstrap: [
+    AppRoot
   ]
 })
 export class AppModule {

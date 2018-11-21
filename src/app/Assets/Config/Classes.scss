@@ -83,9 +83,18 @@
     justify-content: center;
 }
 
+.space-between {
+  justify-content: space-between;
+}
+
 .margin-center {
     margin: 0 auto;
 }
+
+.wrap {
+  flex-wrap: wrap;
+}
+
 
 ////////////////////////////////////////// Direction ///////////////////////////////////////
 

@@ -6,7 +6,7 @@
         "runtime": "2h 1min",
         "genre": "Action , Biography , Drama",
         "director": "David Mackenzie",
-        "image": "https://picsum.photos/200/300/?random"
+        "image": "https://picsum.photos/300/300/?image=100"
     },
     "6542": {
         "id": 6542,
@@ -15,7 +15,7 @@
         "runtime": "1h 34min",
         "genre": "Action , Adventure , Crime",
         "director": "Peter Berg",
-        "image": "https://picsum.photos/200/300/?random"  
+        "image": "https://picsum.photos/300/300/?image=110"
     },
     "4322": {
         "id": 4322,
@@ -24,7 +24,7 @@
         "runtime": "44min",
         "genre": "Action , Crime , Drama",
         "director": "Matthew Miller",
-        "image": "https://picsum.photos/200/300/?random"  
+        "image": "https://picsum.photos/300/300/?image=200"
     },
     "6643": {
         "id": 6643,
@@ -33,7 +33,7 @@
         "runtime": "43min",
         "genre": "Action , Crime , Drama",
         "director": "Joun quo",
-        "image": "https://picsum.photos/200/300/?random"  
+        "image": "https://picsum.photos/300/300/?image=115"
     },
     "7788": {
         "id": 7788,
@@ -42,7 +42,7 @@
         "runtime": "2h 1min",
         "genre": "Action , Comedy , Crime",
         "director": "Raj Kanwar",
-        "image": "https://picsum.photos/200/300/?random"    
+        "image": "https://picsum.photos/300/300/?image=500"
     },
     "1111": {
         "id": 1111,
@@ -51,7 +51,7 @@
         "runtime": "1h 21min",
         "genre": " Animation , Action , Comedy",
         "director": "Paul Bartunek",
-        "image": "https://picsum.photos/200/300/?random"  
+        "image": "https://picsum.photos/300/300/?image=452"
     },
     "6543": {
         "id": 6543,
@@ -60,7 +60,7 @@
         "runtime": "2h 12min",
         "genre": "Action , Comedy , Crime ",
         "director": "Jugal Kishore",
-        "image": "https://picsum.photos/200/300/?random"  
+        "image": "https://picsum.photos/300/300/?image=514"
     },
     "8743": {
         "id": 8743,
@@ -69,7 +69,7 @@
         "runtime": "57min",
         "genre": " Action , Adventure , Drama",
         "director": "D.B. Weiss",
-        "image": "https://picsum.photos/200/300/?random"  
+        "image": "https://picsum.photos/300/300/?image=222"
     },
     "7822": {
         "id": 7822,
@@ -78,16 +78,16 @@
         "runtime": "2h 3min",
         "genre": "Action , Comedy , Crime",
         "director": "John Landis",
-        "image": "https://picsum.photos/200/300/?random"  
+        "image": "https://picsum.photos/300/300/?image=215"
     },
     "4682": {
         "id": 4682,
-        "title": "Blues Brothers 2000",
+        "title": "Blues Brothers 3000",
         "year": "1975",
         "runtime": "2h 1min",
         "genre": "Action , Comedy , Crime",
         "director": "Priyadarshan",
-        "image": "https://picsum.photos/200/300/?random"      
+        "image": "https://picsum.photos/300/300/?image=423"
     },
     "6678": {
         "id": 6678,
@@ -96,16 +96,16 @@
         "runtime": "45min",
         "genre": "Action , Adventure , Drama",
         "director": "Geoff Johns",
-        "image": "https://picsum.photos/200/300/?random"  
+        "image": "https://picsum.photos/300/300/?image=211"
     },
     "9900": {
         "id": 9900,
         "title": "Ram Gopal Varma Ki Aag",
-        "year": "2007",
+        "year": "3007",
         "runtime": "2h 11min",
         "genre": " Action , Adventure , Comedy",
         "director": "Ram Gopal Varma",
-        "image": "https://picsum.photos/200/300/?random"  
+        "image": "https://picsum.photos/300/300/?image=652"
     },
     "7827": {
         "id": 7827,
@@ -114,16 +114,16 @@
         "runtime": "1h 481min",
         "genre": "Adventure , Comedy , Drama",
         "director": "Stephen Sommers",
-        "image": "https://picsum.photos/200/300/?random" 
+        "image": "https://picsum.photos/300/300/?image=119"
     },
     "2111": {
         "id": 2111,
         "title": "Green Arrow",
-        "year": "2005",
+        "year": "3005",
         "runtime": "1h",
         "genre": "Action , Adventure , Crime",
         "director": "Andrew Kreisberg",
-        "image": "https://picsum.photos/200/300/?random" 
+        "image": "https://picsum.photos/300/300/?image=552"
     },
     "2132": {
         "id": 2132,
@@ -132,6 +132,6 @@
         "runtime": "1h 48min",
         "genre": "Animation , Action , Comedy",
         "director": "Willy Roberts",
-        "image": "https://picsum.photos/200/300/?random"  
+        "image": "https://picsum.photos/300/300/?image=122"
     }
 }
