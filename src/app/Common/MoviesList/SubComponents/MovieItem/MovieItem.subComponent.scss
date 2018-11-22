@@ -1,0 +1,116 @@
+@import './src/assets/Config/Utils';
+
+.movieitem-main {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 200px;
+  background: $color-dark-gray;
+  background-size: cover;
+  background-position-y: center;
+  background-repeat: no-repeat;
+  transition: 0.3s;
+
+  &:hover {
+    box-shadow: 10px 10px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
+
+    .movieitem-frontcover {
+      background: transparent;
+    }
+
+    .movieitem-info {
+      opacity: 1;
+      background: rgba($color-dark-gray, .5);
+    }
+
+    .movieitem-icon {
+      opacity: 1;
+    }
+  }
+
+  .movieitem-frontcover {
+    position: absolute;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: space-between;
+    color: $color-white;
+    padding: 15px;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba($color-dark-gray, .5);
+    transition-duration: 0.3s;
+  }
+  
+  .movieitem-title {
+    padding: 1px 15px;
+    font-weight: bold;
+    width: fit-content;
+  }
+
+  .movieitem-info {
+    position: absolute;
+    display: block;
+    bottom: -145px;
+    left: 0;
+    height: 65%;
+    width: 100%;
+    padding: 15px;
+    border-top-right-radius: 75%;
+    transition-duration: 0.3s;
+    opacity: 0;
+  }
+
+  .movieitem-field {
+    display: block;
+    margin-top: 2px;
+  }
+  
+  .movieitem-property {
+    font-weight: bold;
+  }
+
+  .movieitem-value {
+    
+  }
+
+  .movieitem-icon {
+    margin-right: 10px;
+    opacity: 0;
+    transition-duration: 0.3;
+  }
+
+  .movieitem-pencil {
+    &:hover {
+      color: $color-grass;
+    }
+  }
+
+  .movieitem-bin {
+    &:hover {
+      color: $color-error;
+    }
+  }
+
+}
+
+.movieitem-slideUp {
+  animation: slideUp 0.3s ease;
+  animation-fill-mode: forwards;
+}
+
+.movieitem-slideDown {
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideUp {
+  0% {bottom: -145px;}
+  100% {bottom: 0px;}
+}
+
+@keyframes slideDown{
+  0% {bottom: 0px;}
+  100% {bottom: -145px;}
+}

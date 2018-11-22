@@ -15,8 +15,8 @@ export class Cinema {
   movies: Array<Movie>;
 
   constructor(private Movies: Movies){
-    this.Movies.getMovies().subscribe((response) => {
-      this.movies = Object.values(response);
+    this.Movies.getMovies().subscribe((response: any) => {
+      this.movies = response.results;
       console.log(this.movies);
     })
   }

@@ -1,10 +1,11 @@
+@import './src/assets/Config/Colors';
 
 @font-face {
   font-family: 'Cinema-Icons';
   src:
-      url('../../Assets/Fonts/Icons.woff') format('woff'),
-      url('../../Assets/Fonts/Icons.ttf') format('truetype'),
-      url('../../Assets/Icons/Icons.svg') format('svg');
+      url('src/assets/Fonts/Icons.woff') format('woff'),
+      url('src/assets/Fonts/Icons.ttf') format('truetype'),
+      url('src/assets/Icons/Icons.svg') format('svg');
    font-weight: normal;
    font-style: normal;
 }
@@ -18,9 +19,13 @@
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  cursor: pointer;
 }
 
 
+.icon-play:before {
+  content: "\e912";
+}
 
 .icon-pencil:before {
   content: "\e906";

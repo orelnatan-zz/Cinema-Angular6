@@ -1,1 +1,1 @@
-export * from './MovieItem.component';
+export * from './MovieItem.subComponent';

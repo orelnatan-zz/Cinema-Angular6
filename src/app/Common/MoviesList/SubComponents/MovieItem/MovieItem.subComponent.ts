@@ -4,13 +4,16 @@ import { Movie } from '../../../../Models/Movie.modal';
 
 @Component({
   selector: 'movie-item',
-  templateUrl: './MovieItem.component.html',
-  styleUrls: ['./MovieItem.component.scss']
+  templateUrl: './MovieItem.subComponent.html',
+  styleUrls: ['./MovieItem.subComponent.scss']
 })
 
 export class MovieItem implements OnInit {
+  IMAGE_PREFIX: string = "https://image.tmdb.org/t/p/w500";
 
   @Input() movie: Movie;
+  
+  parentIsHovered: boolean;
 
   constructor(){
 
@@ -19,5 +22,7 @@ export class MovieItem implements OnInit {
   ngOnInit(){
     console.log(this.movie);
   }
+
+  
 
 }

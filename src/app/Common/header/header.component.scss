@@ -1,7 +1,25 @@
-@import '../../Assets/Config/Utils';
+@import './src/assets/Config/Utils';
 
-.header-title {
-    font-weight: bold;
-    color: $color-dark-gray;
-    border-bottom: 2px solid $color-milk;
+.header-main {
+    height: 50px;
+    background: $color-dark-gray;
+    z-index: 1;
+    opacity: 0.9;
+    padding: 0px 25px;
+
+    .header-section {
+        display: flex;
+        align-items: center;
+        color: $color-white;
+        font-size: 2.1em;
+    }
+
+    .header-title {
+        font-family: fantasy;
+        font-style: italic;
+    }
+
+    .header-logo {
+        margin: 0px 20px;
+    }
 }

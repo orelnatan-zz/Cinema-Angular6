@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import './app/Assets/Config/Colors';
+@import './assets/Config/Utils';
 
 * {
     margin: 0;
@@ -9,7 +9,7 @@
 
 @font-face {
     font-family: HeeboRegular;
-    src: url('./app/Assets/Fonts/HeeboRegular.ttf');
+    src: url('./assets/Fonts/HeeboRegular.ttf');
 }
 
 body {

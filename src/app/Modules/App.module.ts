@@ -9,17 +9,17 @@ import { MomentModule } from 'angular2-moment'; // npm i angular2-moment // http
 import { AppRoot } from '../Core/AppRoot';
 import { Cinema } from '../Pages/Cinema';
 import { MoviesList } from '../Common/MoviesList';
-import { Header } from '../Common/header';
 import { MovieItem } from '../Common/MoviesList/SubComponents/MovieItem';
+import { Header } from '../Common/Header';
 
 @NgModule({
   declarations: [
     AppRoot,
     Cinema,
     MoviesList,
-    Header,
     MovieItem,
-
+    Header,
+    
   ],
 
   imports: [
