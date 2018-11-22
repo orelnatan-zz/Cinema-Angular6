@@ -2,4 +2,13 @@
 
 <modal #modalReference >
 
+  <div class="dialog-main" (click)="$event.stopPropagation()">
+      <span class="dialog-subject">Are you sure you want to perform this action?</span>
+      <span class="global-separator"></span>
+      <div class="flex-container full rtl">
+          <div class="dialog-button block-container quarter"> <button class="global-button global-button-primary">Ok</button> </div>
+          <div class="dialog-button block-container quarter"> <button class="global-button global-button-secondary">Cancel</button> </div>
+      </div>
+  </div>
+
 </modal>
