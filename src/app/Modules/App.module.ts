@@ -16,7 +16,7 @@ import { MovieItem } from '../Common/MoviesList/SubComponents/MovieItem';
 import { Header } from '../Common/Header';
 import { Spinner } from '../Common/Spinner';
 
-import { Editor } from '../Modals/Editor';
+import { MovieEditor } from '../Modals/MovieEditor';
 import { Loader } from '../Modals/Loader';
 import { Dialog } from '../Modals/Dialog';
 
@@ -29,7 +29,7 @@ import { Dialog } from '../Modals/Dialog';
     MovieItem,
     Header,
     Spinner,
-    Editor,
+    MovieEditor,
     Loader,
     Dialog,
   ],
