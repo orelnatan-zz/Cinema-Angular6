@@ -3,7 +3,10 @@
 
   <div class="flex-container flex-center wrap">
       <div class="movieslist-movie" *ngFor="let movie of movies">
-          <movie-item [movie]="movie"> </movie-item>
+          <movie-item
+              [movie]="movie"
+              (onRemove)="onRemove.emit($event)">
+          </movie-item>
       </div>
   </div>
 

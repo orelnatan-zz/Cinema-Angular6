@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-@import './assets/Config/Utils';
 
 * {
     margin: 0;
@@ -12,6 +11,11 @@
     src: url('./assets/Fonts/HeeboRegular.ttf');
 }
 
+@font-face {
+  font-family: JennaSue;
+  src: url('./assets/Fonts/JennaSue.ttf');
+}
+
 body {
     font-family: HeeboRegular;
 
@@ -22,6 +26,10 @@ body {
     @media screen and (max-width: 899px) {
       font-size: 13px;
     }
+}
+
+dialog {
+  display: block;
 }
 
 .global-separator {

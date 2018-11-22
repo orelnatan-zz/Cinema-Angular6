@@ -1,19 +1,19 @@
 
 <div class="movieitem-main" (mouseenter)="parentIsHovered=true" (mouseleave)="parentIsHovered=false" [ngStyle]="{'background-image': 'url(' + IMAGE_PREFIX + movie.poster_path + ')'}">
     <div class="movieitem-frontcover">
-        
+
         <div class="flex-container row full space-between">
             <div class="block-container">
                 <span class="movieitem-title">{{movie.title}}</span>
             </div>
             <div class="block-container">
                 <span class="movieitem-icon movieitem-pencil icon icon-pencil"></span>
-                <span class="movieitem-icon movieitem-bin icon icon-bin"></span>
+                <span class="movieitem-icon movieitem-bin icon icon-bin" (click)="onRemove.emit(movie.id)"></span>
             </div>
         </div>
 
         <div class="movieitem-info" [ngClass]="{'movieitem-slideUp': parentIsHovered, 'movieitem-slideDown': !parentIsHovered}">
-            <div class="movieitem-infofield">
+            <div class="movieitem-field">
                 <span class="movieitem-property">Language:&ensp;</span>
                 <span class="movieitem-value">{{movie.original_language}}</span>
             </div>
@@ -21,14 +21,14 @@
                 <span class="movieitem-property">Who Can Watch?&ensp;</span>
                 <span class="movieitem-value">{{movie.adult? 'Adults only.' : 'Everyone.'}}</span>
             </div>
-            <div class="movieitem-infofield">
+            <div class="movieitem-field">
                 <span class="movieitem-property">Published At:&ensp;</span>
                 <span class="movieitem-value">{{movie.release_date}}</span>
             </div>
-            <div class="movieitem-infofield">
+            <div class="movieitem-field">
                 <span class="movieitem-property">Title:&ensp;</span>
                 <span class="movieitem-value">{{movie.title}}</span>
-            </div>    
+            </div>
         </div>
     </div>
 </div>

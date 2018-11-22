@@ -12,7 +12,7 @@
   transition: 0.3s;
 
   &:hover {
-    box-shadow: 10px 10px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
+    box-shadow: 10px 10px 10px 0 rgba(0 , 0 , 0 , 0.2), 0 4px 20px 0 rgba(0, 0, 0 , 0.19);
 
     .movieitem-frontcover {
       background: transparent;
@@ -20,7 +20,7 @@
 
     .movieitem-info {
       opacity: 1;
-      background: rgba($color-dark-gray, .5);
+      background: rgba($color-dark-gray, .8);
     }
 
     .movieitem-icon {
@@ -47,9 +47,8 @@
     background: rgba($color-dark-gray, .5);
     transition-duration: 0.3s;
   }
-  
+
   .movieitem-title {
-    padding: 1px 15px;
     font-weight: bold;
     width: fit-content;
   }
@@ -70,14 +69,15 @@
   .movieitem-field {
     display: block;
     margin-top: 2px;
+    font-size: 0.9em;
   }
-  
+
   .movieitem-property {
     font-weight: bold;
   }
 
   .movieitem-value {
-    
+
   }
 
   .movieitem-icon {

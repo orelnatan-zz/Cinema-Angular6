@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Movie } from '../../Models/Movie.modal';
 
 @Component({
@@ -10,5 +10,7 @@ import { Movie } from '../../Models/Movie.modal';
 export class MoviesList {
 
   @Input() movies: Array<Movie>;
+
+  @Output() onRemove = new EventEmitter();
 
 }

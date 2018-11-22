@@ -1,3 +1,5 @@
+<loader #loaderReference> </loader>
+<dialog #DialogReference> </dialog>
 
 <header> </header>
 
@@ -5,7 +7,13 @@
     <div class="body">
         <div class="block-container">
             <span class="global-separator"></span>
-            <movies-list [movies]="movies"> </movies-list>
+            <movies-list
+                [movies]="movies"
+                (onRemove)="handleRemove($event)" >
+            </movies-list>
         </div>
     </div>
 </div>
+
+
+
