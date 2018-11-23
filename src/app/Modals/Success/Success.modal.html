@@ -1,0 +1,9 @@
+
+<modal (onClose)="onClose.emit()">
+    <notification
+        [notification]="'Action Successfully Complete. :)'"
+        [iconClass]="'icon-checkmark'"
+        [alertColor]="'#4CAF50'"
+        (onClose)="onClose.emit()">
+    </notification>
+</modal>

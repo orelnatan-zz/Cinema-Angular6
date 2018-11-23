@@ -1,7 +1,15 @@
-<loader #loaderReference> </loader>
-<dialog #DialogReference> </dialog>
+<loader *ngIf="showLoader"> </loader>
+<dialog *ngIf="showDialog" (onClose)="showDialog=false" (onApprove)="deleteMovie(movieId)"> </dialog>
+<success *ngIf="showSuccess" (onClose)="showSuccess=false"> </success>
+
+<movie-editor *ngIf="showEditor"
+    (onClose)="showEditor=false"
+    [movie]="movie"> 
+</movie-editor>
 
 <header> </header>
+
+
 
 <div class="page">
     <div class="body">
@@ -9,7 +17,8 @@
             <span class="global-separator"></span>
             <movies-list
                 [movies]="movies"
-                (onRemove)="handleRemove($event)" >
+                (onRemove)="handleRemove($event)"
+                (onEdit)="handleEdit($event)" >
             </movies-list>
         </div>
     </div>

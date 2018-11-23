@@ -1,13 +1,13 @@
 
-<div class="movieitem-main" (mouseenter)="parentIsHovered=true" (mouseleave)="parentIsHovered=false" [ngStyle]="{'background-image': 'url(' + IMAGE_PREFIX + movie.poster_path + ')'}">
+<div class="movieitem-main" (mouseenter)="parentIsHovered=true" (mouseleave)="parentIsHovered=false" [ngStyle]="{'background-image': 'url(' + movie.poster_path + ')'}">
     <div class="movieitem-frontcover">
 
         <div class="flex-container row full space-between">
-            <div class="block-container">
+            <div class="block-container global-overflowEllipsis">
                 <span class="movieitem-title">{{movie.title}}</span>
             </div>
             <div class="block-container">
-                <span class="movieitem-icon movieitem-pencil icon icon-pencil"></span>
+                <span class="movieitem-icon movieitem-pencil icon icon-pencil" (click)="onEdit.emit(movie.id)"></span>
                 <span class="movieitem-icon movieitem-bin icon icon-bin" (click)="onRemove.emit(movie.id)"></span>
             </div>
         </div>
@@ -25,7 +25,7 @@
                 <span class="movieitem-property">Published At:&ensp;</span>
                 <span class="movieitem-value">{{movie.release_date}}</span>
             </div>
-            <div class="movieitem-field">
+            <div class="movieitem-field global-overflowEllipsis">
                 <span class="movieitem-property">Title:&ensp;</span>
                 <span class="movieitem-value">{{movie.title}}</span>
             </div>

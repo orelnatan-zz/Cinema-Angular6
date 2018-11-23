@@ -17,7 +17,7 @@ export class InputText {
     @Input() showTitle: boolean = true;
     @Input() showValidation: boolean = true;
 
-    @Output() onChange = new EventEmitter();
+    @Output() onChange: EventEmitter<any> = new EventEmitter();
 
 
 }

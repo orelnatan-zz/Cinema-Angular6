@@ -1,0 +1,42 @@
+@import './src/assets/Config/Utils';
+
+.notification-main {
+    position: relative;
+    padding: 30px;
+    background: #FFFFFF;
+    height: 120px;
+    border-top: 10px solid;
+    background: $color-white;
+
+    @media screen and (min-width: 900px) {
+        width: 450px;
+    }
+
+    @media screen and (max-width: 899px) {
+        width: 100%;
+    }
+  
+    .notification-close {
+        top: -20px;
+        background: white;
+        border-radius: 50%;
+        left: -15px;
+        padding: 6px;
+        cursor: pointer;
+    }
+
+    .notification-icon {
+        right: 0;
+        font-size: 2em;
+        margin: 10px 23px;
+    }
+
+    .notification-note {
+        width: 70%;
+        text-align: center;
+        display: block;
+        max-width: 100%;
+        word-wrap: break-word;
+        font-weight: bold;
+    }
+}

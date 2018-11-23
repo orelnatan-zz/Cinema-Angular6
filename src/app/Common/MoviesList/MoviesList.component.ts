@@ -11,6 +11,7 @@ export class MoviesList {
 
   @Input() movies: Array<Movie>;
 
-  @Output() onRemove = new EventEmitter();
+  @Output() onRemove: EventEmitter<any> = new EventEmitter();
+  @Output() onEdit: EventEmitter<any> = new EventEmitter();
 
 }

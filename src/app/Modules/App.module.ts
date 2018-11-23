@@ -8,22 +8,30 @@ import { MomentModule } from 'angular2-moment'; // npm i angular2-moment // http
 
 import { AppRoot } from '../Core/AppRoot';
 import { Modal } from '../Core/Modal';
+import { Notification } from '../Core/Notification';
+import { Header } from '../Core/Header';
 
 import { Cinema } from '../Pages/Cinema';
-
 import { MoviesList } from '../Common/MoviesList';
 import { MovieItem } from '../Common/MoviesList/SubComponents/MovieItem';
-import { Header } from '../Common/Header';
+
 import { Spinner } from '../Common/Spinner';
 
 import { MovieEditor } from '../Modals/MovieEditor';
 import { Loader } from '../Modals/Loader';
 import { Dialog } from '../Modals/Dialog';
+import { Success } from '../Modals/Success';
+
+import { InputText } from '../Inputs/inputText';
+import { InputSelect } from '../Inputs/InputSelect';
+import { InputDate } from '../Inputs/InputDate';
+import { InputCheckbox } from '../Inputs/InputCheckbox';
 
 @NgModule({
   declarations: [
     AppRoot,
     Modal,
+    Notification,
     Cinema,
     MoviesList,
     MovieItem,
@@ -32,6 +40,11 @@ import { Dialog } from '../Modals/Dialog';
     MovieEditor,
     Loader,
     Dialog,
+    Success,
+    InputText,
+    InputSelect,
+    InputDate,
+    InputCheckbox
   ],
 
   imports: [
@@ -46,7 +59,7 @@ import { Dialog } from '../Modals/Dialog';
   ],
 
   providers: [
-
+    
   ],
 
   bootstrap: [

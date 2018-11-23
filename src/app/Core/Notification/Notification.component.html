@@ -1,0 +1,7 @@
+
+
+<div class="notification-main flex-container row flex-center" [ngStyle]="{'color': alertColor}" (click)="$event.stopPropagation()">
+    <span class="absolute notification-icon icon {{iconClass}}" ></span>
+    <span class="absolute notification-close icon icon-close" (click)="onClose.emit()"></span>
+    <span class="notification-note">{{notification}}</span>
+</div>

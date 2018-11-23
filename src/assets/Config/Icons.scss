@@ -19,7 +19,6 @@
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  cursor: pointer;
 }
 
 
@@ -45,4 +44,16 @@
 
 .icon-close:before {
   content: "\e908";
+}
+
+.icon-warning:before {
+  content: "\ea07";
+}
+
+.icon-info:before {
+  content: "\ea0c";
+}
+
+.icon-checkmark:before {
+  content: "\ea10";
 }

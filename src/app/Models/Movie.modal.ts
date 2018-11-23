@@ -1,10 +1,11 @@
+import { Language } from './Language.modal';
 
 export interface Movie {
   adult: boolean;
   backdrop_path: string;
   genre_ids: Array<number>;
   id: number;
-  original_language: string;
+  original_language: Language;
   original_title: string;
   overview: string;
   popularity: Float32Array;

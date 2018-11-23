@@ -23,8 +23,8 @@ export class InputSelect implements OnInit, AfterViewInit {
     @Input() showTitle: boolean = true;
     @Input() showValidation: boolean = true;
 
-    @Output() onChange = new EventEmitter();
-    @Output() clear = new EventEmitter();
+    @Output() onChange: EventEmitter <any> = new EventEmitter();
+    @Output() clear: EventEmitter <any> = new EventEmitter();
 
     constructor(private renderer: Renderer2){}
 

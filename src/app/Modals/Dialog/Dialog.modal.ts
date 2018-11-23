@@ -1,5 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
-import { Modal } from '../../Core/Modal';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'dialog',
@@ -9,13 +8,7 @@ import { Modal } from '../../Core/Modal';
 
 export class Dialog {
 
-  @ViewChild('modalReference') modalReference: Modal;
+  @Output() onClose: EventEmitter<any> = new EventEmitter();
+  @Output() onApprove: EventEmitter<any> = new EventEmitter();
 
-  public showDialog(){
-    this.modalReference.showModal();
-  }
-
-  public hideDialog(){
-    this.modalReference.hideModal();
-  }
 }

@@ -70,3 +70,12 @@ dialog {
       cursor: default;
   }
 }
+
+.global-overflowEllipsis {
+  white-space: nowrap; 
+  max-width: 80%; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+
+

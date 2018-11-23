@@ -1,17 +1,10 @@
 @import './src/assets/Config/Utils';
 
-.dialog-main {
-  display: block;
-  padding: 30px;
-  background: $color-white;
+.dialog-controls {
+    background: $color-white;
+    padding-bottom: 10px;
+}
 
-  .dialog-subject {
-    display: block;
-    font-size: 1.3em;
-    max-width: 80%;
-  }
-
-  .dialog-button {
-    margin-left: 20px;
-  }
+.dialog-button {
+    margin: 0px 10px;
 }

@@ -1,9 +1,9 @@
-@import '../assets/config/utils';
+@import './src/assets/Config/Utils';
 
 .validation {
     position: absolute;
     color: $color-error;
-    font-size: 13px;
+    font-size: 0.8em;
     font-weight: bold;
 }
 

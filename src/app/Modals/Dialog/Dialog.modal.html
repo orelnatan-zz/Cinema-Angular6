@@ -1,14 +1,22 @@
 
 
-<modal #modalReference >
-
-  <div class="dialog-main" (click)="$event.stopPropagation()">
-      <span class="dialog-subject">Are you sure you want to perform this action?</span>
-      <span class="global-separator"></span>
-      <div class="flex-container full rtl">
-          <div class="dialog-button block-container quarter"> <button class="global-button global-button-primary">Ok</button> </div>
-          <div class="dialog-button block-container quarter"> <button class="global-button global-button-secondary">Cancel</button> </div>
-      </div>
+<modal (onClose)="onClose.emit()" >
+  <div class="block-container">
+        <div class="block-container">
+            <notification
+                [notification]="'Are you sure you want to perform this action?'"
+                [iconClass]="'icon-warning'"
+                [alertColor]="'#000080'"
+                (onClose)="onClose.emit()">
+            </notification>
+        </div>
+        <div class="dialog-controls flex-container row full">
+            <div class="dialog-button block-container half">
+                    <button class="global-button global-button-secondary" (click)="onClose.emit()">Cancel</button> 
+            </div>
+            <div class="dialog-button  block-container half"> 
+                <button class="global-button global-button-primary" (click)="onApprove.emit()">Ok</button> 
+            </div>
+        </div>
   </div>
-
 </modal>

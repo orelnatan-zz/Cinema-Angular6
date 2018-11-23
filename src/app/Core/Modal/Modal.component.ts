@@ -1,5 +1,5 @@
 
-import { Component, Input } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'modal',
@@ -9,16 +9,7 @@ import { Component, Input } from '@angular/core';
 
 export class Modal {
 
-  @Input() isActive: boolean;
-
-  public showModal(){
-    this.isActive = true;
-  }
-
-  public hideModal(){
-    this.isActive = false;
-  }
-
+  @Output() onClose: EventEmitter<any> = new EventEmitter();
 }
 
 

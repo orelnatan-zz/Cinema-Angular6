@@ -1,6 +1,6 @@
 
-<div class="modal-main" *ngIf="isActive" (click)="hideModal()">
-    <div class="block-container relative">
+<div class="modal-main" (click)="onClose.emit()">
+    <div class="modal-body block-container relative">
           <ng-content></ng-content>
     </div>
 </div>

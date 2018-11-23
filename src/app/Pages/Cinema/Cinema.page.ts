@@ -1,12 +1,8 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { Movies } from '../../Services/Movies.service';
 import { Movie } from '../../Models/Movie.modal';
-import { Loader } from '../../Modals/Loader';
-import { Dialog } from '../../Modals/Dialog';
 
-
-import * as moment from 'moment';
-
+//import * as moment from 'moment';
 
 @Component({
   selector: 'cinema',
@@ -16,28 +12,47 @@ import * as moment from 'moment';
 })
 
 export class Cinema implements OnInit {
-  @ViewChild('loaderReference') loaderReference: Loader;
-  @ViewChild('DialogReference') DialogReference: Dialog;
+  showLoader: boolean;
+  showDialog: boolean;
+  showSuccess: boolean;
+  showEditor: boolean;
 
   movies: Array<Movie>;
+  movieId: number;
+  movie: Movie;
 
   constructor(private Movies: Movies){
 
   }
 
   ngOnInit(){
-    this.loaderReference.showLoader();
+    this.showLoader = true;
 
     this.Movies.getMovies().subscribe((response: any) => {
-      this.movies = response.results;
-      this.loaderReference.hideLoader();
+      this.movies = response;
+      this.showLoader = false;
       console.log(this.movies);
     })
   }
 
   handleRemove(id: number){
-    console.log(id);
-    this.DialogReference.showDialog();
+    this.movieId = id;
+    this.showDialog = true;
   }
+
+  handleEdit(id: number){
+    this.movie = {...this.movies.find(movie => movie.id == id)};      //Copy book by value only...
+    this.showEditor = true;
+  }
+
+  deleteMovie(id: number){
+    let index = this.movies.findIndex(movie => movie.id == id);
+    this.movies.splice(index, 1);
+
+    this.showDialog = false;
+    this.showSuccess = true;
+  }
+
+  
 
 }

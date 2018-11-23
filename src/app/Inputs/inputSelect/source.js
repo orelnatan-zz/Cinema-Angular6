@@ -281,7 +281,7 @@ form = {
 };
 
 export function activateSource(){
-  window.onload = form.f.init.register;
+  form.f.init.register();
 }
 
 export function remoteSelection(child, parent){

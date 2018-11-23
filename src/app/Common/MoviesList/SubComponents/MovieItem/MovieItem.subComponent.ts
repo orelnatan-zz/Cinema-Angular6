@@ -9,11 +9,11 @@ import { Movie } from '../../../../Models/Movie.modal';
 })
 
 export class MovieItem implements OnInit {
-  IMAGE_PREFIX: string = "https://image.tmdb.org/t/p/w500";
 
   @Input() movie: Movie;
 
-  @Output() onRemove = new EventEmitter();
+  @Output() onRemove: EventEmitter<any> = new EventEmitter();
+  @Output() onEdit: EventEmitter<any> = new EventEmitter();
 
   parentIsHovered: boolean;
 
