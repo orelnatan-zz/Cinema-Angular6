@@ -14,10 +14,4 @@ export class MovieEditor {
 
   @Input() movie: Movie;
 
-  languages: Array<string> = ['en', 'es', 'fr', 'de', 'ja', 'hi', 'he', 'ru'];
-
-  handleSubmit(movie: Movie): void{
-    this.onSave.emit(movie);
-  }
-
 }

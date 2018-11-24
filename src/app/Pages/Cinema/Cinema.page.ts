@@ -22,7 +22,7 @@ export class Cinema implements OnInit {
   movie: Movie;
 
   constructor(private moviesService: Movies, 
-              private movieTitlePipe: MovieTitle,){
+              private movieTitlePipe: MovieTitle){
     
   }
 

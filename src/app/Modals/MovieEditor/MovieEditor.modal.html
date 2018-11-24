@@ -1,7 +1,7 @@
 
 
 <modal (onClose)="onClose.emit()" >
-    <form class="movieeditor-main" #form="ngForm" (ngSubmit)="form.valid && handleSubmit(movie)" novalidate (click)="$event.stopPropagation()">
+    <form class="movieeditor-main" #form="ngForm" (ngSubmit)="form.valid && onSave.emit(movie)" novalidate (click)="$event.stopPropagation()">
             <div class="block-container">
                 <div class="movieeditor-cover" [ngStyle]="{'background-image': 'url(' + movie?.poster_path + ')'}"></div>
                 <div class="movieeditor-inputs">   
@@ -9,7 +9,7 @@
                         <input-select
                             [title]="'Language:'"
                             [subtitle]="'Languages'"
-                            [items]="languages"
+                            [items]="['en', 'es', 'fr', 'de', 'ja', 'hi', 'he', 'ru']"
                             [validation]="'You must choose a language!'"
                             [selected]="movie?.original_language"
                             [invalid]="!movie?.original_language" 
@@ -22,12 +22,13 @@
                             required >    
                         </input-select>
                     </div>
-
+                    
                     <div class="movieeditor-input">
+                        <!-- Minimum date = 1888-01-11 ==>> First movie ever created! -->
                         <input-date
                             [title]="'Release Date'"
-                            [value]="movie?.release_date"
-                            [min]="'1886-01-11'"
+                            [value]="movie?.release_date" 
+                            [min]="'1888-01-11'"             
                             [validation]="'Please choose a valid date!'"
                             [submitted]="form.submitted"
                             [invalid]="date.invalid"                      
