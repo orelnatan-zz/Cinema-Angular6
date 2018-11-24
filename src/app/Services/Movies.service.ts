@@ -13,31 +13,21 @@ export class Movies {
 
     }
 
-    getMovies(): Observable<Movie[]>{
+    getMovies(): Observable<Movie[]> {
         return this.http.get(environment.apis.movies.moviesData).map((response) => {
             return this.normalizeData(response.json().results);
         }).catch(this.handleError);
     }
 
-    handleError(error: any): Observable<Error>{               //On error, throw exception
+    handleError(error: any): Observable<Error> {               //On error, throw exception
         return Observable.throw(error);
     }
-
-    normalizeData(data: Array<Movie>): any{
-        const languagesIds = {
-            en: 1, es: 2, fr: 3,
-            de: 4, js: 5, hi: 6, he: 7
-        };
-        
-        data.forEach((movie: Movie) => {
-            let imagePath: string = movie.poster_path;
-            let language: string = String(movie.original_language);
-            let releaseDate: string = movie.release_date;
-    
-            movie.poster_path = IMAGE_PREFIX.concat(imagePath);
-            movie.original_language = { label: String(language), id: languagesIds[language] };
-        })
-
+ 
+    normalizeData(data: Array<Movie>): any {     // any ???
+            data.forEach((movie: Movie) => {
+                    let imagePath: string = movie.poster_path;
+                    movie.poster_path = IMAGE_PREFIX.concat(imagePath);
+            })
         return data;
     }
 }

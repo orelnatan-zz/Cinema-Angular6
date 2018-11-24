@@ -1,6 +1,7 @@
 @import './src/assets/Config/Utils';
 
 .movieeditor-main {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

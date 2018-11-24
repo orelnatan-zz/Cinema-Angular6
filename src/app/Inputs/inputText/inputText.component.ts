@@ -2,8 +2,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'input-text',
-  templateUrl: './inputText.component.html',
-  styleUrls: [ './inputText.component.scss', '../inputs.styles.scss'],
+  templateUrl: './InputText.component.html',
+  styleUrls: [ './InputText.component.scss', '../inputs.styles.scss'],
 })
 
 export class InputText {

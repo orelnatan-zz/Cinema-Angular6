@@ -4,8 +4,8 @@ import { remoteSelection } from './source';
 
 @Component({
   selector: 'input-select',
-  templateUrl: './inputSelect.component.html',
-  styleUrls: ['./inputSelect.component.scss', '../inputs.styles.scss'],
+  templateUrl: './InputSelect.component.html',
+  styleUrls: ['./InputSelect.component.scss', '../inputs.styles.scss'],
 })
 
 export class InputSelect implements OnInit, AfterViewInit {
@@ -13,10 +13,10 @@ export class InputSelect implements OnInit, AfterViewInit {
     @ViewChild('inputReference') inputReference: ElementRef;
     @ViewChild('subtitleReference') subtitleReference: ElementRef;
 
-    @Input() items: Array<object>;
+    @Input() items: Array<string>;
     @Input() title: string;
     @Input() subtitle: string;
-    @Input() selected: number;
+    @Input() selected: string;
     @Input() validation: string;
     @Input() submitted: boolean;
     @Input() invalid: boolean;
@@ -24,7 +24,6 @@ export class InputSelect implements OnInit, AfterViewInit {
     @Input() showValidation: boolean = true;
 
     @Output() onChange: EventEmitter <any> = new EventEmitter();
-    @Output() clear: EventEmitter <any> = new EventEmitter();
 
     constructor(private renderer: Renderer2){}
 
@@ -37,14 +36,14 @@ export class InputSelect implements OnInit, AfterViewInit {
     }
 
     public clearSelection(){
-      this.selectItem(-1);
+      this.selectItem('non');
 
       this.renderer.setStyle(this.subtitleReference.nativeElement, 'font-size', '16px');
       this.renderer.setStyle(this.subtitleReference.nativeElement, 'top', '32px');
     }
 
-    public selectItem(id: number){
-      let child: HTMLElement = document.getElementById(String(id));
+    public selectItem(id: string){
+      let child: HTMLElement = document.getElementById(id);
       let parent: HTMLElement = this.inputReference.nativeElement;
 
       remoteSelection(child, parent); 

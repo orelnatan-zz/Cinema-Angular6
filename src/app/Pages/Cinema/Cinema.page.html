@@ -1,22 +1,23 @@
-<loader *ngIf="showLoader"> </loader>
-<dialog *ngIf="showDialog" (onClose)="showDialog=false" (onApprove)="deleteMovie(movieId)"> </dialog>
-<success *ngIf="showSuccess" (onClose)="showSuccess=false"> </success>
 
 <movie-editor *ngIf="showEditor"
     (onClose)="showEditor=false"
+    (onSave)="isMovieExist($event.id) ? updateExistingMovie($event) : createNewMovie($event)"
     [movie]="movie"> 
 </movie-editor>
 
+<loader *ngIf="showLoader"> </loader>
+<dialog *ngIf="showDialog" (onClose)="showDialog=false" (onApprove)="deleteMovie(movieId)"> </dialog>
+<success *ngIf="showSuccess" (onClose)="showSuccess=false"> </success>
+<failure *ngIf="showFailure" (onClose)="showFailure=false"> </failure>
+
 <header> </header>
-
-
 
 <div class="page">
     <div class="body">
         <div class="block-container">
             <span class="global-separator"></span>
             <movies-list
-                [movies]="movies"
+                [movies]="moviesList"
                 (onRemove)="handleRemove($event)"
                 (onEdit)="handleEdit($event)" >
             </movies-list>

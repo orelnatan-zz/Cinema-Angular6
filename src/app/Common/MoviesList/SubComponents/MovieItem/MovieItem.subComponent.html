@@ -4,7 +4,7 @@
 
         <div class="flex-container row full space-between">
             <div class="block-container global-overflowEllipsis">
-                <span class="movieitem-title">{{movie.title}}</span>
+                <span class="movieitem-title">{{movie.title | purifier}}</span>
             </div>
             <div class="block-container">
                 <span class="movieitem-icon movieitem-pencil icon icon-pencil" (click)="onEdit.emit(movie.id)"></span>
@@ -23,11 +23,11 @@
             </div>
             <div class="movieitem-field">
                 <span class="movieitem-property">Published At:&ensp;</span>
-                <span class="movieitem-value">{{movie.release_date}}</span>
+                <span class="movieitem-value">{{movie.release_date | dateAdapter}}</span>
             </div>
             <div class="movieitem-field global-overflowEllipsis">
                 <span class="movieitem-property">Title:&ensp;</span>
-                <span class="movieitem-value">{{movie.title}}</span>
+                <span class="movieitem-value">{{movie.title | purifier}}</span>
             </div>
         </div>
     </div>

@@ -1,1 +1,17 @@
 
+<div class="block-container relative full">
+    <div class="input-title" *ngIf="showTitle"> <h3>{{title}}</h3> </div>
+    <div class="block-container">
+        <input
+            class="inputdate-box" 
+            type="date"
+            value="{{value}}"
+            min="{{min}}"
+            max="{{max}}"
+            (input)="onChange.emit(calederReference.value)"
+            onkeypress='return(event.charCode > 12 && event.charCode < 12)'
+            #calederReference
+        />
+    </div>
+    <div *ngIf="showValidation && invalid && submitted"> <span class="validation">{{validation}}</span> </div>
+</div> 

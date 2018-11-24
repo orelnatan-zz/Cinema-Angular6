@@ -1,0 +1,9 @@
+
+<modal (onClose)="onClose.emit()">
+    <notification
+        [notification]="'Error: This title is already in use!, try a another.'"
+        [iconClass]="'icon-close'"
+        [alertColor]="'#c40000'"
+        (onClose)="onClose.emit()">
+    </notification>
+</modal>

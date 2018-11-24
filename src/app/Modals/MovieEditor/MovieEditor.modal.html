@@ -4,32 +4,47 @@
     <form class="movieeditor-main" #form="ngForm" (ngSubmit)="form.valid && handleSubmit(movie)" novalidate (click)="$event.stopPropagation()">
             <div class="block-container">
                 <div class="movieeditor-cover" [ngStyle]="{'background-image': 'url(' + movie?.poster_path + ')'}"></div>
-                <div class="movieeditor-inputs">
-                    
+                <div class="movieeditor-inputs">   
                     <div class="movieeditor-input">
                         <input-select
-                            [title]="'Select Movie Language:'"
+                            [title]="'Language:'"
                             [subtitle]="'Languages'"
                             [items]="languages"
-                            [validation]="'You must choose a languages!'"
-                            [selected]="movie?.original_language?.id"
+                            [validation]="'You must choose a language!'"
+                            [selected]="movie?.original_language"
                             [invalid]="!movie?.original_language" 
                             [submitted]="form.submitted"
                             [ngModel]="movie.original_language"
                             (onChange)="movie.original_language=$event"
-                            (clear)="movie.original_language=$event"
                             name="language"
                             #language="ngModel"
                             ngDefaultControl
                             required >    
                         </input-select>
                     </div>
+
+                    <div class="movieeditor-input">
+                        <input-date
+                            [title]="'Release Date'"
+                            [value]="movie?.release_date"
+                            [min]="'1886-01-11'"
+                            [validation]="'Please choose a valid date!'"
+                            [submitted]="form.submitted"
+                            [invalid]="date.invalid"                      
+                            (onChange)="movie.release_date=$event"
+                            [ngModel]="movie.release_date"
+                            name="date"
+                            #date="ngModel"
+                            ngDefaultControl
+                            required >
+                        </input-date>
+                    </div>
                     
                     <div class="movieeditor-input">
                         <input-text 
                             [title]="'Title:'"
-                            [value]="movie?.title"
-                            [validation]="'Invalide name!,&ensp;Min length must be 2 characters.'"
+                            [value]="movie?.title | purifier"
+                            [validation]="'Invalide!,&ensp;Min length must be 2 characters'"
                             [placeholder]="'Insert Movie Name'"
                             [submitted]="form.submitted"
                             [invalid]="title.invalid"
@@ -76,10 +91,10 @@
 
             <div class="movieeditor-inputs flex-container space-between">
                 <div class="movieeditor-button">
-                    <button class="global-button global-button-secondary">Cancel</button>
+                    <button class="global-button global-button-secondary" (click)="onClose.emit()">Cancel</button>
                 </div>
                 <div class="movieeditor-button">
-                    <button type="submit" class="global-button global-button-primary">Ok</button>
+                    <button type="submit" class="global-button global-button-primary">Save</button>
                 </div>
             </div>
     </form>

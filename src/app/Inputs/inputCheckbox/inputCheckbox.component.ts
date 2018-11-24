@@ -2,8 +2,8 @@ import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core
 
 @Component({
   selector: 'input-checkbox',
-  templateUrl: './inputCheckbox.component.html',
-  styleUrls: ['./inputCheckbox.component.scss', '../inputs.styles.scss'],
+  templateUrl: './InputCheckbox.component.html',
+  styleUrls: ['./InputCheckbox.component.scss', '../inputs.styles.scss'],
 })
 
 export class InputCheckbox {

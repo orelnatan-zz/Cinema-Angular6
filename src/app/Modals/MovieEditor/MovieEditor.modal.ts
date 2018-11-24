@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Movie } from '../../Models/Movie.modal';
-import { Language } from '../../Models/Language.modal';
 
 @Component({
   selector: 'movie-editor',
@@ -11,6 +10,7 @@ import { Language } from '../../Models/Language.modal';
 
 export class MovieEditor implements OnInit {
   @Output() onClose: EventEmitter<any> = new EventEmitter();
+  @Output() onSave: EventEmitter<any> = new EventEmitter();
 
   @Input() movie: Movie = {
     adult: false,
@@ -30,15 +30,8 @@ export class MovieEditor implements OnInit {
     vote_count: null
   };
 
-  languages = [
-    {label: 'en', id: 1},
-    {label: 'es', id: 2},
-    {label: 'fr', id: 3},
-    {label: 'de', id: 4},
-    {label: 'ja', id: 5},
-    {label: 'hi', id: 6},
-    {label: 'he', id: 7},
-  ]
+  languages = ['en', 'es', 'fr', 'de', 'ja', 'hi', 'he', 'ru'];
+   
 
   constructor(){
 
@@ -48,9 +41,8 @@ export class MovieEditor implements OnInit {
     console.log(this.movie)
   }
 
-
   handleSubmit(movie: Movie){
-    console.log(movie);
+    this.onSave.emit(movie);
   }
 
 }

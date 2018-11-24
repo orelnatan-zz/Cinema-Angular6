@@ -21,6 +21,20 @@
     animation: fadeIn 0.3s ease;
     animation-fill-mode: forwards
   }
+
+  .modal-close {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 20px;
+    font-size: 2em;
+    cursor: pointer;
+    color: $color-error;
+
+    &:hover {
+        color: $color-white;
+    }
+  } 
 }
 
 @keyframes blurIn {
