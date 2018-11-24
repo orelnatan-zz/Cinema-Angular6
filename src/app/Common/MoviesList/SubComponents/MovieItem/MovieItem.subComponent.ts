@@ -1,5 +1,5 @@
 
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Movie } from '../../../../Models/Movie.modal';
 
 @Component({
@@ -8,23 +8,12 @@ import { Movie } from '../../../../Models/Movie.modal';
   styleUrls: ['./MovieItem.subComponent.scss']
 })
 
-export class MovieItem implements OnInit {
-
+export class MovieItem {
   @Input() movie: Movie;
 
   @Output() onRemove: EventEmitter<any> = new EventEmitter();
   @Output() onEdit: EventEmitter<any> = new EventEmitter();
 
   parentIsHovered: boolean;
-
-  constructor(){
-
-  }
-
-  ngOnInit(){
-    console.log(this.movie.adult);
-  }
-
-
 
 }

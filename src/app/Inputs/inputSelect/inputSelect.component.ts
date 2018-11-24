@@ -35,14 +35,14 @@ export class InputSelect implements OnInit, AfterViewInit {
       if(this.selected) this.selectItem(this.selected);
     }
 
-    public clearSelection(){
+    public clearSelection(): void{
       this.selectItem('non');
 
       this.renderer.setStyle(this.subtitleReference.nativeElement, 'font-size', '16px');
       this.renderer.setStyle(this.subtitleReference.nativeElement, 'top', '32px');
     }
 
-    public selectItem(id: string){
+    public selectItem(id: string): void{
       let child: HTMLElement = document.getElementById(id);
       let parent: HTMLElement = this.inputReference.nativeElement;
 

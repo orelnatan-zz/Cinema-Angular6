@@ -7,7 +7,6 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 
 export class Success {
-
     @Output() onClose: EventEmitter<any> = new EventEmitter();
  
 }

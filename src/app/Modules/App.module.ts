@@ -6,8 +6,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RoutingModule } from './Routing.module';
 import { MomentModule } from 'angular2-moment'; // npm i angular2-moment // https://www.npmjs.com/package/angular2-moment
 
-import { DateAdapter } from '../Pips/DateAdapter';
-import { Purifier } from '../Pips/Purifier';
+import { MovieDate } from '../Pips/MovieDate';
+import { MovieTitle } from '../Pips/MovieTitle';
 
 import { AppRoot } from '../Core/AppRoot';
 import { Modal } from '../Core/Modal';
@@ -50,8 +50,8 @@ import { InputCheckbox } from '../Inputs/InputCheckbox';
     InputSelect,
     InputDate,
     InputCheckbox,
-    DateAdapter,
-    Purifier
+    MovieDate,
+    MovieTitle
   ],
 
   imports: [

@@ -8,40 +8,15 @@ import { Movie } from '../../Models/Movie.modal';
 
 })
 
-export class MovieEditor implements OnInit {
+export class MovieEditor {
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   @Output() onSave: EventEmitter<any> = new EventEmitter();
 
-  @Input() movie: Movie = {
-    adult: false,
-    backdrop_path: '',
-    genre_ids: [],
-    id: null,
-    original_language: null,
-    original_title: '',
-    overview: '',
-    popularity: null,
-    poster_path: '',
-    director: '',
-    release_date: '',
-    title: '',
-    video: false,
-    vote_average: null,
-    vote_count: null
-  };
+  @Input() movie: Movie;
 
-  languages = ['en', 'es', 'fr', 'de', 'ja', 'hi', 'he', 'ru'];
-   
+  languages: Array<string> = ['en', 'es', 'fr', 'de', 'ja', 'hi', 'he', 'ru'];
 
-  constructor(){
-
-  }
-
-  ngOnInit(){
-    console.log(this.movie)
-  }
-
-  handleSubmit(movie: Movie){
+  handleSubmit(movie: Movie): void{
     this.onSave.emit(movie);
   }
 

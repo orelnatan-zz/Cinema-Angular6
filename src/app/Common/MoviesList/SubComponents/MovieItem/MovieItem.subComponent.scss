@@ -20,7 +20,7 @@
 
     .movieitem-info {
       opacity: 1;
-      background: rgba($color-dark-gray, .8);
+      background: rgba($color-dark-gray, .5);
     }
 
     .movieitem-icon {
@@ -62,6 +62,7 @@
     width: 100%;
     padding: 15px;
     border-top-right-radius: 75%;
+    border-top-left-radius: 16%;
     transition-duration: 0.3s;
     opacity: 0;
   }

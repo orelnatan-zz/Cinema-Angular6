@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'header',
@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
 })
 
 export class Header {
-    
- 
+  @Output() plus: EventEmitter<any> = new EventEmitter();
+  
 }

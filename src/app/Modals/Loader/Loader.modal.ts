@@ -6,6 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./Loader.modal.scss']
 })
 
-export class Loader {
-
-}
+export class Loader {}

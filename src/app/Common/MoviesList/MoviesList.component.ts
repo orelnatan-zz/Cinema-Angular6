@@ -8,7 +8,6 @@ import { Movie } from '../../Models/Movie.modal';
 })
 
 export class MoviesList {
-
   @Input() movies: Array<Movie>;
 
   @Output() onRemove: EventEmitter<any> = new EventEmitter();

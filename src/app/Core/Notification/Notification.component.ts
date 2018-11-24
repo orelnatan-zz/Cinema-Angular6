@@ -7,7 +7,6 @@ import { Component, Input, ViewChild, Output, EventEmitter } from '@angular/core
 })
 
 export class Notification {
-    
  @Input() notification: string;
  @Input() iconClass: string;
  @Input() alertColor: string;

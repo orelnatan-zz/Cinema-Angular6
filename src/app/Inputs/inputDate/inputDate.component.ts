@@ -8,7 +8,6 @@ import * as moment from 'moment';
 })
  
 export class InputDate implements OnInit {
-
   @Input() title: string;
   @Input() value: string;
   @Input() min: string;
@@ -22,7 +21,6 @@ export class InputDate implements OnInit {
   @Output() onChange: EventEmitter <any> = new EventEmitter();
 
   ngOnInit(){
-      if(!this.value) this.value = this.convertToCalenderFormat(this.getCurrentDate());
       if(!this.max) this.max = this.convertToCalenderFormat(this.getCurrentDate());
   }
 
@@ -34,7 +32,4 @@ export class InputDate implements OnInit {
     return moment(date).format('YYYY-MM-DD');
   }
 
-  show(any){
-    console.log(any.value);
-  }
 }

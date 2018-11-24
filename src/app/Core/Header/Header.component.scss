@@ -21,4 +21,13 @@
     .header-logo {
         margin: 0px 20px;
     }
+
+    .header-plus {
+        font-size: 0.8em;
+        cursor: pointer;
+
+        &:hover {
+            color: $color-grass;
+        }
+    }
 }

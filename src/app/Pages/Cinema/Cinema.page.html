@@ -10,7 +10,7 @@
 <success *ngIf="showSuccess" (onClose)="showSuccess=false"> </success>
 <failure *ngIf="showFailure" (onClose)="showFailure=false"> </failure>
 
-<header> </header>
+<header (plus)="openEditorModal()"> </header>
 
 <div class="page">
     <div class="body">

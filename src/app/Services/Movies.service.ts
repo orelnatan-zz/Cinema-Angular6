@@ -9,9 +9,7 @@ const IMAGE_PREFIX: string = "https://image.tmdb.org/t/p/w500";
 @Injectable()
 export class Movies {
 
-    constructor(private http: Http){
-
-    }
+    constructor(private http: Http){}
 
     getMovies(): Observable<Movie[]> {
         return this.http.get(environment.apis.movies.moviesData).map((response) => {

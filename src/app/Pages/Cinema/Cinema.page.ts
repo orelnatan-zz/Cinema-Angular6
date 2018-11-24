@@ -1,13 +1,13 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { Movies } from '../../Services/Movies.service';
 import { Movie } from '../../Models/Movie.modal';
-import { Purifier } from '../../Pips/Purifier';
+import { MovieTitle } from '../../Pips/MovieTitle';
 
 @Component({
   selector: 'cinema',
   templateUrl: './Cinema.page.html',
   styleUrls: ['./Cinema.page.scss'],
-  providers: [ Movies, Purifier, ]
+  providers: [ Movies, MovieTitle, ]
 })
 
 export class Cinema implements OnInit {
@@ -22,7 +22,7 @@ export class Cinema implements OnInit {
   movie: Movie;
 
   constructor(private moviesService: Movies, 
-              private purifierPipe: Purifier,){
+              private movieTitlePipe: MovieTitle,){
     
   }
 
@@ -30,23 +30,27 @@ export class Cinema implements OnInit {
     this.showLoader = true;
 
     this.moviesService.getMovies().subscribe((response: any) => {
-      response[1].title = '@@THIS is a Mov333iE!!';
       this.moviesList = response;
       this.showLoader = false; 
     })
   }
 
-  handleRemove(id: number){
+  handleRemove(id: number): void {
     this.movieId = id;
     this.showDialog = true;
   }
 
-  handleEdit(id: number){
+  handleEdit(id: number): void {
     this.movie = {...this.moviesList.find(movie => movie.id == id)};      //Copy book by value only...
     this.showEditor = true;
   }
 
-  deleteMovie(id: number){
+  openEditorModal(): void {
+    this.movie = this.initializeNewMovie();
+    this.showEditor = true;
+  }
+
+  deleteMovie(id: number): void {
     let index = this.moviesList.findIndex(movie => movie.id == id);
     this.moviesList.splice(index, 1);
 
@@ -59,14 +63,14 @@ export class Cinema implements OnInit {
   }
 
   isTitleExist(title: string, excludes: Array<string>): boolean {
-    let transformedExcludes = excludes.map(title => this.purifierPipe.transform(title));
-    let filterdList = this.moviesList.filter(item => !transformedExcludes.includes(this.purifierPipe.transform(item.title)));
+    let transformedExcludes = excludes.map(title => this.movieTitlePipe.transform(title));
+    let filterdList = this.moviesList.filter(item => !transformedExcludes.includes(this.movieTitlePipe.transform(item.title)));
        
-    return filterdList.map(movie => this.purifierPipe.transform(movie.title))
-           .indexOf(this.purifierPipe.transform(title)) != -1 ? true : false; 
+    return filterdList.map(movie => this.movieTitlePipe.transform(movie.title))
+           .indexOf(this.movieTitlePipe.transform(title)) != -1 ? true : false; 
   }
 
-  updateExistingMovie(updates: Movie){
+  updateExistingMovie(updates: Movie): void {
     let currentMovie: Movie = this.moviesList.find(movie => movie.id == updates.id);
     
     if(this.isTitleExist(updates.title, [currentMovie.title])) {
@@ -81,8 +85,35 @@ export class Cinema implements OnInit {
     this.showSuccess = true;
   }
   
-  createNewMovie(movie: Movie){
+  createNewMovie(movie: Movie): void {
+    if(this.isTitleExist(movie.title, [])) {
+      this.showFailure = true;
+      return;
+    }
 
+    this.moviesList.unshift(movie);
+    this.showSuccess = true;
+    this.showEditor = false;
+  }
+
+  initializeNewMovie(): Movie {
+      return {
+          adult: false,
+          backdrop_path: '',
+          genre_ids: [],
+          id: Math.floor((Math.random() * 9999) + 2000),
+          original_language: null,
+          original_title: '',
+          overview: '',
+          popularity: null,
+          poster_path: '',
+          director: '',
+          release_date: '',
+          title: '',
+          video: false,
+          vote_average: null,
+          vote_count: null
+      }
   }
 
 }

@@ -7,7 +7,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 
 export class InputText {
-
     @Input() title: string;
     @Input() validation: string;
     @Input() placeholder: string;
@@ -18,6 +17,5 @@ export class InputText {
     @Input() showValidation: boolean = true;
 
     @Output() onChange: EventEmitter<any> = new EventEmitter();
-
 
 }

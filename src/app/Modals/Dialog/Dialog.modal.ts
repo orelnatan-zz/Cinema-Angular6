@@ -7,7 +7,6 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 
 export class Dialog {
-
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   @Output() onApprove: EventEmitter<any> = new EventEmitter();
 

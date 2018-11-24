@@ -7,7 +7,6 @@ import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core
 })
 
 export class InputCheckbox {
-
     @Input() id: string;
     @Input() title: string;
     @Input() validation: string;
