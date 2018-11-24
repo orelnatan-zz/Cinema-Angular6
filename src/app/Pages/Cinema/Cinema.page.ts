@@ -30,8 +30,10 @@ export class Cinema implements OnInit {
     this.showLoader = true;
 
     this.moviesService.getMovies().subscribe((response: any) => {
-      this.moviesList = response;
-      this.showLoader = false; 
+        this.moviesList = response;
+        setTimeout(() => {
+            this.showLoader = false; 
+        }, 5000);    
     })
   }
 

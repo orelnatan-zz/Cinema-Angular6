@@ -2,10 +2,7 @@
 
 .modal-main {
   position: fixed;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  display: block;
   z-index: 10;
   top: 0;
   left: 0;
@@ -15,24 +12,42 @@
   animation-fill-mode: forwards;
 
   .modal-body {
+    position: absolute;
+    display: block;
+    width: 100%;
+    top: -150%;
+    transform: translateY(-50%);
+    animation: downfall 0.5s ease;
+    animation-fill-mode: forwards;
+  }
+
+  .modal-content {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     width: 100%;
-    animation: fadeIn 0.3s ease;
-    animation-fill-mode: forwards
+    animation: fadeIn 1s ease;
   }
 
   .modal-close {
     position: absolute;
     top: 0;
     left: 0;
-    margin: 20px;
-    font-size: 2em;
     cursor: pointer;
     color: $color-error;
 
-    &:hover {
-        color: $color-white;
+    @media screen and (min-width: 900px) {
+      margin: 20px;
+      font-size: 2em;
+
+      &:hover {
+          color: $color-white;
+      }
+    }
+
+    @media screen and (max-width: 899px) {
+      margin: 10px;
+      font-size: 1em;
     }
   } 
 }
@@ -45,4 +60,9 @@
 @keyframes fadeIn {
   0% {opacity: 0;}
   100% {opacity: 1;}
+}
+
+@keyframes downfall {
+  from {top: -150%;}
+  to {top: 50%;}
 }
