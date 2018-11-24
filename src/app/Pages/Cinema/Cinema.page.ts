@@ -31,7 +31,7 @@ export class Cinema implements OnInit {
 
     this.moviesService.getMovies().subscribe((response: any) => {
         this.moviesList = response;
-            this.showLoader = false; 
+        this.showLoader = false; 
     })
   }
 

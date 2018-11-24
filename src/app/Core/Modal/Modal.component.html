@@ -1,6 +1,6 @@
 
 <div class="modal-main" (click)="onClose.emit()">
-    <span class="modal-close icon icon-close" (click)="onClose.emit()"> </span>
+    <span *ngIf="showCloseButton" class="modal-close icon icon-close" (click)="onClose.emit()"> </span>
     <div class="modal-body">
           <div class="modal-content">
                 <ng-content></ng-content>
