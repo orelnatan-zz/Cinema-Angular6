@@ -3,10 +3,10 @@ import * as moment from 'moment';
 
 @Component({
   selector: 'input-date',
-  templateUrl: './inputDate.component.html',
-  styleUrls: ['./inputDate.component.scss', '../inputs.styles.scss']
+  templateUrl: './InputDate.component.html',
+  styleUrls: ['./InputDate.component.scss', '../inputs.styles.scss']
 })
- 
+
 export class InputDate implements OnInit {
   @Input() title: string;
   @Input() value: string;

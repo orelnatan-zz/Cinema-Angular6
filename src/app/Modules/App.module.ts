@@ -26,7 +26,7 @@ import { Dialog } from '../Modals/Dialog';
 import { Success } from '../Modals/Success';
 import { Failure } from '../Modals/Failure';
 
-import { InputText } from '../Inputs/inputText';
+import { InputText } from '../Inputs/InputText';
 import { InputSelect } from '../Inputs/InputSelect';
 import { InputDate } from '../Inputs/InputDate';
 import { InputCheckbox } from '../Inputs/InputCheckbox';
@@ -66,7 +66,7 @@ import { InputCheckbox } from '../Inputs/InputCheckbox';
   ],
 
   providers: [
-    
+
   ],
 
   bootstrap: [
