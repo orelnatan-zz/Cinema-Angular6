@@ -54,11 +54,11 @@ dialog {
 }
 
 .global-button-primary {
-  background: $color-grass;
+  background: $color-sky;
 }
 
 .global-button-secondary {
-  background: $color-sky;
+  background: $color-mouse;
 }
 
 .global-button-disabled {
@@ -66,7 +66,6 @@ dialog {
   pointer-events: none;
 
   &:hover {
-      box-shadow: 0px 0px 0px 0px;
       cursor: default;
   }
 }

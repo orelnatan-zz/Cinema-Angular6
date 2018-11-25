@@ -10,5 +10,15 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class Modal {
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   @Input() showCloseButton: boolean = true;
+
+  modalIsOpen: boolean = true;
+
+  closeModal(){
+    this.modalIsOpen = false;
+    setTimeout(() => {
+      this.onClose.emit();
+    }, 300);
+  }
+  
 }
 

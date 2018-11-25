@@ -6,7 +6,7 @@
             <div class="block-container global-overflowEllipsis">
                 <span class="movieitem-title">{{movie.title | movieTitle}}</span>
             </div>
-            <div class="block-container">
+            <div class="movieitem-controls">
                 <span class="movieitem-icon movieitem-pencil icon icon-pencil" (click)="onEdit.emit(movie.id)"></span>
                 <span class="movieitem-icon movieitem-bin icon icon-bin" (click)="onRemove.emit(movie.id)"></span>
             </div>

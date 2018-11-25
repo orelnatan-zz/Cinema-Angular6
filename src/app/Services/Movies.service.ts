@@ -11,7 +11,7 @@ export class Movies {
 
     constructor(private http: Http){}
 
-    getMovies(): Observable<Movie[]> {
+    getMovies(): Observable<Movie[] | Error> {
         return this.http.get(environment.apis.movies.moviesData).map((response) => {
             return this.normalizeData(response.json().results);
         }).catch(this.handleError);
@@ -21,11 +21,11 @@ export class Movies {
         return Observable.throw(error);
     }
  
-    normalizeData(data: Array<Movie>): any {     // any ???
-            data.forEach((movie: Movie) => {
-                    let imagePath: string = movie.poster_path;
-                    movie.poster_path = IMAGE_PREFIX.concat(imagePath);
-            })
-        return data;
+    normalizeData(data: Array<Movie>): Array<Movie> {     
+        return data.map(item => {
+            item.poster_path = IMAGE_PREFIX.concat(item.poster_path)
+            return item;
+        })
     }
 }
+

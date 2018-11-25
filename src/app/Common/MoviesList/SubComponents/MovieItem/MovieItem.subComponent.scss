@@ -12,8 +12,6 @@
   transition: 0.3s;
 
   &:hover {
-    box-shadow: 10px 10px 10px 0 rgba(0 , 0 , 0 , 0.2), 0 4px 20px 0 rgba(0, 0, 0 , 0.19);
-
     .movieitem-frontcover {
       background: transparent;
     }
@@ -23,7 +21,7 @@
       background: rgba($color-dark-gray, .5);
     }
 
-    .movieitem-icon {
+    .movieitem-controls {
       opacity: 1;
     }
 
@@ -77,20 +75,23 @@
     font-weight: bold;
   }
 
-  .movieitem-value {
-
+  .movieitem-controls {
+    display: flex;
+    background: rgba($color-dark-gray, .5);
+    border-radius: 20px;
+    padding: 6px 8px;
+    opacity: 0;
   }
 
   .movieitem-icon {
-    margin-right: 10px;
-    opacity: 0;
     transition-duration: 0.3;
     cursor: pointer;
+    margin: 0px 4px;
   }
 
   .movieitem-pencil {
     &:hover {
-      color: $color-grass;
+      color: $color-sky;
     }
   }
 

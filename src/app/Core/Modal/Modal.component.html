@@ -1,7 +1,7 @@
 
-<div class="modal-main" (click)="onClose.emit()">
-    <span *ngIf="showCloseButton" class="modal-close icon icon-close" (click)="onClose.emit()"> </span>
-    <div class="modal-body">
+<div class="modal-main" (click)="closeModal()">
+    <span *ngIf="showCloseButton" class="modal-close icon icon-close" (click)="closeModal()"> </span>
+    <div class="modal-body" [ngClass]="{'modal-bodyfallDown': modalIsOpen, 'modal-bodyfallUp': !modalIsOpen}">
           <div class="modal-content">
                 <ng-content></ng-content>
           </div>

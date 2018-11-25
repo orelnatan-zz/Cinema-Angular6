@@ -101,7 +101,7 @@ export class Cinema implements OnInit {
           adult: false,
           backdrop_path: '',
           genre_ids: [],
-          id: Math.floor((Math.random() * 9999) + 2000),
+          id: Math.max.apply(Math, this.moviesList.map(movie => movie.id)) + 1,
           original_language: null,
           original_title: '',
           overview: '',
