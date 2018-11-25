@@ -4,34 +4,34 @@
     <form class="movieeditor-main" #form="ngForm" (ngSubmit)="form.valid && onSave.emit(movie)" novalidate (click)="$event.stopPropagation()">
             <div class="block-container">
                 <div class="movieeditor-cover" [ngStyle]="{'background-image': 'url(' + movie?.poster_path + ')'}"></div>
-                <div class="movieeditor-inputs">   
+                <div class="movieeditor-inputs">
                     <div class="movieeditor-input">
                         <input-select
                             [title]="'Language:'"
                             [subtitle]="'Languages'"
-                            [items]="['en', 'es', 'fr', 'de', 'ja', 'hi', 'he', 'ru']"
+                            [items]="languages"
                             [validation]="'You must choose a language!'"
                             [selected]="movie?.original_language"
-                            [invalid]="!movie?.original_language" 
+                            [invalid]="!movie?.original_language"
                             [submitted]="form.submitted"
                             [ngModel]="movie.original_language"
                             (onChange)="movie.original_language=$event"
                             name="language"
                             #language="ngModel"
                             ngDefaultControl
-                            required >    
+                            required >
                         </input-select>
                     </div>
-                    
+
                     <div class="movieeditor-input">
                         <!-- Minimum date = 1888-01-11 ==>> First movie ever created! -->
                         <input-date
                             [title]="'Release Date'"
-                            [value]="movie?.release_date" 
-                            [min]="'1888-01-11'"             
+                            [value]="movie?.release_date"
+                            [min]="'1888-01-11'"
                             [validation]="'Please choose a valid date!'"
                             [submitted]="form.submitted"
-                            [invalid]="date.invalid"                      
+                            [invalid]="date.invalid"
                             (onChange)="movie.release_date=$event"
                             [ngModel]="movie.release_date"
                             name="date"
@@ -40,9 +40,9 @@
                             required >
                         </input-date>
                     </div>
-                    
+
                     <div class="movieeditor-input">
-                        <input-text 
+                        <input-text
                             [title]="'Title:'"
                             [value]="movie?.title | movieTitle"
                             [validation]="'Invalide!,&ensp;Min length must be 2 characters'"
@@ -60,7 +60,7 @@
                     </div>
 
                     <div class="movieeditor-input">
-                        <input-text 
+                        <input-text
                             [title]="'Cover:'"
                             [value]="movie?.poster_path"
                             [validation]="'Invalide Url!,&ensp;Min length must be 8 characters.'"
@@ -80,12 +80,12 @@
                     <div class="movieeditor-input">
                         <input-checkbox
                             [id]="'adult'"
-                            [checked]="movie?.adult" 
+                            [checked]="movie?.adult"
                             [title]="'Adults Only?'"
                             [showValidation]="false"
                             (onChange)="movie.adult=$event"
-                            ngDefaultControl > 
-                        </input-checkbox> 
+                            ngDefaultControl >
+                        </input-checkbox>
                     </div>
                 </div>
             </div>
@@ -100,6 +100,5 @@
             </div>
     </form>
 </modal>
-      
-      
-      
+
+
