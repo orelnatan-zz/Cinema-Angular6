@@ -13,7 +13,7 @@ export class Modal {
 
   showBackwardsAnimation: boolean = false;
 
-  closeModal(){    
+  public closeModal(): void {    
     this.showBackwardsAnimation = true;
     setTimeout(() => {
       this.onClose.emit();

@@ -13,19 +13,15 @@ import { AppRoot } from '../Core/AppRoot';
 import { Modal } from '../Core/Modal';
 import { Notification } from '../Core/Notification';
 import { Header } from '../Core/Header';
-
 import { Cinema } from '../Pages/Cinema';
-
 import { MoviesList } from '../Common/MoviesList';
 import { MovieItem } from '../Common/MoviesList/SubComponents/MovieItem';
 import { Spinner } from '../Common/Spinner';
-
 import { MovieEditor } from '../Modals/MovieEditor';
 import { Loader } from '../Modals/Loader';
 import { Dialog } from '../Modals/Dialog';
 import { Success } from '../Modals/Success';
 import { Failure } from '../Modals/Failure';
-
 import { InputText } from '../Inputs/InputText';
 import { InputSelect } from '../Inputs/InputSelect';
 import { InputDate } from '../Inputs/InputDate';
@@ -36,10 +32,10 @@ import { InputCheckbox } from '../Inputs/InputCheckbox';
     AppRoot,
     Modal,
     Notification,
+    Header,
     Cinema,
     MoviesList,
     MovieItem,
-    Header,
     Spinner,
     MovieEditor,
     Loader,
