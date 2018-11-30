@@ -30,7 +30,9 @@ body {
 }
 
 dialog {
+  position: relative;
   display: block;
+  border-style: none;
 }
 
 .global-separator {

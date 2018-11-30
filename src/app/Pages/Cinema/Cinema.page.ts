@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { Movies } from '../../Services/Movies.service';
 import { Movie } from '../../Models/Movie.modal';
 import { MovieTitle } from '../../Pips/MovieTitle';
+import { Modal } from '../../Core/Modal';
 
 @Component({
   selector: 'cinema',
@@ -11,6 +12,9 @@ import { MovieTitle } from '../../Pips/MovieTitle';
 })
 
 export class Cinema implements OnInit {
+  @ViewChild('loadermodal') loadermodal: Modal;
+  @ViewChild('editormodal') editormodal: Modal;
+
   showLoader: boolean;
   showDialog: boolean;
   showSuccess: boolean;
@@ -31,7 +35,7 @@ export class Cinema implements OnInit {
 
     this.moviesService.getMovies().subscribe((response: any) => {
         this.moviesList = response;
-        this.showLoader = false; 
+        this.loadermodal.closeModal(); 
     })
   }
 
@@ -54,7 +58,6 @@ export class Cinema implements OnInit {
     let index = this.moviesList.findIndex(movie => movie.id == id);
     this.moviesList.splice(index, 1);
 
-    this.showDialog = false;
     this.showSuccess = true;
   }
 
@@ -81,8 +84,9 @@ export class Cinema implements OnInit {
     Object.keys(currentMovie).forEach((key) => { 
         currentMovie[key] = updates[key]; 
     });
-    this.showEditor = false;
+
     this.showSuccess = true;
+    this.editormodal.closeModal();
   }
   
   createNewMovie(movie: Movie): void {
@@ -93,7 +97,7 @@ export class Cinema implements OnInit {
 
     this.moviesList.unshift(movie);
     this.showSuccess = true;
-    this.showEditor = false;
+    this.editormodal.closeModal();
   }
 
   initializeNewMovie(): Movie {

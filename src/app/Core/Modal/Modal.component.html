@@ -1,7 +1,7 @@
 
-<div class="modal-main" (click)="closeModal()">
-    <span *ngIf="allowManualClose" class="modal-close icon icon-close" (click)="closeModal()"> </span>
-    <div class="modal-body" [ngClass]="{'modal-bodyfallDown': modalIsOpen, 'modal-bodyfallUp': !modalIsOpen}">
+<div class="modal-main" (click)="allowManualClose ? closeModal() : null">
+    <span *ngIf="allowManualClose" class="modal-close icon icon-close" (click)="allowManualClose ? closeModal() : null"> </span>
+    <div class="modal-body" [ngClass]="{'modal-bodyfallDown': !showBackwardsAnimation, 'modal-bodyfallUp': showBackwardsAnimation}">
           <div class="modal-content">
                 <ng-content></ng-content>
           </div>

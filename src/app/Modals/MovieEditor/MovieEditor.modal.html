@@ -1,6 +1,4 @@
 
-
-<modal (onClose)="onClose.emit()" >
     <form class="movieeditor-main" #form="ngForm" (ngSubmit)="form.valid && onSave.emit(movie)" novalidate (click)="$event.stopPropagation()">
             <div class="block-container">
                 <div class="movieeditor-cover" [ngStyle]="{'background-image': 'url(' + movie?.poster_path + ')'}"></div>
@@ -92,13 +90,13 @@
 
             <div class="movieeditor-inputs flex-container space-between">
                 <div class="movieeditor-button">
-                    <button class="global-button global-button-secondary" (click)="onClose.emit()">Cancel</button>
+                    <button type="button" class="global-button global-button-secondary" (click)="onClose.emit()">Cancel</button>
                 </div>
                 <div class="movieeditor-button">
                     <button type="submit" class="global-button global-button-primary">Save</button>
                 </div>
             </div>
     </form>
-</modal>
+
 
 

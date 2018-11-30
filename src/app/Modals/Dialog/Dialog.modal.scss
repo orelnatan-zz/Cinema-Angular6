@@ -1,10 +1,15 @@
 @import './src/assets/Config/Utils';
 
-.dialog-controls {
-    background: $color-white;
-    padding-bottom: 10px;
+.dialog-main {
+    @extend %modal;
+
+    .dialog-controls {
+        background: $color-white;
+        padding-bottom: 10px;
+    }
+    
+    .dialog-button {
+        margin: 0px 10px;
+    }
 }
 
-.dialog-button {
-    margin: 0px 10px;
-}

@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, } from '@angular/core';
 
 @Component({
   selector: 'success',
@@ -7,6 +7,6 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 
 export class Success {
-    @Output() onClose: EventEmitter<any> = new EventEmitter();
+
  
 }

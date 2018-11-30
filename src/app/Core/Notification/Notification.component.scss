@@ -7,14 +7,6 @@
     height: 120px;
     border-top: 10px solid;
     background: $color-white;
-
-    @media screen and (min-width: 900px) {
-        width: 450px;
-    }
-
-    @media screen and (max-width: 899px) {
-        width: 100%;
-    }
   
     .notification-close {
         top: -20px;

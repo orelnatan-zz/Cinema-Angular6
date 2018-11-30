@@ -1,14 +1,28 @@
 
-<movie-editor *ngIf="showEditor"
-    (onClose)="showEditor=false"
-    (onSave)="isMovieExist($event.id) ? updateExistingMovie($event) : createNewMovie($event)"
-    [movie]="movie"> 
-</movie-editor>
+<modal #editormodal (onClose)="showEditor=false" *ngIf="showEditor">
+    <movie-editor 
+        (onClose)="editormodal.closeModal()"
+        (onSave)="isMovieExist($event.id) ? updateExistingMovie($event) : createNewMovie($event)"
+        [movie]="movie"> 
+    </movie-editor>
+</modal>
 
-<loader *ngIf="showLoader"> </loader>
-<dialog *ngIf="showDialog" (onClose)="showDialog=false" (onApprove)="deleteMovie(movieId)"> </dialog>
-<success *ngIf="showSuccess" (onClose)="showSuccess=false"> </success>
-<failure *ngIf="showFailure" (onClose)="showFailure=false"> </failure>
+<modal #dialogmodal (onClose)="showDialog=false" *ngIf="showDialog">
+    <dialog (onClose)="dialogmodal.closeModal()" (onApprove)="deleteMovie(movieId); dialogmodal.closeModal()"> </dialog>
+</modal>
+
+<modal #successmodal (onClose)="showSuccess=false" *ngIf="showSuccess">
+    <success> </success>
+</modal>
+
+<modal #failuremodal (onClose)="showFailure=false" *ngIf="showFailure">
+    <failure> </failure>
+</modal>
+
+<modal #loadermodal (onClose)="showLoader=false" [allowManualClose]="false" *ngIf="showLoader">
+    <loader> </loader>
+</modal>
+
 
 <header (plus)="openEditorModal()"> </header>
 

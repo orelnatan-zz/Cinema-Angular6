@@ -1,19 +1,12 @@
 @import './src/assets/Config/Utils';
 
 .movieeditor-main {
-    position: relative;
+    @extend %modal;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background: $color-white;
-
-    @media screen and (min-width: 900px) {
-        width: 500px;
-    }
-
-    @media screen and (max-width: 899px) {
-        width: 90%;
-    }
 
     .movieeditor-cover {
         display: block;

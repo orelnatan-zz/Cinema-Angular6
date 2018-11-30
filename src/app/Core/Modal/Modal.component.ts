@@ -11,12 +11,10 @@ export class Modal {
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   @Input() allowManualClose: boolean = true;
 
-  modalIsOpen: boolean = true;
+  showBackwardsAnimation: boolean = false;
 
-  closeModal(){
-    if(!this.allowManualClose) return;
-    
-    this.modalIsOpen = false;
+  closeModal(){    
+    this.showBackwardsAnimation = true;
     setTimeout(() => {
       this.onClose.emit();
     }, 300);
