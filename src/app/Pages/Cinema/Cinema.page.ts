@@ -5,6 +5,9 @@ import { MovieTitle } from '../../Pips/MovieTitle';
 import { Modal } from '../../Core/Modal';
 import { Success } from '../../Modals/Success';
 import { Dialog } from '../../Modals/Dialog';
+import { MovieEditor } from '../../Modals/MovieEditor';
+import { Failure } from '../../Modals/Failure';
+import { Loader } from '../../Modals/Loader';
 
 @Component({
   selector: 'cinema',
@@ -14,17 +17,12 @@ import { Dialog } from '../../Modals/Dialog';
 })
 
 export class Cinema implements OnInit {
-  @ViewChild('loadermodal') loadermodal: Modal;
-  @ViewChild('editormodal') editormodal: Modal;
   @ViewChild('dynamicModal') dynamicModal: Modal;
 
   showLoader: boolean;
-  showEditor: boolean;
-  showFailure: boolean;
-
+  
   moviesList: Array<Movie>;
   movieId: number;
-  movie: Movie;
 
   constructor(private moviesService: Movies, 
               private movieTitlePipe: MovieTitle){
@@ -32,10 +30,11 @@ export class Cinema implements OnInit {
   }
 
   ngOnInit(){
-    this.showLoader = true;
+    this.dynamicModal.show(Loader);
 
     this.moviesService.getMovies().subscribe((response: any) => {
         this.moviesList = response;
+        this.dynamicModal.hide();
     })
   }
 
@@ -57,15 +56,42 @@ export class Cinema implements OnInit {
   }
 
   handleEdit(id: number): void {
-    this.movie = {...this.moviesList.find(movie => movie.id == id)};      //Copy book by value only...
-    this.showEditor = true;
+
+    let editorInputs = {
+      movie: {...this.moviesList.find(movie => movie.id == id)},
+    }
+
+    let editorOutputs = {
+      onClose: () => {
+        this.dynamicModal.hide();
+      },
+      onSave: (movie: Movie) => {
+        this.dynamicModal.hide().then(() => {
+            this.isMovieExist(movie.id) ? this.updateExistingMovie(movie) : this.createNewMovie(movie);
+        });
+      }
+    }
+
+    this.dynamicModal.show(MovieEditor, editorInputs, editorOutputs);
   }
 
   openEditorModal(): void {
-    this.movie = this.initializeNewMovie();
-    this.showEditor = true;
+    let editorInputs = {
+      movie: this.initializeNewMovie(),
+    };
 
-    this.dynamicModal.show(Success);                 // this.successmodal.show();
+    let editorOutputs = {
+      onClose: () => {
+        this.dynamicModal.hide();
+      },
+      onSave: (movie: Movie) => {
+        this.dynamicModal.hide().then(() => {
+            this.isMovieExist(movie.id) ? this.updateExistingMovie(movie) : this.createNewMovie(movie);
+        });
+      }
+    }
+
+    this.dynamicModal.show(MovieEditor, editorInputs, editorOutputs);   
   }
 
   deleteMovie(id: number): void {
@@ -89,7 +115,7 @@ export class Cinema implements OnInit {
     let currentMovie: Movie = this.moviesList.find(movie => movie.id == updates.id);
     
     if(this.isTitleExist(updates.title, [currentMovie.title])) {
-        this.showFailure = true;
+        this.dynamicModal.show(Failure);
         return;
     }
 
@@ -97,19 +123,17 @@ export class Cinema implements OnInit {
         currentMovie[key] = updates[key]; 
     });
 
-  //  this.showSuccess = true;
-   // this.editormodal.closeModal();
+    this.dynamicModal.show(Success);
   }
   
   createNewMovie(movie: Movie): void {
     if(this.isTitleExist(movie.title, [])) {
-      this.showFailure = true;
+      this.dynamicModal.show(Failure);
       return;
     }
 
     this.moviesList.unshift(movie);
-  //  this.showSuccess = true;
-  //  this.editormodal.closeModal();
+    this.dynamicModal.show(Success);
   }
 
   initializeNewMovie(): Movie {
