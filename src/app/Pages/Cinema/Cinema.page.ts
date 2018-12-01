@@ -3,6 +3,8 @@ import { Movies } from '../../Services/Movies.service';
 import { Movie } from '../../Models/Movie.modal';
 import { MovieTitle } from '../../Pips/MovieTitle';
 import { Modal } from '../../Core/Modal';
+import { Success } from '../../Modals/Success';
+import { Dialog } from '../../Modals/Dialog';
 
 @Component({
   selector: 'cinema',
@@ -14,10 +16,9 @@ import { Modal } from '../../Core/Modal';
 export class Cinema implements OnInit {
   @ViewChild('loadermodal') loadermodal: Modal;
   @ViewChild('editormodal') editormodal: Modal;
+  @ViewChild('dynamicModal') dynamicModal: Modal;
 
   showLoader: boolean;
-  showDialog: boolean;
-  showSuccess: boolean;
   showEditor: boolean;
   showFailure: boolean;
 
@@ -35,13 +36,24 @@ export class Cinema implements OnInit {
 
     this.moviesService.getMovies().subscribe((response: any) => {
         this.moviesList = response;
-        this.loadermodal.closeModal(); 
     })
   }
 
   handleRemove(id: number): void {
     this.movieId = id;
-    this.showDialog = true;
+
+    let dialogOutputs = {
+        onClose: () => { 
+            this.dynamicModal.hide()
+        },
+        onApprove: () => {
+            this.deleteMovie(this.movieId);
+            this.dynamicModal.hide().then(() => {
+                this.dynamicModal.show(Success);
+            });  
+        }
+    };
+    this.dynamicModal.show(Dialog, {}, dialogOutputs);  
   }
 
   handleEdit(id: number): void {
@@ -52,13 +64,13 @@ export class Cinema implements OnInit {
   openEditorModal(): void {
     this.movie = this.initializeNewMovie();
     this.showEditor = true;
+
+    this.dynamicModal.show(Success);                 // this.successmodal.show();
   }
 
   deleteMovie(id: number): void {
     let index = this.moviesList.findIndex(movie => movie.id == id);
     this.moviesList.splice(index, 1);
-
-    this.showSuccess = true;
   }
 
   isMovieExist(id: number): boolean {
@@ -85,8 +97,8 @@ export class Cinema implements OnInit {
         currentMovie[key] = updates[key]; 
     });
 
-    this.showSuccess = true;
-    this.editormodal.closeModal();
+  //  this.showSuccess = true;
+   // this.editormodal.closeModal();
   }
   
   createNewMovie(movie: Movie): void {
@@ -96,8 +108,8 @@ export class Cinema implements OnInit {
     }
 
     this.moviesList.unshift(movie);
-    this.showSuccess = true;
-    this.editormodal.closeModal();
+  //  this.showSuccess = true;
+  //  this.editormodal.closeModal();
   }
 
   initializeNewMovie(): Movie {

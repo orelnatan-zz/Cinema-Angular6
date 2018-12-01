@@ -5,6 +5,7 @@ import { HttpModule, JsonpModule, } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RoutingModule } from './Routing.module';
 import { MomentModule } from 'angular2-moment'; // npm i angular2-moment // https://www.npmjs.com/package/angular2-moment
+import { DynamicModule } from 'ng-dynamic-component'; // npm install ng-dynamic-component --save // https://www.npmjs.com/package/ng-dynamic-component
 
 import { MovieDate } from '../Pips/MovieDate';
 import { MovieTitle } from '../Pips/MovieTitle';
@@ -26,7 +27,7 @@ import { InputText } from '../Inputs/InputText';
 import { InputSelect } from '../Inputs/InputSelect';
 import { InputDate } from '../Inputs/InputDate';
 import { InputCheckbox } from '../Inputs/InputCheckbox';
-
+ 
 @NgModule({
   declarations: [
     AppRoot,
@@ -58,7 +59,7 @@ import { InputCheckbox } from '../Inputs/InputCheckbox';
     FormsModule,
     RoutingModule,
     MomentModule,
-
+    DynamicModule.withComponents([Success, Dialog, Failure, MovieEditor, Loader])  // All components that can be dynamically generated. 
   ],
 
   providers: [

@@ -1,4 +1,4 @@
-import { Component, } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'success',
@@ -6,7 +6,13 @@ import { Component, } from '@angular/core';
   styleUrls: ['./Success.modal.scss']
 })
 
-export class Success {
+export class Success implements OnInit, OnDestroy {
 
- 
+  ngOnInit(){
+    console.log('Success-ngOnInit');
+  }
+
+  ngOnDestroy(){
+    console.log('Success-ngOnDestroy');
+  }
 }
