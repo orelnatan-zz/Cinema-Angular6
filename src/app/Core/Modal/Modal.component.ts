@@ -15,6 +15,7 @@ export class Modal {
 
   public closeModal(): void {    
     this.showBackwardsAnimation = true;
+    
     setTimeout(() => {
       this.onClose.emit();
     }, 300);
