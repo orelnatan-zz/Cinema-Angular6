@@ -61,7 +61,7 @@ export class Cinema implements OnInit {
     this.showSuccess = true;
   }
 
-  isMovieExist(id: number): boolean{
+  isMovieExist(id: number): boolean {
     return this.moviesList.map(movie => movie.id).indexOf(id) != -1 ? true : false;
   }
 
