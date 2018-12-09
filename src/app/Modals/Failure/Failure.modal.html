@@ -1,10 +1,13 @@
 
-<div class="failure-main">
-    <notification
-        [notification]="'Error: This title is already in use!, try a another.'"
-        [iconClass]="'icon-close'"
-        [alertColor]="'#c40000'" >
-    </notification>
-</div>
+
+<modal #modalRef (onClose)="onClose.emit()">
+    <div class="failure-main">
+        <notification
+            [notification]="'Error: This title is already in use!, try a another.'"
+            [iconClass]="'icon-close'"
+            [alertColor]="'#c40000'" >
+        </notification>
+    </div>
+</modal>
 
 

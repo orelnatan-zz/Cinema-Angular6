@@ -1,4 +1,5 @@
-import { Component, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Modal } from '../../Core/Modal';
 
 @Component({
   selector: 'dialog',
@@ -6,16 +7,13 @@ import { Component, Output, EventEmitter, OnInit, OnDestroy } from '@angular/cor
   styleUrls: ['./Dialog.modal.scss']
 })
 
-export class Dialog implements OnInit, OnDestroy {
+export class Dialog {
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   @Output() onApprove: EventEmitter<any> = new EventEmitter();
 
-  ngOnInit() {
-    console.log('dialog ngOnInit');
-  }
+  @ViewChild('modalRef') modalRef: Modal;
 
-  ngOnDestroy() {
-    console.log('dialog ngOnDestroy');
+  closeModal(){
+      this.modalRef.closeModal();
   }
-
 }

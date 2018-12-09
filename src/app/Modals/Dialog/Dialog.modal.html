@@ -1,19 +1,20 @@
-
-  <div class="dialog-main">
-        <div class="block-container">
-            <notification
-                [notification]="'Are you sure you want to perform this action?'"
-                [iconClass]="'icon-warning'"
-                [alertColor]="'#000080'">
-            </notification>
-        </div>
-        <div class="dialog-controls flex-container row full">
-            <div class="dialog-button block-container half">
-                    <button class="global-button global-button-secondary" (click)="onClose.emit()">Cancel</button> 
-            </div>
-            <div class="dialog-button  block-container half"> 
-                <button class="global-button global-button-primary" (click)="onApprove.emit()">Ok</button> 
-            </div>
-        </div>
-  </div>
+<modal #modalRef (onClose)="onClose.emit()">
+    <div class="dialog-main">
+          <div class="block-container">
+              <notification
+                  [notification]="'Are you sure you want to perform this action?'"
+                  [iconClass]="'icon-warning'"
+                  [alertColor]="'#000080'">
+              </notification>
+          </div>
+          <div class="dialog-controls flex-container row full">
+              <div class="dialog-button block-container half">
+                      <button class="global-button global-button-secondary" (click)="closeModal()">Cancel</button>
+              </div>
+              <div class="dialog-button  block-container half">
+                  <button class="global-button global-button-primary" (click)="onApprove.emit()">Ok</button>
+              </div>
+          </div>
+    </div>
+</modal>
 

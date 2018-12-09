@@ -3,6 +3,7 @@ import { Movies } from '../../Services/Movies.service';
 import { Movie } from '../../Models/Movie.modal';
 import { MovieTitle } from '../../Pips/MovieTitle';
 import { Modal } from '../../Core/Modal';
+import { MovieEditor } from '../../Modals/MovieEditor';
 
 @Component({
   selector: 'cinema',
@@ -12,8 +13,8 @@ import { Modal } from '../../Core/Modal';
 })
 
 export class Cinema implements OnInit {
-  @ViewChild('loadermodal') loadermodal: Modal;
-  @ViewChild('editormodal') editormodal: Modal;
+  @ViewChild('loaderRef') loaderRef: Modal;
+  @ViewChild('editorRef') editorRef: MovieEditor;
 
   showLoader: boolean;
   showDialog: boolean;
@@ -25,9 +26,9 @@ export class Cinema implements OnInit {
   movieId: number;
   movie: Movie;
 
-  constructor(private moviesService: Movies, 
+  constructor(private moviesService: Movies,
               private movieTitlePipe: MovieTitle){
-    
+
   }
 
   ngOnInit(){
@@ -35,7 +36,7 @@ export class Cinema implements OnInit {
 
     this.moviesService.getMovies().subscribe((response: any) => {
         this.moviesList = response;
-        this.loadermodal.closeModal(); 
+        this.loaderRef.closeModal();
     })
   }
 
@@ -68,27 +69,27 @@ export class Cinema implements OnInit {
   isTitleExist(title: string, excludes: Array<string>): boolean {
     let transformedExcludes = excludes.map(title => this.movieTitlePipe.transform(title));
     let filterdList = this.moviesList.filter(item => !transformedExcludes.includes(this.movieTitlePipe.transform(item.title)));
-       
+
     return filterdList.map(movie => this.movieTitlePipe.transform(movie.title))
-           .indexOf(this.movieTitlePipe.transform(title)) != -1 ? true : false; 
+           .indexOf(this.movieTitlePipe.transform(title)) != -1 ? true : false;
   }
 
   updateExistingMovie(updates: Movie): void {
     let currentMovie: Movie = this.moviesList.find(movie => movie.id == updates.id);
-    
+
     if(this.isTitleExist(updates.title, [currentMovie.title])) {
         this.showFailure = true;
         return;
     }
 
-    Object.keys(currentMovie).forEach((key) => { 
-        currentMovie[key] = updates[key]; 
+    Object.keys(currentMovie).forEach((key) => {
+        currentMovie[key] = updates[key];
     });
 
     this.showSuccess = true;
-    this.editormodal.closeModal();
+    this.editorRef.closeModal();
   }
-  
+
   createNewMovie(movie: Movie): void {
     if(this.isTitleExist(movie.title, [])) {
       this.showFailure = true;
@@ -97,7 +98,7 @@ export class Cinema implements OnInit {
 
     this.moviesList.unshift(movie);
     this.showSuccess = true;
-    this.editormodal.closeModal();
+    this.editorRef.closeModal();
   }
 
   initializeNewMovie(): Movie {

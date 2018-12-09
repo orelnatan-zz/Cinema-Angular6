@@ -1,5 +1,6 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Output, Input, EventEmitter, ViewChild } from '@angular/core';
 import { Movie } from '../../Models/Movie.modal';
+import { Modal } from '../../Core/Modal';
 
 @Component({
   selector: 'movie-editor',
@@ -13,6 +14,12 @@ export class MovieEditor {
   @Output() onSave: EventEmitter<any> = new EventEmitter();
 
   @Input() movie: Movie;
+
+  @ViewChild('modalRef') modalRef: Modal;
+
+  closeModal(){
+      this.modalRef.closeModal();
+  }
 
   languages: Array<string> = ['en', 'es', 'fr', 'de', 'ja', 'hi', 'he', 'ru', 'sv', 'it', 'cn'];
 

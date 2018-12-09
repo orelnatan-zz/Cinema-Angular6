@@ -1,7 +1,10 @@
 
-<div class="loader-main">
-    <spinner> </spinner>
-</div>  
+
+<modal #modalRef (onClose)="onClose.emit()" [allowManualClose]="false">
+    <div class="loader-main">
+          <spinner> </spinner>
+    </div>
+</modal>
 
 
 
