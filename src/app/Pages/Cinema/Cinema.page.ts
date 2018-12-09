@@ -2,7 +2,6 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { Movies } from '../../Services/Movies.service';
 import { Movie } from '../../Models/Movie.modal';
 import { MovieTitle } from '../../Pips/MovieTitle';
-import { Modal } from '../../Core/Modal';
 import { MovieEditor } from '../../Modals/MovieEditor';
 
 @Component({
@@ -13,9 +12,6 @@ import { MovieEditor } from '../../Modals/MovieEditor';
 })
 
 export class Cinema implements OnInit {
-  @ViewChild('loaderRef') loaderRef: Modal;
-  @ViewChild('editorRef') editorRef: MovieEditor;
-
   showLoader: boolean;
   showDialog: boolean;
   showSuccess: boolean;
@@ -36,7 +32,7 @@ export class Cinema implements OnInit {
 
     this.moviesService.getMovies().subscribe((response: any) => {
         this.moviesList = response;
-        this.loaderRef.closeModal();
+        this.showLoader = false;
     })
   }
 
@@ -51,7 +47,8 @@ export class Cinema implements OnInit {
   }
 
   openEditorModal(): void {
-    this.movie = this.initializeNewMovie();
+    this.movie = {} as Movie;
+    console.log(this.movie);
     this.showEditor = true;
   }
 
@@ -71,10 +68,10 @@ export class Cinema implements OnInit {
     let filterdList = this.moviesList.filter(item => !transformedExcludes.includes(this.movieTitlePipe.transform(item.title)));
 
     return filterdList.map(movie => this.movieTitlePipe.transform(movie.title))
-           .indexOf(this.movieTitlePipe.transform(title)) != -1 ? true : false;
+           .indexOf(this.movieTitlePipe.transform(title)) != -1;
   }
 
-  updateExistingMovie(updates: Movie): void {
+  updateExistingMovie(updates: Movie, editorRef: MovieEditor): void {
     let currentMovie: Movie = this.moviesList.find(movie => movie.id == updates.id);
 
     if(this.isTitleExist(updates.title, [currentMovie.title])) {
@@ -87,38 +84,20 @@ export class Cinema implements OnInit {
     });
 
     this.showSuccess = true;
-    this.editorRef.closeModal();
+    editorRef.closeModal();
   }
 
-  createNewMovie(movie: Movie): void {
+  createNewMovie(movie: Movie, editorRef: MovieEditor): void {
     if(this.isTitleExist(movie.title, [])) {
       this.showFailure = true;
       return;
     }
 
+    movie.id = Math.max.apply(Math, this.moviesList.map(movie => movie.id)) + 1;
     this.moviesList.unshift(movie);
-    this.showSuccess = true;
-    this.editorRef.closeModal();
-  }
 
-  initializeNewMovie(): Movie {
-      return {
-          adult: false,
-          backdrop_path: '',
-          genre_ids: [],
-          id: Math.max.apply(Math, this.moviesList.map(movie => movie.id)) + 1,
-          original_language: null,
-          original_title: '',
-          overview: '',
-          popularity: null,
-          poster_path: '',
-          director: '',
-          release_date: '',
-          title: '',
-          video: false,
-          vote_average: null,
-          vote_count: null
-      }
+    this.showSuccess = true;
+    editorRef.closeModal();
   }
 
 }

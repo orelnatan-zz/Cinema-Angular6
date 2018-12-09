@@ -5,6 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class MovieTitle implements PipeTransform {
     transform(value: string): string {
+        if(!value) return '';
+
         let clean: string = value.replace(/[`~!@#$%^&*()_|+\-=?;:0-9'",.<>\{\}\[\]\\\/]/gi, '');
         let words: Array<string> = clean.split(' ');
         let final: string = '';

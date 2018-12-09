@@ -1,4 +1,3 @@
-
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -13,9 +12,9 @@ export class Modal {
 
   showBackwardsAnimation: boolean = false;
 
-  public closeModal(): void {    
+  public closeModal(): void {
     this.showBackwardsAnimation = true;
-    
+
     setTimeout(() => {
       this.onClose.emit();
     }, 300);
