@@ -2,9 +2,9 @@
 
 .dialog-main {
     @extend %modal;
+    background: $color-white;
 
     .dialog-controls {
-        background: $color-white;
         padding-bottom: 10px;
     }
     
