@@ -3,7 +3,6 @@ import { Movies } from '../../Services/Movies.service';
 import { Movie } from '../../Models/Movie.modal';
 import { MovieTitle } from '../../Pips/MovieTitle';
 import { MovieEditor } from '../../Modals/MovieEditor';
-
 @Component({
   selector: 'cinema',
   templateUrl: './Cinema.page.html',
@@ -48,7 +47,6 @@ export class Cinema implements OnInit {
 
   openEditorModal(): void {
     this.movie = {} as Movie;
-    console.log(this.movie);
     this.showEditor = true;
   }
 
