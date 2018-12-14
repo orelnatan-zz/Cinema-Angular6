@@ -1,0 +1,12 @@
+
+<modal #modalRef (onClose)="onClose.emit()">
+    <div class="movieviewer-main">
+        <movie-editor
+            [movie]="movie"
+            (onSubmit)="onSubmit.emit($event)"
+            (onClose)="closeModal()"> 
+        </movie-editor>
+    </div>
+</modal>
+
+

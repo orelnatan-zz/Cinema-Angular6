@@ -3,15 +3,15 @@ import { Movie } from '../../Models/Movie.modal';
 import { Modal } from '../../Core/Modal';
 
 @Component({
-  selector: 'movie-editor',
-  templateUrl: './MovieEditor.modal.html',
-  styleUrls: ['./MovieEditor.modal.scss'],
+  selector: 'movie-viewer',
+  templateUrl: './MovieViewer.modal.html',
+  styleUrls: ['./MovieViewer.modal.scss'],
 
 })
 
-export class MovieEditor {
+export class MovieViewer {
   @Output() onClose: EventEmitter<any> = new EventEmitter();
-  @Output() onSave: EventEmitter<any> = new EventEmitter();
+  @Output() onSubmit: EventEmitter<any> = new EventEmitter();
 
   @Input() movie: Movie;
 
@@ -20,7 +20,5 @@ export class MovieEditor {
   closeModal(){
       this.modalRef.closeModal();
   }
-
-  languages: Array<string> = ['en', 'es', 'fr', 'de', 'ja', 'hi', 'he', 'ru', 'sv', 'it', 'cn'];
 
 }

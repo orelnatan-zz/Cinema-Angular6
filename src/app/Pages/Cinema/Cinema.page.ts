@@ -2,7 +2,8 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { Movies } from '../../Services/Movies.service';
 import { Movie } from '../../Models/Movie.modal';
 import { MovieTitle } from '../../Pips/MovieTitle';
-import { MovieEditor } from '../../Modals/MovieEditor';
+import { MovieViewer } from '../../Modals/MovieViewer';
+
 @Component({
   selector: 'cinema',
   templateUrl: './Cinema.page.html',
@@ -69,7 +70,7 @@ export class Cinema implements OnInit {
            .indexOf(this.movieTitlePipe.transform(title)) != -1;
   }
 
-  updateExistingMovie(updates: Movie, editorRef: MovieEditor): void {
+  updateExistingMovie(updates: Movie, editorRef: MovieViewer): void {
     let currentMovie: Movie = this.moviesList.find(movie => movie.id == updates.id);
 
     if(this.isTitleExist(updates.title, [currentMovie.title])) {
@@ -85,7 +86,7 @@ export class Cinema implements OnInit {
     editorRef.closeModal();
   }
 
-  createNewMovie(movie: Movie, editorRef: MovieEditor): void {
+  createNewMovie(movie: Movie, editorRef: MovieViewer): void {
     if(this.isTitleExist(movie.title, [])) {
       this.showFailure = true;
       return;

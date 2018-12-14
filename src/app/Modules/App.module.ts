@@ -17,7 +17,8 @@ import { Cinema } from '../Pages/Cinema';
 import { MoviesList } from '../Common/MoviesList';
 import { MovieItem } from '../Common/MoviesList/SubComponents/MovieItem';
 import { Spinner } from '../Common/Spinner';
-import { MovieEditor } from '../Modals/MovieEditor';
+import { MovieEditor } from '../Forms/MovieEditor';
+import { MovieViewer } from '../Modals/MovieViewer';
 import { Loader } from '../Modals/Loader';
 import { Dialog } from '../Modals/Dialog';
 import { Success } from '../Modals/Success';
@@ -38,6 +39,7 @@ import { InputCheckbox } from '../Inputs/InputCheckbox';
     MovieItem,
     Spinner,
     MovieEditor,
+    MovieViewer,
     Loader,
     Dialog,
     Success,

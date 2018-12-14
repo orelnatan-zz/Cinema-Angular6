@@ -1,8 +1,8 @@
-<movie-editor #editorRef (onClose)="showEditor=false" *ngIf="showEditor"
+<movie-viewer #editorRef (onClose)="showEditor=false" *ngIf="showEditor"
       (onClose)="editorRef.closeModal()"
-      (onSave)="isMovieExist($event.id) ? updateExistingMovie($event, editorRef) : createNewMovie($event, editorRef)"
+      (onSubmit)="isMovieExist($event.id) ? updateExistingMovie($event, editorRef) : createNewMovie($event, editorRef)"
       [movie]="movie">
-</movie-editor>
+</movie-viewer>
 
 <dialog #dialogRef (onClose)="showDialog=false" *ngIf="showDialog"
       (onClose)="dialogRef.closeModal()"

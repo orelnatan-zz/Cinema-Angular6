@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { Cinema } from '../Pages/Cinema';
 
 const routes: Routes = [
-    { path: '', component: Cinema },
+    { path: '', redirectTo: '/Cinema', pathMatch: 'full' },
     { path: 'Cinema', component: Cinema },
 ];
 
