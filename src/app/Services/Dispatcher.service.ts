@@ -7,12 +7,11 @@ import { Route } from '../Models/Route.model';
 export class Dispatcher {
     @Output() redirect: EventEmitter<Route> = new EventEmitter();
     @Output() dataChanged: EventEmitter<Movie[]> = new EventEmitter();
-    @Output() movieSubmited: EventEmitter<Movie> = new EventEmitter();
+    @Output() edit: EventEmitter<Movie> = new EventEmitter();
+    @Output() delete: EventEmitter<Number> = new EventEmitter();
+    @Output() pending: EventEmitter<Boolean> = new EventEmitter();
+    @Output() error: EventEmitter<String> = new EventEmitter();
     
-    @Output() loaderToggled: EventEmitter<boolean> = new EventEmitter();
-    @Output() successToggled: EventEmitter<boolean> = new EventEmitter();
-    @Output() failureToggled: EventEmitter<boolean> = new EventEmitter();
-
     /////////////////////////////////////////////// Events launchers ///////////////////////////////////////////////
     public dispathDataChanged(data: Array<Movie>): void {
         this.dataChanged.emit(data);
@@ -22,15 +21,21 @@ export class Dispatcher {
         this.redirect.emit(route);
     }
 
-    public dispatchMovieSubmited(movie: Movie): void {
-        this.movieSubmited.emit(movie);
+    public dispatchEdit(movie: Movie): void {
+        this.edit.emit(movie);
     }
 
-    public dispatchLoaderToggled(isActive: boolean): void {
-        this.loaderToggled.emit(isActive);
+    public dispatchDelete(id: Number): void {
+        this.delete.emit(id);
     }
 
-   
+    public dispatchPending(isActive: Boolean): void {
+        this.pending.emit(isActive);
+    }
+
+    public dispatchError(notification: String): void {
+        this.error.emit(notification);
+    }
 
     /////////////////////////////////////////////// Events listeners ///////////////////////////////////////////////
     public onDataChanged(): EventEmitter<Movie[]> {
@@ -41,13 +46,19 @@ export class Dispatcher {
         return this.redirect;
     }
 
-    public onMovieSubmited(): EventEmitter<Movie> {
-        return this.movieSubmited;
+    public onEdit(): EventEmitter<Movie> {
+        return this.edit;
     }
 
-    public onLoaderToggled(): EventEmitter<boolean> {
-        return this.loaderToggled;
+    public onDelete(): EventEmitter<Number> {
+        return this.delete;
     }
 
-    
+    public onPending(): EventEmitter<Boolean> {
+        return this.pending;
+    }
+
+    public onError(): EventEmitter<String> {
+        return this.error;
+    }
 }

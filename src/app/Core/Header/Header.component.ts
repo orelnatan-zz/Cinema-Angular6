@@ -7,7 +7,6 @@ import { Component, Output, Input, EventEmitter } from '@angular/core';
 })
 
 export class Header {
-  @Output() plus: EventEmitter<any> = new EventEmitter();
-  @Input() showEditButton: boolean;
+  @Output() edit: EventEmitter<any> = new EventEmitter();
 
 }

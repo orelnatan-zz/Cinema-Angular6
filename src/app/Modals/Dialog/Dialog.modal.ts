@@ -13,7 +13,11 @@ export class Dialog {
 
   @ViewChild('modalRef') modalRef: Modal;
 
-  closeModal(){
+  public openModal(){
+    this.modalRef.openModal();
+  }
+
+  public closeModal(){
       this.modalRef.closeModal();
   }
 }

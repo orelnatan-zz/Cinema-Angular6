@@ -22,13 +22,19 @@ export class MovieSummary implements OnInit {
   }
 
   ngOnInit() {
-    this.dispatcher.dispatchLoaderToggled(true);
+    this.dispatcher.dispatchPending(true);
 
     this.route.queryParams.subscribe((params) => {
-        this.movies.getMovieById(params.movieId).subscribe((response: Movie) => {
-            this.movie = response;
+        this.movies.getMovies().subscribe((response: Movie[]) => {
+            this.movie = params.movieId ? { ...response.find((movie: Movie) => movie.id == params.movieId) } : {} as Movie;
+            
+            if(!this.movie){
+              this.dispatcher.dispatchError('Server Error: unable to find item ' + params.movieId + ', redirecting home page.');
+              this.navigateToHomePage();
+              return;
+            }
 
-            this.dispatcher.dispatchLoaderToggled(false);
+            this.dispatcher.dispatchPending(false);
             this.renderPage = true;
         })
     });
@@ -42,7 +48,7 @@ export class MovieSummary implements OnInit {
   }
 
   onSubmit(movie: Movie){
-    this.dispatcher.dispatchMovieSubmited(movie);
+    this.dispatcher.dispatchEdit(movie);
   }
 
 }

@@ -1,4 +1,4 @@
-<modal #modalRef (onClose)="onClose.emit()">
+<modal #modalRef >
     <div class="dialog-main">
           <div class="block-container">
               <notification
@@ -9,7 +9,7 @@
           </div>
           <div class="dialog-controls flex-container row full">
               <div class="dialog-button block-container half">
-                    <button class="global-button global-button-secondary" (click)="closeModal()">Cancel</button>
+                    <button class="global-button global-button-secondary" (click)="onClose.emit()">Cancel</button>
               </div>
               <div class="dialog-button  block-container half">
                     <button class="global-button global-button-primary" (click)="onApprove.emit()">Ok</button>

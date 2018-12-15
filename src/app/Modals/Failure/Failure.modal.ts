@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, Input, EventEmitter, ViewChild } from '@angular/core';
 import { Modal } from '../../Core/Modal';
 
 @Component({
@@ -8,11 +8,12 @@ import { Modal } from '../../Core/Modal';
 })
 
 export class Failure {
-  @Output() onClose: EventEmitter<any> = new EventEmitter();
+  @Input() notification: String;
 
   @ViewChild('modalRef') modalRef: Modal;
 
-  public openModal(){
+  public openModal(notification: String){
+      this.notification = notification;
       this.modalRef.openModal();
   }
 

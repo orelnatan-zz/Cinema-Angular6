@@ -18,32 +18,15 @@ export class Movies {
         this.dispatcher.onDataChanged().subscribe((movies: Array<Movie>) => {
             this.movies = movies;
         })
-
     }
 
-    public getMovieById(movieId: number): Observable<Movie | Error> {
-        return this.movies ? new Observable((observer) => {
-            observer.next(this.movies.find((movie: Movie) => movie.id == movieId));
-            observer.complete();
-        }) : new Observable((observer) => {
-            this.getAllMovies().subscribe((response: Array<Movie>) => {
-                observer.next(response.find((movie: Movie) => movie.id == movieId));
-                observer.complete();
-            });
-        });
-    }
-
-    public getAllMovies(): Observable<Movie[] | Error> {
+    public getMovies(): Observable<Movie[] | Error> {
         return this.movies ? new Observable((observer) => {
             observer.next(this.movies);
-            observer.complete(); this.getMovies();
-        }) : this.getMovies();
-    }
-
-    private getMovies(): Observable<Movie[] | Error> {
-        return this.http.get(environment.apis.movies.moviesData).map((response) => {
+            observer.complete();
+         }) : this.http.get(environment.apis.movies.moviesData).map((response) => {
             return this.normalizeData(response.json().results);
-        }).catch(this.handleError).delay(2000);
+        }).catch(this.handleError).delay(3000);
     }
 
     private handleError(error: any): Observable<Error> {               //On error, throw exception

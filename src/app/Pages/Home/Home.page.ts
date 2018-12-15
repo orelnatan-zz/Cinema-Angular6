@@ -26,22 +26,25 @@ export class Home implements OnInit {
     }
     
     ngOnInit() {
-        this.dispatcher.dispatchLoaderToggled(true);
+        this.dispatcher.dispatchPending(true);
 
-        this.moviesService.getAllMovies().subscribe((response: Array<Movie>) => {
+        this.moviesService.getMovies().subscribe((response: Array<Movie>) => {
             this.moviesList = response;
-            this.dispatcher.dispatchLoaderToggled(false);
+            this.dispatcher.dispatchPending(false);
         })
     }
 
     navigateToMovieSummary(id: number): void {
         this.dispatcher.dispatcRedirect({ 
-          path: 'Cinema/MovieSummary', queryParams: {
-            movieId: id,
-          }
+            path: 'Cinema/MovieSummary', queryParams: {
+                movieId: id,
+            }
         });
     }
   
+    handleRemove(id: number): void {
+        this.dispatcher.dispatchDelete(id);
+    }
     
 }
 

@@ -1,14 +1,14 @@
 
-<dialog #dialogRef (onClose)="showDialog=false" *ngIf="showDialog"
+<dialog #dialogRef 
     (onClose)="dialogRef.closeModal()"
-    (onApprove)="deleteMovie(movieId); dialogRef.closeModal()">
+    (onApprove)="deleteMovie(movieId)">
 </dialog>
 
 <success #successRef ></success>
 <failure #failureRef ></failure>
 <loader #loaderRef > </loader>
 
-<header (plus)="openEditorModal()" [showEditButton]="showEditButton"> </header>
+<header (edit)="navigateToMovieSummary()"> </header>
 
 <div class="page">
     <div class="body">
