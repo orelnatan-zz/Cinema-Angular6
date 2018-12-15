@@ -30,16 +30,17 @@ export class Cinema implements OnInit {
               private movies: Movies,
               private dispatcher: Dispatcher,
               private movieTitlePipe: MovieTitle,) {
-
+      
+      // System global subscriptions...
       this.dispatcher.onRedirect().subscribe((route: Route): void => {
           this.router.navigate([route.path], {
               queryParams: route.queryParams,
           })
-      })
+      });
 
       this.dispatcher.onEdit().subscribe((movie: Movie): void => {
           this.isMovieExist(movie.id) ? this.updateExistingMovie(movie) : this.createNewMovie(movie)
-      })
+      });
 
       this.dispatcher.onPending().subscribe((isActive: Boolean): void => {
           isActive ? this.loaderRef.openModal() : this.loaderRef.closeModal();
@@ -48,11 +49,11 @@ export class Cinema implements OnInit {
       this.dispatcher.onDelete().subscribe((id: Number): void => {
           this.movieId = id;
           this.dialogRef.openModal();
-      })
+      });
 
       this.dispatcher.onError().subscribe((errorNotification: String): void => {
           this.failureRef.openModal(errorNotification);
-      })
+      });
   }
 
   ngOnInit() {

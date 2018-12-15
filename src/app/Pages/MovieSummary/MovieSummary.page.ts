@@ -26,7 +26,8 @@ export class MovieSummary implements OnInit {
 
     this.route.queryParams.subscribe((params) => {
         this.movies.getMovies().subscribe((response: Movie[]) => {
-            this.movie = params.movieId ? { ...response.find((movie: Movie) => movie.id == params.movieId) } : {} as Movie;
+            const shownMovie: Movie = response.find((movie: Movie) => movie.id == params.movieId);
+            this.movie = params.movieId ? shownMovie ? { ...shownMovie } : null : {} as Movie;
             
             if(!this.movie){
               this.dispatcher.dispatchError('Server Error: unable to find item ' + params.movieId + ', redirecting home page.');
