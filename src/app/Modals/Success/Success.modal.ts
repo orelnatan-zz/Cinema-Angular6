@@ -12,6 +12,10 @@ export class Success {
 
   @ViewChild('modalRef') modalRef: Modal;
 
+  public openModal(){
+      this.modalRef.openModal();
+  }
+
   closeModal(){
       this.modalRef.closeModal();
   }

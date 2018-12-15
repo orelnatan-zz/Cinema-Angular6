@@ -1,38 +1,21 @@
-<movie-viewer #editorRef (onClose)="showEditor=false" *ngIf="showEditor"
-      (onClose)="editorRef.closeModal()"
-      (onSubmit)="isMovieExist($event.id) ? updateExistingMovie($event, editorRef) : createNewMovie($event, editorRef)"
-      [movie]="movie">
-</movie-viewer>
 
 <dialog #dialogRef (onClose)="showDialog=false" *ngIf="showDialog"
-      (onClose)="dialogRef.closeModal()"
-      (onApprove)="deleteMovie(movieId); dialogRef.closeModal()">
+    (onClose)="dialogRef.closeModal()"
+    (onApprove)="deleteMovie(movieId); dialogRef.closeModal()">
 </dialog>
 
-<success *ngIf="showSuccess"
-    (onClose)="showSuccess=false" >
-</success>
+<success #successRef ></success>
 
-<failure *ngIf="showFailure"
-    (onClose)="showFailure=false" >
-</failure>
+<failure #failureRef ></failure>
 
-<loader *ngIf="showLoader"
-    >
-</loader>
+<loader #loaderRef > </loader>
 
-<header (plus)="openEditorModal()"> </header>
+
+<header (plus)="openEditorModal()" [showEditButton]="showEditButton"> </header>
 
 <div class="page">
     <div class="body">
-        <div class="block-container">
-            <span class="global-separator"></span>
-            <movies-list
-                [movies]="moviesList"
-                (onRemove)="handleRemove($event)"
-                (onEdit)="handleEdit($event)" >
-            </movies-list>
-        </div>
+        <router-outlet (activate)="onActivate($event)"> </router-outlet>
     </div>
 </div>
 

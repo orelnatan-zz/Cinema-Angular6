@@ -8,7 +8,7 @@ import { Movie } from '../../Models/Movie.modal';
 })
 
 export class MovieEditor {
-    @Output() onClose: EventEmitter<any> = new EventEmitter();
+    @Output() onExit: EventEmitter<any> = new EventEmitter();
     @Output() onSubmit: EventEmitter<any> = new EventEmitter();
   
     @Input() movie: Movie;
