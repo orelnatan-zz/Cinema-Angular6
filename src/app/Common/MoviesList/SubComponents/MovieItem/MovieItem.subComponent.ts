@@ -1,6 +1,6 @@
 
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Movie } from '../../../../Models/Movie.modal';
+import { Movie } from '../../../../Models/Movie.model';
 
 @Component({
   selector: 'movie-item',

@@ -1,17 +1,23 @@
 import { EventEmitter, Output } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { Movie } from '../Models/Movie.modal';
-import { Route } from '../Models/Route.modal';
+import { Movie } from '../Models/Movie.model';
+import { Route } from '../Models/Route.model';
 
 @Injectable()
 export class Dispatcher {
     @Output() redirect: EventEmitter<Route> = new EventEmitter();
+    @Output() dataChanged: EventEmitter<Movie[]> = new EventEmitter();
     @Output() movieSubmited: EventEmitter<Movie> = new EventEmitter();
+    
     @Output() loaderToggled: EventEmitter<boolean> = new EventEmitter();
     @Output() successToggled: EventEmitter<boolean> = new EventEmitter();
     @Output() failureToggled: EventEmitter<boolean> = new EventEmitter();
 
     /////////////////////////////////////////////// Events launchers ///////////////////////////////////////////////
+    public dispathDataChanged(data: Array<Movie>): void {
+        this.dataChanged.emit(data);
+    }
+
     public dispatcRedirect(route: Route): void {
         this.redirect.emit(route);
     }
@@ -24,15 +30,13 @@ export class Dispatcher {
         this.loaderToggled.emit(isActive);
     }
 
-    public dispatchSuccessToggled(isActive: boolean): void {
-        this.successToggled.emit(isActive);
-    }
-
-    public dispatchFailureToggled(isActive: boolean): void {
-        this.failureToggled.emit(isActive);
-    }
+   
 
     /////////////////////////////////////////////// Events listeners ///////////////////////////////////////////////
+    public onDataChanged(): EventEmitter<Movie[]> {
+        return this.dataChanged;
+    }
+
     public onRedirect(): EventEmitter<Route> {
         return this.redirect;
     }
@@ -45,11 +49,5 @@ export class Dispatcher {
         return this.loaderToggled;
     }
 
-    public onSuccessToggled(): EventEmitter<boolean> {
-        return this.successToggled;
-    }
-
-    public onFailureToggled(): EventEmitter<boolean> {
-        return this.failureToggled;
-    }
+    
 }

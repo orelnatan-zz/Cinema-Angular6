@@ -5,17 +5,14 @@
 </dialog>
 
 <success #successRef ></success>
-
 <failure #failureRef ></failure>
-
 <loader #loaderRef > </loader>
-
 
 <header (plus)="openEditorModal()" [showEditButton]="showEditButton"> </header>
 
 <div class="page">
     <div class="body">
-        <router-outlet (activate)="onActivate($event)"> </router-outlet>
+        <router-outlet> </router-outlet>
     </div>
 </div>
 

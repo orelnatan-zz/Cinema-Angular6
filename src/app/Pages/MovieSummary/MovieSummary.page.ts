@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Movies } from '../../Services/Movies.service';
 import { Dispatcher } from '../../Services/Dispatcher.service';
-import { Movie } from '../../Models/Movie.modal';
+import { Movie } from '../../Models/Movie.model';
 
 
 @Component({
@@ -17,7 +17,6 @@ export class MovieSummary implements OnInit {
 
   constructor(private movies: Movies,
               private dispatcher: Dispatcher,
-              private router: Router,
               private route: ActivatedRoute){
 
   }

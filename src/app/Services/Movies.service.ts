@@ -1,8 +1,10 @@
 import { Http, Response, } from '@angular/http';
 import { Injectable, }  from '@angular/core';
+import { Dispatcher } from '../Services/Dispatcher.service';
 import { Observable } from 'rxjs/Rx';   // npm install rxjs-compat
 import { environment } from '../../environments/environment';
-import { Movie } from '../Models/Movie.modal';
+import { Movie } from '../Models/Movie.model';
+
 
 const IMAGE_PREFIX: string = "https://image.tmdb.org/t/p/w500";
 
@@ -10,7 +12,12 @@ const IMAGE_PREFIX: string = "https://image.tmdb.org/t/p/w500";
 export class Movies {
     movies: Array<Movie>;
 
-    constructor(private http: Http){
+    constructor(private http: Http,
+                private dispatcher: Dispatcher){
+
+        this.dispatcher.onDataChanged().subscribe((movies: Array<Movie>) => {
+            this.movies = movies;
+        })
 
     }
 
@@ -35,9 +42,8 @@ export class Movies {
 
     private getMovies(): Observable<Movie[] | Error> {
         return this.http.get(environment.apis.movies.moviesData).map((response) => {
-            this.movies = this.normalizeData(response.json().results);
-            return this.movies;
-        }).catch(this.handleError);
+            return this.normalizeData(response.json().results);
+        }).catch(this.handleError).delay(2000);
     }
 
     private handleError(error: any): Observable<Error> {               //On error, throw exception

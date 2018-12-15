@@ -1,5 +1,5 @@
 import { Component, Output, Input, EventEmitter, ViewChild } from '@angular/core';
-import { Movie } from '../../Models/Movie.modal';
+import { Movie } from '../../Models/Movie.model';
 import { Modal } from '../../Core/Modal';
 
 @Component({
