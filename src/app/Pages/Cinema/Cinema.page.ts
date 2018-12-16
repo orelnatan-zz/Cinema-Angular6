@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute, } from '@angular/router';
+import { Router } from '@angular/router';
 import { Dispatcher } from '../../Services/Dispatcher.service';
 import { Loader } from '../../Modals/Loader';
 import { Success } from '../../Modals/Success';
@@ -9,6 +9,10 @@ import { Movie } from '../../Models/Movie.model';
 import { Movies } from '../../Services/Movies.service';
 import { MovieTitle } from '../../Pips/MovieTitle';
 import { Dialog } from '../../Modals/Dialog';
+
+const MOVIE_SUMMARY_PATH: string = 'Cinema/MovieSummary';
+const HOME_PATH: string = 'Cinema/Home';
+const ERROR_NOTIFICATION: string = "Error: This title is already in use!, try a another.";
 
 @Component({
   selector: 'cinema',
@@ -30,7 +34,7 @@ export class Cinema implements OnInit {
               private movies: Movies,
               private dispatcher: Dispatcher,
               private movieTitlePipe: MovieTitle,) {
-      
+
       // System global subscriptions...
       this.dispatcher.onRedirect().subscribe((route: Route): void => {
           this.router.navigate([route.path], {
@@ -68,7 +72,7 @@ export class Cinema implements OnInit {
   }
 
   navigateToMovieSummary(): void{
-    this.router.navigate(['Cinema/MovieSummary']);
+    this.router.navigate([MOVIE_SUMMARY_PATH]);
   }
 
   isMovieExist(id: number): Boolean{
@@ -95,22 +99,22 @@ export class Cinema implements OnInit {
     let currentMovie: Movie = this.moviesList.find(movie => movie.id == updates.id);
 
     if(this.isTitleExist(updates.title, [currentMovie.title])) {
-        this.failureRef.openModal('Error: This title is already in use!, try a another.');
+        this.failureRef.openModal(ERROR_NOTIFICATION);
         return;
     }
 
     Object.keys(currentMovie).forEach((key) => {
         currentMovie[key] = updates[key];
     });
-    
+
     this.dispatcher.dispathDataChanged(this.moviesList);
-    this.router.navigate(['Cinema/Home']);
+    this.router.navigate([HOME_PATH]);
     this.successRef.openModal();
   }
 
   createNewMovie(movie: Movie): void {
     if(this.isTitleExist(movie.title, [])) {
-      this.failureRef.openModal('Error: This title is already in use!, try a another.');
+      this.failureRef.openModal(ERROR_NOTIFICATION);
       return;
     }
     movie.id = Math.max.apply(Math, this.moviesList.map(movie => movie.id)) + 1;
@@ -121,6 +125,6 @@ export class Cinema implements OnInit {
     this.successRef.openModal();
   }
 
-  
-  
+
+
 }

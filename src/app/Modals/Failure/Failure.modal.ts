@@ -9,7 +9,6 @@ import { Modal } from '../../Core/Modal';
 
 export class Failure {
   @Input() notification: String;
-
   @ViewChild('modalRef') modalRef: Modal;
 
   public openModal(notification: String){

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Movie } from '../../Models/Movie.model';
 import { Movies } from '../../Services/Movies.service';
 import { Dispatcher } from '../../Services/Dispatcher.service';
 import { MovieTitle } from '../../Pips/MovieTitle';
+
+const MOVIE_SUMMARY_PATH: string = 'Cinema/MovieSummary';
 
 @Component({
   selector: 'home',
@@ -13,18 +14,17 @@ import { MovieTitle } from '../../Pips/MovieTitle';
 })
 
 export class Home implements OnInit {
-    
+
     moviesList: Array<Movie>;
-   
+
     constructor(private moviesService: Movies,
-                private movieTitlePipe: MovieTitle,
                 private dispatcher: Dispatcher){
-      
+
         this.dispatcher.onDataChanged().subscribe((movies: Array<Movie>) => {
           this.moviesList = movies;
         })
     }
-    
+
     ngOnInit() {
         this.dispatcher.dispatchPending(true);
 
@@ -35,16 +35,17 @@ export class Home implements OnInit {
     }
 
     navigateToMovieSummary(id: number): void {
-        this.dispatcher.dispatcRedirect({ 
-            path: 'Cinema/MovieSummary', queryParams: {
+        this.dispatcher.dispatcRedirect({
+            path: MOVIE_SUMMARY_PATH,
+            queryParams: {
                 movieId: id,
             }
         });
     }
-  
+
     handleRemove(id: number): void {
         this.dispatcher.dispatchDelete(id);
     }
-    
+
 }
 

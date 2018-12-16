@@ -4,7 +4,8 @@ import { Movies } from '../../Services/Movies.service';
 import { Dispatcher } from '../../Services/Dispatcher.service';
 import { Movie } from '../../Models/Movie.model';
 
-
+const HOME_PATH: string = 'Cinema/Home';
+const ERROR_NOTIFICATION: string = 'Server Error: unable to find movie, redirecting home page.';
 @Component({
   selector: 'movie-summary',
   templateUrl: './MovieSummary.page.html',
@@ -28,9 +29,9 @@ export class MovieSummary implements OnInit {
         this.movies.getMovies().subscribe((response: Movie[]) => {
             const shownMovie: Movie = response.find((movie: Movie) => movie.id == params.movieId);
             this.movie = params.movieId ? shownMovie ? { ...shownMovie } : null : {} as Movie;
-            
+
             if(!this.movie){
-              this.dispatcher.dispatchError('Server Error: unable to find item ' + params.movieId + ', redirecting home page.');
+              this.dispatcher.dispatchError(ERROR_NOTIFICATION);
               this.navigateToHomePage();
               return;
             }
@@ -42,8 +43,8 @@ export class MovieSummary implements OnInit {
   }
 
   navigateToHomePage(){
-    this.dispatcher.dispatcRedirect({ 
-        path: 'Cinema/Home', 
+    this.dispatcher.dispatcRedirect({
+        path: HOME_PATH,
         queryParams: {}
     });
   }

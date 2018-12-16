@@ -8,9 +8,5 @@ import { Component } from '@angular/core';
 // This is the top level component //
 export class AppRoot {
 
-  constructor(){
-    
-  }
-
 }
 

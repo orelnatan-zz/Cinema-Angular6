@@ -1,4 +1,4 @@
-import { Http, Response, } from '@angular/http';
+import { Http, } from '@angular/http';
 import { Injectable, }  from '@angular/core';
 import { Dispatcher } from '../Services/Dispatcher.service';
 import { Observable } from 'rxjs/Rx';   // npm install rxjs-compat
@@ -26,14 +26,14 @@ export class Movies {
             observer.complete();
          }) : this.http.get(environment.apis.movies.moviesData).map((response) => {
             return this.normalizeData(response.json().results);
-        }).catch(this.handleError).delay(3000);
+        }).catch(this.handleError).delay(2000);
     }
 
     private handleError(error: any): Observable<Error> {               //On error, throw exception
         return Observable.throw(error);
     }
- 
-    private normalizeData(data: Array<Movie>): Array<Movie> {     
+
+    private normalizeData(data: Array<Movie>): Array<Movie> {
         return data.map(item => {
             item.poster_path = IMAGE_PREFIX.concat(item.poster_path)
             return item;
