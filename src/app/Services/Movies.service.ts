@@ -1,6 +1,5 @@
 import { Http, } from '@angular/http';
 import { Injectable, }  from '@angular/core';
-import { Dispatcher } from '../Services/Dispatcher.service';
 import { Observable } from 'rxjs/Rx';   // npm install rxjs-compat
 import { environment } from '../../environments/environment';
 import { Movie } from '../Models/Movie.model';
@@ -12,12 +11,8 @@ const IMAGE_PREFIX: string = "https://image.tmdb.org/t/p/w500";
 export class Movies {
     movies: Array<Movie>;
 
-    constructor(private http: Http,
-                private dispatcher: Dispatcher){
+    constructor(private http: Http){
 
-        this.dispatcher.onDataChanged().subscribe((movies: Array<Movie>) => {
-            this.movies = movies;
-        })
     }
 
     public getMovies(): Observable<Movie[] | Error> {

@@ -1,20 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Cinema } from '../Pages/Cinema';
+import { UserDetails } from '../Pages/UserDetails';
+import { Entrance } from '../Pages/Entrance';
 import { MovieSummary } from '../Pages/MovieSummary';
 import { Home } from '../Pages/Home';
+import { NotFound } from '../Pages/NotFound';
 
-const routes: Routes = [                                                    // empty = (empty from component's point of view!)
-    { path: '', redirectTo: 'Cinema', pathMatch: 'full' },                  // if path = empty(http://localhost:5000), so redirectTo http://localhost:5000/Cinema.
+const routes: Routes = [                                                  
+	{ path: 'User-Details', component: UserDetails },
+	{ path: 'Entrance', component: Entrance },
+	{ path: '', redirectTo: 'Cinema', pathMatch: 'full' },                  
     { path: 'Cinema', component: Cinema, 
       children: [
-        { path: '', redirectTo: 'Home', pathMatch: 'full' },                // if path = empty(http://localhost:5000/Cinema), so redirectTo http://localhost:5000/Cinema/Home.
+        { path: '', redirectTo: 'Home', pathMatch: 'full' },           
         { path: 'Home', component: Home },
         { path: 'MovieSummary', component: MovieSummary },
       ]
     },
 
-  //  { path: '**', component: PageNotFoundComponent }
+   { path: '**', component: NotFound }
 ];
 
 @NgModule({

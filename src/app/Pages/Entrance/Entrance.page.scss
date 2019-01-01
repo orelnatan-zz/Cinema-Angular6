@@ -1,0 +1,9 @@
+@import './src/assets/Config/Utils';
+
+.page {
+    @extend %page;
+
+    .body {
+        @extend %body;
+    }
+}
