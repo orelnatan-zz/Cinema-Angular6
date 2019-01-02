@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Rx';   // npm install rxjs-compat
 import { environment } from '../../environments/environment';
 import { Movie } from '../Models/Movie.model';
 
-
 const IMAGE_PREFIX: string = "https://image.tmdb.org/t/p/w500";
 
 @Injectable()
