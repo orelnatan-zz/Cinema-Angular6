@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule, } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RoutingModule } from '../Modules/Routing.module';
+import { AppStoreModule } from '../Store';
 import { MomentModule } from 'angular2-moment'; 				// npm i angular2-moment // https://www.npmjs.com/package/angular2-moment
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'; 	// npm install @ngrx/store-devtools --save // https://alligator.io/angular/ngrx-store-redux-devtools/
 
@@ -26,6 +27,7 @@ import { MoviesList } from '../Common/MoviesList';
 import { MovieItem } from '../Common/MoviesList/SubComponents/MovieItem';
 import { Spinner } from '../Common/Spinner';
 import { MovieEditor } from '../Forms/MovieEditor';
+import { Login } from '../Forms/LogIn';
 import { MovieViewer } from '../Modals/MovieViewer';
 import { Loader } from '../Modals/Loader';
 import { Dialog } from '../Modals/Dialog';
@@ -42,16 +44,17 @@ import { InputCheckbox } from '../Inputs/InputCheckbox';
     Modal,
     Notification,
     Header,
-	Cinema,
-	Entrance,
-	UserDetails,
+	  Cinema,
+	  Entrance,
+	  UserDetails,
     Home,
-	MovieSummary,
-	NotFound,
+	  MovieSummary,
+	  NotFound,
     MoviesList,
     MovieItem,
     Spinner,
     MovieEditor,
+    Login,
     MovieViewer,
     Loader,
     Dialog,
@@ -72,10 +75,11 @@ import { InputCheckbox } from '../Inputs/InputCheckbox';
     ReactiveFormsModule,
     FormsModule,
     RoutingModule,
-	MomentModule,
-	StoreDevtoolsModule.instrument({
-		maxAge: 10
-	})
+    MomentModule,
+    AppStoreModule,
+    StoreDevtoolsModule.instrument({
+      maxAge: 10
+    })
 
   ],
 

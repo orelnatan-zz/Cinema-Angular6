@@ -1,0 +1,39 @@
+{
+  "users": [
+      {
+        "id": 305538332,
+        "username": "orel natan",
+        "password": "w754e",
+        "mail": "natenorel@gmail.com",
+        "favorites": []
+      },
+      {
+        "id": 554543666,
+        "username": "ran perets",
+        "password": "11111",
+        "mail": "ranperets@gmail.com",
+        "favorites": []
+      },
+      {
+        "id": 776543243,
+        "username": "naor avitan",
+        "password": "qazxs1",
+        "mail": "naor@gmail.com",
+        "favorites": []
+      },
+      {
+        "id": 986532222,
+        "username": "ron avni",
+        "password": "edcvfr",
+        "mail": "ronav@gmail.com",
+        "favorites": []
+      },
+      {
+        "id": 324436667,
+        "username": "maor eli",
+        "password": "trr432",
+        "mail": "maorEli@gmail.com",
+        "favorites": []
+      }
+  ]
+}
