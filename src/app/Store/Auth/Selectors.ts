@@ -25,11 +25,11 @@ export const getAuthIsPending = createSelector(
 );
 
 export const getAuthStatus = createSelector(
-  getAuthState,
-  (state: AuthState): AuthStatus => {
-      return {
-          logged: state.logged,
-          error: state.error
-      }
-  }
+    getAuthState,
+      (state: AuthState): AuthStatus => {
+          return {
+              logged: state.logged,
+              error: state.error
+          }
+    }
 );
