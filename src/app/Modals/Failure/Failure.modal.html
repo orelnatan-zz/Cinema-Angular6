@@ -1,7 +1,7 @@
 
 
-<modal #modalRef (onClose)="onClose.emit()">
-    <div class="failure-main">
+<modal #modalRef >
+    <div class="failure-main"  *ngIf="modalRef.renderModal">
         <notification
             [notification]="notification"
             [iconClass]="'icon-close'"

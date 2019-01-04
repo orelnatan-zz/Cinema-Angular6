@@ -9,6 +9,9 @@ import { MomentModule } from 'angular2-moment'; 				// npm i angular2-moment // 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'; 	// npm install @ngrx/store-devtools --save // https://alligator.io/angular/ngrx-store-redux-devtools/
 
 import { Movies } from '../Services/Movies.service';
+import { Users } from '../Services/Users.service';
+import { LocalStorage } from '../Services/LocalStorage.service';
+import { AuthGuard } from '../Services/AuthGuard.service';
 
 import { MovieDate } from '../Pips/MovieDate';
 import { MovieTitle } from '../Pips/MovieTitle';
@@ -44,12 +47,12 @@ import { InputCheckbox } from '../Inputs/InputCheckbox';
     Modal,
     Notification,
     Header,
-	  Cinema,
-	  Entrance,
-	  UserDetails,
+	Cinema,
+	Entrance,
+	UserDetails,
     Home,
-	  MovieSummary,
-	  NotFound,
+	MovieSummary,
+	NotFound,
     MoviesList,
     MovieItem,
     Spinner,
@@ -84,7 +87,10 @@ import { InputCheckbox } from '../Inputs/InputCheckbox';
   ],
 
   providers: [
-    Movies,
+	Movies,
+	Users,
+	LocalStorage,
+	AuthGuard
   ],
 
   bootstrap: [

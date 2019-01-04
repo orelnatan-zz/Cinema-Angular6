@@ -5,5 +5,11 @@
 
     .body {
         @extend %body;
-    }
+	}
+	
+	.entrance-form {
+		display: block;
+		width: 50%;
+		margin-top: 40px;
+	}
 }

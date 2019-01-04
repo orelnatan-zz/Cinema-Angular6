@@ -1,14 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { AuthState } from './AuthState.model';
 import { User } from '../../Models/User.model';
-import { Error } from '../../Models/Error.model';
+import { Status } from '../../Models/Status.model';
 
-interface AuthStatus {
-    logged: boolean;
-    error: Error;
-}
-
-export const getAuthState = createFeatureSelector<AuthState>('authentication');
+export const getAuthState = createFeatureSelector<AuthState>('auth');
 
 export const getLoggedUser = createSelector(
     getAuthState,
@@ -24,12 +19,16 @@ export const getAuthIsPending = createSelector(
     }
 );
 
-export const getAuthStatus = createSelector(
+export const getLoginStatus = createSelector(
     getAuthState,
-      (state: AuthState): AuthStatus => {
-          return {
-              logged: state.logged,
-              error: state.error
-          }
+	(state: AuthState): Status => {
+		return state.status;
+    }
+);
+
+export const getIsLogged = createSelector(
+    getAuthState,
+	(state: AuthState): boolean => {
+		return state.logged;
     }
 );

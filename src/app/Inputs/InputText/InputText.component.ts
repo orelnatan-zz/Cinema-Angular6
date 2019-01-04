@@ -9,7 +9,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class InputText {
     @Input() title: string;
     @Input() validation: string;
-    @Input() placeholder: string;
+	@Input() placeholder: string;
+	@Input() type: string;
     @Input() value: string;
     @Input() submitted: boolean;
     @Input() invalid: boolean;

@@ -3,7 +3,7 @@
     <div class="input-title" *ngIf="showTitle"> <h3>{{title}}</h3> </div>
     <div> 
      <input class="input-text-textbox" 
-            type="text" 
+            type="{{type}}" 
             (input)="onChange.emit($event.target.value)"
             value="{{value}}"
             placeholder="{{placeholder}}"

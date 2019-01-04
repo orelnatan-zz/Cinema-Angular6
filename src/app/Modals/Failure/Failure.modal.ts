@@ -11,12 +11,12 @@ export class Failure {
   @Input() notification: String;
   @ViewChild('modalRef') modalRef: Modal;
 
-  public openModal(notification: String){
+  public showFailure(notification: String): void{
       this.notification = notification;
       this.modalRef.openModal();
   }
 
-  closeModal(){
+  public hideFailure(): void{
       this.modalRef.closeModal();
   }
 }

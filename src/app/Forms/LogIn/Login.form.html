@@ -1,12 +1,12 @@
 
 <form class="block-container" #form="ngForm" (ngSubmit)="form.valid && onSubmit.emit(login)" novalidate >
 
-    <h1>Log in:</h1>
-
+    <h2>Sigh in:</h2>
     <span class="global-separator"> </span>
 
     <div class="block-container">
-        <input-text
+		<input-text
+			[type]="'text'"
             [title]="'User Name:'"
             [value]="login?.username"
             [validation]="'invalide user name.'"
@@ -26,7 +26,8 @@
     <span class="global-separator"> </span>
 
     <div class="block-container">
-      <input-text
+	  <input-text
+	  	  [type]="'password'"
           [title]="'Password:'"
           [value]="login?.password"
           [validation]="'invalide password.'"
@@ -38,7 +39,8 @@
           name="password"
           #password="ngModel"
           ngDefaultControl
-          minlength="1"
+		  minlength="1"
+		  type="password"
           required >
       </input-text>
   </div>

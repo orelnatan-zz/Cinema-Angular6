@@ -1,11 +1,13 @@
 import { Actions, ActionTypes } from './Actions';
 import { AuthState } from './AuthState.model';
+import { User } from '../../Models/User.model';
+import { Status } from '../../Models/Status.model';
 
 const initialState: AuthState = {
     logged: false,
-    user: null,
+    user: {} as User,
     isPending: false,
-    error: null
+    status: {} as Status,
 }
 
 export function AuthReducer(state = initialState, action: Actions): AuthState {
@@ -26,7 +28,7 @@ export function AuthReducer(state = initialState, action: Actions): AuthState {
                 ... state,
                 logged: false,
                 isPending: false,
-                error: action.payload.error
+                status: action.payload.error
             };
         };
         case ActionTypes.LOGIN_SUCCESS: {
@@ -34,9 +36,14 @@ export function AuthReducer(state = initialState, action: Actions): AuthState {
                 user: action.payload.user,
                 logged: true,
                 isPending: false,
-                error: null
+                status: action.payload.success
             }
-        }
+		}
+		default: {
+            return {
+				... state
+			}
+        };
     }
 }
 

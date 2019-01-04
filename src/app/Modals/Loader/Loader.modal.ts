@@ -1,4 +1,4 @@
-import { Component, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Modal } from '../../Core/Modal';
 
 @Component({
@@ -8,15 +8,13 @@ import { Modal } from '../../Core/Modal';
 })
 
 export class Loader {
-  @Output() onClose: EventEmitter<any> = new EventEmitter();
-
   @ViewChild('modalRef') modalRef: Modal;
 
-  public openModal(){
-    this.modalRef.openModal();
+  public showLoader(): void {
+  	  this.modalRef.openModal();
   }
 
-  public closeModal(){
+  public hideLoader(): void {
       this.modalRef.closeModal();
   }
 }

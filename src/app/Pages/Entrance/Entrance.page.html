@@ -1,9 +1,14 @@
 
+<loader #loaderRef > </loader>
+<failure #failureRef> </failure>
+
 <div class="page">
     <div class="body">
-        <div class="block-container half">
-            <login> </login>
-        </div>
+		<div class="flex-container row full flex-center">
+			<div class="entrance-form">
+				<login (onSubmit)="handleSubmit($event)"> </login>
+			</div>
+		</div>
     </div>
 </div>
 

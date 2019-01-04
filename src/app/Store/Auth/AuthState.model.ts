@@ -1,9 +1,9 @@
 import { User } from "../../Models/User.model";
-import { Error } from "../../Models/Error.model";
+import { Status } from "../../Models/Status.model";
 
 export interface AuthState {
     logged: boolean,
     user: User,
     isPending: boolean,
-    error: Error
+    status: Status
 }

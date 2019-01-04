@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 import { LoginAuth } from '../../Models/LoginAuth.model';
 import { User } from '../../Models/User.model';
-import { Error } from '../../Models/Error.model';
+import { Status } from '../../Models/Status.model';
 
 export enum ActionTypes {
     LOGIN = '[AUTH] Login',
@@ -25,13 +25,16 @@ export class Logout implements Action {
 export class LoginFailed implements Action {
   readonly type = ActionTypes.LOGIN_FAILED;
 
-  constructor(public payload: { error: Error }){}
+  constructor(public payload: { error: Status }){}
 }
 
 export class LoginSuccess implements Action {
   readonly type = ActionTypes.LOGIN_SUCCESS;
 
-  constructor(public payload: { user: User }){}
+  constructor(public payload: { 
+	  	user: User,
+		success: Status
+	}){}
 }
 
 

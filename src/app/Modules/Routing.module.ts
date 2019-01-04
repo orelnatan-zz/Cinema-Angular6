@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../Services/AuthGuard.service';
 import { Cinema } from '../Pages/Cinema';
 import { UserDetails } from '../Pages/UserDetails';
 import { Entrance } from '../Pages/Entrance';
@@ -9,9 +10,9 @@ import { NotFound } from '../Pages/NotFound';
 
 const routes: Routes = [                                                  
 	{ path: 'User-Details', component: UserDetails },
-	{ path: 'Entrance', component: Entrance },
+	{ path: 'Entrance', component: Entrance, },
 	{ path: '', redirectTo: 'Cinema', pathMatch: 'full' },                  
-    { path: 'Cinema', component: Cinema, 
+    { path: 'Cinema', component: Cinema, canActivate: [ AuthGuard ], 
       children: [
         { path: '', redirectTo: 'Home', pathMatch: 'full' },           
         { path: 'Home', component: Home },
@@ -28,6 +29,4 @@ const routes: Routes = [
 })
 
 
-export class RoutingModule {
-
-}
+export class RoutingModule {}

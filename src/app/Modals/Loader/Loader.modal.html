@@ -1,10 +1,9 @@
 
-
 <modal #modalRef [allowManualClose]="false">
-    <div class="loader-main">
-          <spinner> </spinner>
+    <div class="loader-main" *ngIf="modalRef.renderModal">
+        <spinner> </spinner>
     </div>
-</modal>
+</modal>  
 
 
 
