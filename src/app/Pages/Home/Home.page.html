@@ -1,8 +1,17 @@
 
+<loader #loaderRef > </loader>
+
+<dialog #dialogRef 
+	(onCancel)="dialogRef.hideDialog()"
+	(onApprove)="dialogRef.hideDialog(); handleRemove(movieId)"> 
+</dialog>
 
 <div class="page">
     <div class="body">
-        Home..
+		<movies-list
+			[movies]="moviesList$ | async"
+			(onRemove)="dialogRef.showDialog(DELETION_ALERT); movieId=$event">	
+		</movies-list>
     </div>
 </div>
 

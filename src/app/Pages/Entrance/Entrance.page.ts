@@ -30,23 +30,22 @@ export class Entrance implements OnInit {
 			AuthSelectors.getLoggedUser
 		);
 		
-		this.status$ = this.store$.select (
-			AuthSelectors.getLoginStatus
-		);
-
 		this.isPending$ = this.store$.select (
 			AuthSelectors.getAuthIsPending
 		);
 
+		this.status$ = this.store$.select (
+			AuthSelectors.getLoginStatus
+		);
 	}
 
 	ngOnInit(){
-		this.isPending$.subscribe((isPending: boolean) => {
-			isPending ? this.loaderRef.showLoader() : this.loaderRef.hideLoader();
+		this.status$.subscribe((status: Status) => {
+			status.failure ? this.handleFailure(status) : null;
 		})
 
-		this.status$.subscribe((status: Status) => {
-			status.failure ? this.handleFailure(status) : null
+		this.isPending$.subscribe((isPending: boolean) => {
+			isPending ? this.loaderRef.showLoader() : this.loaderRef.hideLoader();
 		})
 	}
 

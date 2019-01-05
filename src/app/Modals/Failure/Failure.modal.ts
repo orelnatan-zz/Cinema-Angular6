@@ -8,15 +8,16 @@ import { Modal } from '../../Core/Modal';
 })
 
 export class Failure {
-  @Input() notification: String;
-  @ViewChild('modalRef') modalRef: Modal;
+	@ViewChild('modalRef') modalRef: Modal;
+	
+	notification: string;
+	
+	public showFailure(notification: string): void {
+		this.notification = notification;
+		this.modalRef.openModal();
+	}
 
-  public showFailure(notification: String): void{
-      this.notification = notification;
-      this.modalRef.openModal();
-  }
-
-  public hideFailure(): void{
-      this.modalRef.closeModal();
-  }
+	public hideFailure(): void {
+		this.modalRef.closeModal();
+	}
 }

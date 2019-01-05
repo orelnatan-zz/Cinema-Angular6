@@ -45,23 +45,22 @@ const USERS: Array<User> = [
 
 const USER_NOT_EXIST: Status = {
 	number: 404,
-	description: 'Server Error 404: User not exist.',
+	description: 'Server responded with status code 401, The username is not exist.',
 	failure: true,
 }
 
 const WRONG_PASSWORD: Status = {
 	number: 401,
-	description: 'Server Error 401: Unauthorized password.',
+	description: 'Server responded with status code 401, The password you provided is invalid.', 
 	failure: true,
 }
 
-/* This service simulates a real Ajax requst(with a duration of 3s), that returns specific user or a relevant error if necessary */
 @Injectable()
 export class Users {
 	user$: Observable<User>;
 
 	constructor(private http: Http){}
-
+/* This function simulates a real Ajax requst(with a duration of 3s), that returns specific user or a relevant error if necessary */
 	public getRegisteredUser(login: LoginAuth): Observable<User | Error> {
 		const user = USERS.find((user: User) => { 
 								return user.username == login.username 
@@ -70,12 +69,11 @@ export class Users {
 		return user ? (user.password == login.password) 
 					? Observable.of(user).delay(3000) : this._handleError(WRONG_PASSWORD)
 		 			  								  : this._handleError(USER_NOT_EXIST);			
-
     }
 
-	_handleError(error: any): Observable<Error>{               //On error, throw exception
+	private _handleError(error: Status): Observable<Error> {               //On error, throw exception
         return Observable
-		.throw(error)
+		.throw({ ... error })
 		.materialize()
 		.delay(3000)
 		.dematerialize();

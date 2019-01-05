@@ -5,11 +5,13 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AuthStoreModule } from './Auth/AuthStore.module';
+import { MoviesStoreModule } from './Movies/MoviesStore.module';
 
 @NgModule({
     imports: [
       CommonModule,
-      AuthStoreModule,
+	  AuthStoreModule,
+	  MoviesStoreModule,
       StoreModule.forRoot({}),
       EffectsModule.forRoot([]),
       StoreDevtoolsModule.instrument({

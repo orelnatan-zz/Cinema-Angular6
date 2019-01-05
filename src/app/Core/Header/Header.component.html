@@ -2,9 +2,17 @@
 <div class="header-main flex-container row space-between fixed full">
     <div class="header-section">
         <span class="header-title">C i n e m a</span>
-        <span class="header-logo icon icon-play"></span>
+		<span class="header-logo icon icon-play"></span>
+		
+		<div class="header-authentication" *ngIf="router.url != '/Login'">
+			<span> Logged in as&nbsp;{{username}}&ensp;&nbsp;</span>
+			<span class="header-logout" (click)="onLogout.emit()">Log Out</span>
+		</div>
+		<div class="header-authentication" *ngIf="router.url == '/Login'">
+			<span>Hello Guest</span>
+		</div>
     </div>
-    <div class="header-section">
-        <span class="header-plus icon icon-plus" (click)="edit.emit()"></span>
+    <div class="header-section" *ngIf="router.url != '/Login'">
+        <span class="header-plus icon icon-plus" (click)="edit.onEmit()"></span>
     </div>
 </div>

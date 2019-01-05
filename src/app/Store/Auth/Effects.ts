@@ -8,10 +8,22 @@ import { Users } from '../../Services/Users.service';
 import { LocalStorage } from '../../Services/LocalStorage.service';
 import { Status } from '../../Models/Status.model';
 import { User } from '../../Models/User.model';
+import { Route } from '../../Models/Route.model';
 
 import * as AuthActions from './Actions';
 
-const HOME_PATH: string = '/Cinema/Home';
+const ENTRANCE_URL: string = '/Login';
+
+const SUCCESS: Status = {
+	number: 200, 
+	description: 'Server responded with status code 200!, Success!.', 
+	failure: false
+};
+
+const HOME_ROUTE: Route = {
+	path: '/Cinema/Home',
+	queryParams: {},
+};
 
 @Injectable()
 export class AuthEffects {
@@ -32,11 +44,8 @@ export class AuthEffects {
 				map((user: User) => {
 					return new AuthActions.LoginSuccess({
 						user: user,
-						success: { 
-							number: 200, 
-							description: 'Success!', 
-							failure: false
-						}
+						navigateTo: HOME_ROUTE,
+						success: SUCCESS
 					})
 				}),
 				catchError((error: Status) => {
@@ -55,7 +64,21 @@ export class AuthEffects {
 		),
 		tap((result: AuthActions.LoginSuccess) => {
 			this.localStorage.setUser(result.payload.user);
-			this.router.navigate([ HOME_PATH ]);
+
+			this.router.navigate([result.payload.navigateTo.path], {
+				queryParams: result.payload.navigateTo.queryParams,
+			});
+		})
+	);
+
+	@Effect({ dispatch: false })
+	Logout: Observable<Action> = this.actions$.pipe(
+		ofType<AuthActions.Logout>(
+				AuthActions.ActionTypes.LOGOUT
+		),
+		tap(() => {
+			this.localStorage.removeUser();
+			this.router.navigate([ENTRANCE_URL]);
 		})
 	);
 

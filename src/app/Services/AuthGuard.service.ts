@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 import { LocalStorage } from './LocalStorage.service';
 
-const ENTRANCE_PATH: string = '/Entrance';
+const ENTRANCE_PATH: string = '/Login';
 
 @Injectable()
 export class AuthGuard implements CanActivate {

@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, Output, EventEmitter, ViewChild, Input } from '@angular/core';
 import { Modal } from '../../Core/Modal';
 
 @Component({
@@ -8,16 +8,19 @@ import { Modal } from '../../Core/Modal';
 })
 
 export class Dialog {
-  @Output() onClose: EventEmitter<any> = new EventEmitter();
-  @Output() onApprove: EventEmitter<any> = new EventEmitter();
+	@Output() onCancel: EventEmitter<any> = new EventEmitter();
+	@Output() onApprove: EventEmitter<any> = new EventEmitter();
+	@ViewChild('modalRef') modalRef: Modal;
 
-  @ViewChild('modalRef') modalRef: Modal;
+	notification: string;
+	
+	public showDialog(notification: string): void {
+		this.notification = notification;
+		this.modalRef.openModal();
+	}
 
-  public openModal(){
-    this.modalRef.openModal();
-  }
+	public hideDialog(): void {
+		this.modalRef.closeModal();
+	}
 
-  public closeModal(){
-      this.modalRef.closeModal();
-  }
 }

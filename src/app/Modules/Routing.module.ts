@@ -10,7 +10,7 @@ import { NotFound } from '../Pages/NotFound';
 
 const routes: Routes = [                                                  
 	{ path: 'User-Details', component: UserDetails },
-	{ path: 'Entrance', component: Entrance, },
+	{ path: 'Login', component: Entrance, },
 	{ path: '', redirectTo: 'Cinema', pathMatch: 'full' },                  
     { path: 'Cinema', component: Cinema, canActivate: [ AuthGuard ], 
       children: [

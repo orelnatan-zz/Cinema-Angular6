@@ -35,11 +35,18 @@ export class LocalStorage {
 	}
 	
 	public getAuthenticatedUser(): User {
-		return this.getLocalData().user;
+		return 'user' in this.getLocalData() ? this.getLocalData().user : {} as User;
 	}
 
 	public isAuthenticated(): boolean {
 		return Object.keys(this.getAuthenticatedUser()).length > 0;
+	}
+
+	public removeUser(): void {
+		const cinema: Cinema = this.getLocalData();
+
+		delete cinema['user'];
+		this.updateLocalData(cinema);
 	}
 
 	private updateLocalData(cinema: Cinema): void {

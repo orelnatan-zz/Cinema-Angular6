@@ -5,14 +5,19 @@
     background: $color-dark-gray;
     z-index: 1;
     opacity: 0.9;
-    padding: 0px 25px;
+	padding: 0px 25px;
 
     .header-section {
         display: flex;
         align-items: center;
         color: $color-white;
-        font-size: 2.6em;
-    }
+		font-size: 2.6em;
+	}
+	
+	.header-authentication {
+		display: inline;
+		font-size: 0.4em;
+	}
 
     .header-title {
         font-family: JennaSue;
@@ -29,5 +34,15 @@
         &:hover {
             color: $color-sky;
         }
-    }
+	}
+	
+	.header-logout {
+		cursor: pointer;
+		text-decoration: underline;
+
+		&:hover {
+			color: $color-sky;
+		}
+	}
+	
 }

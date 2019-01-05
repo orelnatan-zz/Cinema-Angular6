@@ -8,13 +8,13 @@ import { Modal } from '../../Core/Modal';
 })
 
 export class Loader {
-  @ViewChild('modalRef') modalRef: Modal;
+	@ViewChild('modalRef') modalRef: Modal;
 
-  public showLoader(): void {
-  	  this.modalRef.openModal();
-  }
+	public showLoader(): void {
+		this.modalRef.openModal();
+	}
 
-  public hideLoader(): void {
-      this.modalRef.closeModal();
-  }
+	public hideLoader(): void {
+		this.modalRef.closeModal();
+	}
 }
