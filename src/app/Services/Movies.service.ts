@@ -17,8 +17,9 @@ export class Movies {
 		private http: Http,
 		private store$: Store<AppState>
 	) {
-		this.store$.select(MoviesSelectors.getAllMovies)
-				   .subscribe((movies: Array<Movie>) => {
+		this.store$.select(							// Listening to movies state changes ...
+			MoviesSelectors.getAllMovies
+		).subscribe((movies: Array<Movie>) => {
 			this.movies = movies;
 		});
 	}
@@ -28,12 +29,11 @@ export class Movies {
             observer.next(this.movies);
             observer.complete();
          }) : this.http.get(environment.apis.movies.moviesData).map((response) => {
-			this.movies = this.normalizeData(response.json().results);
-            return this.movies;
+            	return this.normalizeData(response.json().results);
         }).catch(this._handleError).delay(2000);
     }
 
-    private _handleError(error: any): Observable<Error> {               //On error, throw exception
+    private _handleError(error: any): Observable<Error> {               // On error, throw exception
         return Observable.throw(error);
     }
 

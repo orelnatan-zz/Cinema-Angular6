@@ -48,14 +48,6 @@ export class MoviesEffects {
         )
 	);
 
-	// @Effect({ dispatch: false })
-	// Logout: Observable<Action> = this.actions$.pipe(
-	// 	ofType<MoviesActions.RemoveMovie>(
-	// 			MoviesActions.ActionTypes.REMOVE_MOVIE,
-	// 	),
-	// 	tap((result: MoviesActions.RemoveMovie) => {
-			
-	// 	})
-	// );
+	
 
 }
