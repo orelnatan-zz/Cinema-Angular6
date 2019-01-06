@@ -8,16 +8,16 @@ import { Modal } from '../../Core/Modal';
 })
 
 export class Success {
-  @Output() onClose: EventEmitter<any> = new EventEmitter();
+  	@ViewChild('modalRef') modalRef: Modal;
 
-  @ViewChild('modalRef') modalRef: Modal;
+	notification: string;
 
-  public openModal(){
-      this.modalRef.openModal();
-  }
+	public showSuccess(notification: string): void {
+		this.notification = notification;
+		this.modalRef.openModal();
+	}
 
-  closeModal(){
-      this.modalRef.closeModal();
-  }
-
+	public hideSuccess(): void {
+		this.modalRef.closeModal();
+	}
 }

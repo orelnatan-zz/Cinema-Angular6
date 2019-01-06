@@ -1,82 +1,90 @@
 @import './src/assets/Config/Utils';
 
+.prevent-scroll {
+	position:absolute;
+	width:100%;
+	overflow-y:hidden;
+	top:0;
+	bottom:0;
+}
+
 .modal-main {
-  position: fixed;
-  display: block;
-  z-index: 10;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  animation: blurIn 0.3s ease;
-  animation-fill-mode: forwards;
+	position: fixed;
+	display: block;
+	z-index: 10;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	animation: blurIn 0.3s ease;
+	animation-fill-mode: forwards;
 
   .modal-body {
-    position: absolute;
-    display: block;
-    width: 100%;
-    top: -150%;
-    transform: translateY(-50%);
+		position: absolute;
+		display: block;
+		width: 100%;
+		top: -150%;
+		transform: translateY(-50%);
   }
 
   .modal-content {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
-    animation: fadeIn 1s ease;
+		position: relative;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		width: 100%;
+		animation: fadeIn 1s ease;
   }
 
   .modal-close {
-    position: absolute;
-    top: 0;
-    left: 0;
-    cursor: pointer;
-    color: $color-error;
+		position: absolute;
+		top: 0;
+		left: 0;
+		cursor: pointer;
+		color: $color-error;
 
     @media screen and (min-width: 900px) {
-      margin: 20px;
-      font-size: 2em;
+		margin: 20px;
+		font-size: 2em;
 
-      &:hover {
-          color: $color-white;
-      }
+		&:hover {
+			color: $color-white;
+		}
     }
 
     @media screen and (max-width: 899px) {
-      margin: 10px;
-      font-size: 1em;
+		margin: 10px;
+		font-size: 1em;
     }
   } 
 }
 
 .modal-bodyfallDown {
-  animation: downfall 0.5s ease;
-  animation-fill-mode: forwards;
+	animation: downfall 0.5s ease;
+	animation-fill-mode: forwards;
 }
 
 .modal-bodyfallUp {
-  animation: upfall 0.5s ease;
+  	animation: upfall 0.5s ease;
 }
 
 
 @keyframes blurIn {
-  0% {background-color: rgba($color-dark-gray , 0);}
-  100% {background-color: rgba($color-dark-gray , 0.8);}
+	0% {background-color: rgba($color-dark-gray , 0);}
+	100% {background-color: rgba($color-dark-gray , 0.8);}
 }
 
 @keyframes fadeIn {
-  0% {opacity: 0;}
-  100% {opacity: 1;}
+	0% {opacity: 0;}
+	100% {opacity: 1;}
 }
 
 @keyframes downfall {
-  from {top: -150%;}
-  to {top: 50%;}
+	from {top: -150%;}
+	to {top: 50%;}
 }
 
 @keyframes upfall {
-  from {top: 50%;}
-  to {top: -150%;}
+	from {top: 50%;}
+	to {top: -150%;}
 }

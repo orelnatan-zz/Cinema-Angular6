@@ -12,7 +12,7 @@ import { Route } from '../../Models/Route.model';
 
 import * as AuthActions from './Actions';
 
-const ENTRANCE_URL: string = '/Login';
+const ENTRANCE_URL: string = 'Cinema/Login';
 
 const SUCCESS: Status = {
 	number: 200, 

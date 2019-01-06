@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 import { LocalStorage } from './LocalStorage.service';
 
-const ENTRANCE_PATH: string = '/Login';
+const ENTRANCE_URL: string = 'Cinema/Login';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -13,10 +13,9 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
 	   if(!this.localStorage.isAuthenticated()) {
-		   this.router.navigate([ENTRANCE_PATH]);
+		   this.router.navigate([ENTRANCE_URL]);
 		   return false;
 	   }
-
 	   return true;
   }
 }

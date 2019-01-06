@@ -7,6 +7,7 @@ import { Status } from '../../Models/Status.model';
 import { AppState } from '../../Store/AppState.model';
 import { MovieTitle } from '../../Pips/MovieTitle';
 import { Loader } from '../../Modals/Loader';
+import { Success } from '../../Modals/Success';
 
 @Component({
   selector: 'home',
@@ -20,6 +21,7 @@ export class Home implements OnInit {
 	MOVIE_SUMMARY_URL: string = 'Cinema/MovieSummary';
 
 	@ViewChild('loaderRef') loaderRef: Loader;
+	@ViewChild('successRef') successRef: Success;
 	
 	moviesList$: Observable<Movie[]>;
 	isPending$: Observable<boolean>;
@@ -59,6 +61,7 @@ export class Home implements OnInit {
 				movieId: movieId,
 			})
 		);
+		this.successRef.showSuccess('Done!');
 	}
 
 }

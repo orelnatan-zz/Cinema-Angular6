@@ -1,14 +1,5 @@
 
-<header
-	(onLogout)="dialogRef.showDialog(DISCONNECT_ALERT)" > 
-</header>
-
-<dialog #dialogRef 
-	(onCancel)="dialogRef.hideDialog()"
-	(onApprove)="dialogRef.hideDialog(); handleLogout()"> 
-</dialog>
-
 <div class="approot-main">
-    <router-outlet> </router-outlet>
+    	<router-outlet> </router-outlet>
 </div>
 
