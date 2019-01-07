@@ -2,16 +2,17 @@
 <loader #loaderRef > </loader>
 <success #successRef > </success>
 
-<dialog #dialogRef 
+<dialog #dialogRef
 	(onCancel)="dialogRef.hideDialog()"
-	(onApprove)="dialogRef.hideDialog(); handleRemove(movieId)"> 
+	(onApprove)="dialogRef.hideDialog(); handleRemove(movieId)">
 </dialog>
 
 <div class="page">
     <div class="body">
 		<movies-list
 			[movies]="moviesList$ | async"
-			(onRemove)="dialogRef.showDialog(DELETION_ALERT); movieId=$event">	
+      (onRemove)="dialogRef.showDialog(DELETION_ALERT); movieId=$event"
+      (onEdit)="handleEdit($event)">
 		</movies-list>
     </div>
 </div>

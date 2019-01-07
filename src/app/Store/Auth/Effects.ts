@@ -15,8 +15,8 @@ import * as AuthActions from './Actions';
 const ENTRANCE_URL: string = 'Cinema/Login';
 
 const SUCCESS: Status = {
-	number: 200, 
-	description: 'Server responded with status code 200!, Success!.', 
+	number: 200,
+	description: 'Server responded with status code 200!, Success!.',
 	failure: false
 };
 
@@ -49,7 +49,7 @@ export class AuthEffects {
 					})
 				}),
 				catchError((error: Status) => {
-					return observableOf(new AuthActions.LoginFailed({ 
+					return observableOf(new AuthActions.LoginFailed({
 						error: error
 					}))
 				})
@@ -64,7 +64,6 @@ export class AuthEffects {
 		),
 		tap((result: AuthActions.LoginSuccess) => {
 			this.localStorage.setUser(result.payload.user);
-
 			this.router.navigate([result.payload.navigateTo.path], {
 				queryParams: result.payload.navigateTo.queryParams,
 			});

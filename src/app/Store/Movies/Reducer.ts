@@ -14,14 +14,14 @@ export function MoviesReducer(state = initialState, action: Actions): MoviesStat
 		case ActionTypes.LOAD_MOVIES: {
 			return {
 				... state,
-				isPending: true,
+        isPending: true,
 			}
 		};
 		case ActionTypes.MOVIES_LOAD_SUCCESS: {
 			return {
 				movies: action.payload.movies,
 				isPending: false,
-				status: action.payload.success 
+				status: action.payload.success
 			}
 		};
 		case ActionTypes.MOVIES_LOAD_FAILED: {
@@ -38,10 +38,10 @@ export function MoviesReducer(state = initialState, action: Actions): MoviesStat
 						}), 1);
 			return {
 				... state,
-			};  
+			};
 		};
 		default: {
-            return {
+      return {
 				... state
 			}
         };

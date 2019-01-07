@@ -27,10 +27,6 @@ body {
     @media screen and (max-width: 899px) {
       font-size: 13px;
 	}
-	
-	.content {
-		
-	}
 }
 
 
@@ -79,10 +75,10 @@ dialog {
 }
 
 .global-overflowEllipsis {
-  white-space: nowrap; 
-  max-width: 80%; 
+  white-space: nowrap;
+  max-width: 80%;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
 }
 
 
