@@ -33,7 +33,7 @@ export class MoviesLoadSuccess implements Action {
     readonly type = ActionTypes.MOVIES_LOAD_SUCCESS;
 
     constructor(public payload: { 
-        movies: Array<Movie>, 
+		movies: Array<Movie>, 
         success: Status 
     }){}
 }

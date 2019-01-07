@@ -41,7 +41,11 @@ export class Home implements OnInit {
 		);
 
 		this.isPending$ = this.store$.select (
-			MoviesSelectors.getIsPending,
+			MoviesSelectors.getMoviesIsPending,
+		);
+
+		this.status$ = this.store$.select (
+			MoviesSelectors.getMoviesStatus,
 		);
 	}
 
@@ -53,6 +57,10 @@ export class Home implements OnInit {
 		this.isPending$.subscribe((isPending: boolean) => {
 			isPending ? this.loaderRef.showLoader() : this.loaderRef.hideLoader();
 		})
+
+		this.status$.subscribe((status: Status) => {
+		//	console.log(status);
+		})
 	}
 
 	handleRemove(movieId: number): void {
@@ -62,15 +70,15 @@ export class Home implements OnInit {
 			})
 		);
 		this.successRef.showSuccess('Done!');
-  }
+    }
 
-  handleEdit(movieId: number): void {
-    this.router.navigate([MOVIE_SUMMARY_URL], {
-      queryParams: {
-        movieId: movieId
-      }
-    })
-  }
+	handleEdit(movieId: number): void {
+		this.router.navigate([MOVIE_SUMMARY_URL], {
+			queryParams: {
+				movieId: movieId
+			}
+		})
+	}
 
 }
 

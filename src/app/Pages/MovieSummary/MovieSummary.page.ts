@@ -11,7 +11,7 @@ import { Failure } from '../../Modals/Failure';
 import { Success } from '../../Modals/Success';
 
 const Home_URL: string = 'Cinema/Home';
-const ERROR_NOTIFICATION: string = 'Server Error: unable to find movie, redirecting home page.';
+const ERROR_NOTIFICATION: string = 'Server Error: unable to find movie, click to redirect home page.';
 
 @Component({
   selector: 'movie-summary',
@@ -23,9 +23,7 @@ export class MovieSummary implements OnInit {
   @ViewChild('loaderRef') loaderRef: Loader;
   @ViewChild('failureRef') failureRef: Failure;
 
-  moviesList$: Observable<Movie[]>;
-	isPending$: Observable<boolean>;
-  status$: Observable<Status>;
+  isPending$: Observable<boolean>;
 
   movie: Movie;
   renderPage: boolean;
@@ -35,38 +33,42 @@ export class MovieSummary implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
-      this.moviesList$ = this.store$.select (
-        MoviesSelectors.getAllMovies,
-      );
+		this.activatedRoute.queryParams.subscribe((params: object) => {
+			this.store$.select(MoviesSelectors.getAllMovies)
+				.subscribe((movies: Array<Movie>) => {
+					if(!movies.length) return; 	  
+					console.log(movies)
+					const shownMovie: Movie = movies.find((movie: Movie) => movie.id == params['movieId']);
+					this.movie = params['movieId'] ? shownMovie ? { ...shownMovie } : null : {} as Movie;
 
-      this.isPending$ = this.store$.select (
-        MoviesSelectors.getIsPending,
-      );
+					if(!this.movie){
+						this.failureRef.showFailure(ERROR_NOTIFICATION);
+						return;
+					}
+					this.renderPage = true;
+				})
+		})
 
-      this.status$ = this.store$.select (
-        MoviesSelectors.getMoviesStatus,
-      );
-  }
+		this.isPending$ = this.store$.select (
+			MoviesSelectors.getMoviesIsPending,
+		);
+    }
 
-  ngOnInit() {
-      this.store$.dispatch(
-          new MoviesActions.LoadMovies(),
-      );
+	ngOnInit() {
+		this.store$.dispatch(
+			new MoviesActions.LoadMovies(),
+		);
 
-      this.isPending$.subscribe((isPending: boolean) => {
-          isPending ? this.loaderRef.showLoader() : this.loaderRef.hideLoader();
-      })
+		// this.isPending$.subscribe((isPending: boolean) => {
+		// 	isPending ? this.loaderRef.showLoader() : this.loaderRef.hideLoader();
+		// })
+	}
 
-
-
-  }
-
-  private handleFailure(): void {
-      this.failureRef.showFailure(ERROR_NOTIFICATION);
-      this.router.navigate([Home_URL], {
-          queryParams: {}
-      });
-  }
+	private redirectHome(): void {
+		this.router.navigate([Home_URL], {
+			queryParams: {}
+		});
+	}
 
 
 

@@ -12,7 +12,7 @@ export const getAllMovies = createSelector(
     }
 );
 
-export const getIsPending = createSelector(
+export const getMoviesIsPending = createSelector(
     getMoviesState,
     (state: MoviesState): boolean => {
         return state.isPending;

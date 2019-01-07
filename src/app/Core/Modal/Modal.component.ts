@@ -21,7 +21,7 @@ export class Modal {
 		this.showBackwardsAnimation = true;
 		
 		setTimeout(() => {
-		this.renderModal = false;
+			this.renderModal = false;
 		}, 300);
 	}
 }

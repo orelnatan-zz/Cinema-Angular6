@@ -17,6 +17,12 @@ const SUCCESS: Status = {
 	failure: false
 };
 
+const FAILURE: Status = {
+	number: 401, 
+	description: 'Server responded with status code 401!, Unauthorized!.', 
+	failure: true
+};
+
 @Injectable()
 export class MoviesEffects {
 
@@ -41,7 +47,7 @@ export class MoviesEffects {
 				}),
 				catchError((error: Status) => {
 					return observableOf(new MoviesActions.MoviesLoadFailed({ 
-						error: error
+						error: FAILURE
 					}))
 				})
             )

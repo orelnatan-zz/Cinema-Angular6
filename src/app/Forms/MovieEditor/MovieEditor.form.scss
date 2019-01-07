@@ -8,7 +8,8 @@
 
     .movieeditor-cover {
         display: block;
-        width: 100%;
+		width: 50%;
+		margin: 0px 50px;
         
         background: $color-dark-gray;
         background-size: cover;
@@ -16,7 +17,7 @@
         background-position-y: center;
 
         @media screen and (min-width: 900px) {
-            height: 180px;
+            height: 590px;
         }
     
         @media screen and (max-width: 899px) {
@@ -25,17 +26,26 @@
     }
 
     .movieeditor-inputs {
-        width: 100%;
-        margin-bottom: 20px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+        width: 50%;
+		height: 590px;
     }
 
     .movieeditor-input {
         display: block;
         width: 100%;
-        margin-top: 20px;
+		margin-top: 45px;
+		
+		&:first-child {
+			margin-top: 0px;
+		}
     }
 
     .movieeditor-button {
-        width: 49%;
-    }
+		width: 30%;
+		margin: 0px 5px;
+	}
+	
 }

@@ -4,6 +4,7 @@
     @extend %page;
 
     .body {
-        @extend %body;
+		@extend %body;
+		margin-top: 80px;
     }
 }

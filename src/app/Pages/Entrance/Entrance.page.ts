@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { AuthSelectors, AuthActions } from '../../Store';
+import { AuthSelectors, AuthActions, MoviesSelectors } from '../../Store';
 import { LoginAuth } from '../../Models/LoginAuth.model';
 import { AppState } from '../../Store/AppState.model';
 import { User } from '../../Models/User.model';
@@ -31,7 +31,7 @@ export class Entrance implements OnInit {
 		);
 		
 		this.isPending$ = this.store$.select (
-			AuthSelectors.getAuthIsPending
+			AuthSelectors.getAuthIsPending,
 		);
 
 		this.status$ = this.store$.select (
@@ -42,10 +42,14 @@ export class Entrance implements OnInit {
 	ngOnInit(){
 		this.status$.subscribe((status: Status) => {
 			status.failure ? this.handleFailure(status) : null;
-		})
+		});
 
 		this.isPending$.subscribe((isPending: boolean) => {
 			isPending ? this.loaderRef.showLoader() : this.loaderRef.hideLoader();
+		});
+
+		this.status$.subscribe((status: Status) => {
+			console.log(status);
 		})
 	}
 

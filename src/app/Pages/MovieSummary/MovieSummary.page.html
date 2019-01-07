@@ -1,8 +1,11 @@
 <loader #loaderRef > </loader>
-<failure #failureRef > </failure>
+<failure #failureRef (click)="redirectHome()" > </failure>
 
 <div class="page" *ngIf="renderPage">
     <div class="body">
-       Movie Summery
+		    <movie-editor
+				[movie]="movie"
+				(onExit)="redirectHome()" >
+			</movie-editor>
     </div>
 </div>

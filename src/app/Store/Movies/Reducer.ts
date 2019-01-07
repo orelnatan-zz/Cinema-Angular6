@@ -14,7 +14,7 @@ export function MoviesReducer(state = initialState, action: Actions): MoviesStat
 		case ActionTypes.LOAD_MOVIES: {
 			return {
 				... state,
-        isPending: true,
+        		isPending: true,
 			}
 		};
 		case ActionTypes.MOVIES_LOAD_SUCCESS: {
