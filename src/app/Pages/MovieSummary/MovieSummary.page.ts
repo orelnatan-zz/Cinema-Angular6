@@ -59,9 +59,9 @@ export class MovieSummary implements OnInit {
 			new MoviesActions.LoadMovies(),
 		);
 
-		// this.isPending$.subscribe((isPending: boolean) => {
-		// 	isPending ? this.loaderRef.showLoader() : this.loaderRef.hideLoader();
-		// })
+		this.isPending$.subscribe((isPending: boolean) => {
+			isPending ? this.loaderRef.showLoader() : this.loaderRef.hideLoader();
+		})
 	}
 
 	private redirectHome(): void {

@@ -30,7 +30,7 @@ export class Header implements OnInit {
 
 	ngOnInit() {
 		this.user$.subscribe((user: User) => {
-			this.username = user.username;
+			user ? this.username = user.username : null;
 		})
 	}
 

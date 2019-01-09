@@ -6,7 +6,7 @@ import { Movie } from '../../Models/Movie.model';
 const initialState: MoviesState = {
 	movies: [],
 	isPending: false,
-	status: {} as Status,
+	status: null,
 }
 
 export function MoviesReducer(state = initialState, action: Actions): MoviesState {

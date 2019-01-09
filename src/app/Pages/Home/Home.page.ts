@@ -9,6 +9,7 @@ import { AppState } from '../../Store/AppState.model';
 import { MovieTitle } from '../../Pips/MovieTitle';
 import { Loader } from '../../Modals/Loader';
 import { Success } from '../../Modals/Success';
+import { Failure } from '../../Modals/Failure';
 
 const MOVIE_SUMMARY_URL: string = 'Cinema/MovieSummary';
 
@@ -24,6 +25,7 @@ export class Home implements OnInit {
 
 	@ViewChild('loaderRef') loaderRef: Loader;
 	@ViewChild('successRef') successRef: Success;
+	@ViewChild('failureRef') failureRef: Failure;
 
 	moviesList$: Observable<Movie[]>;
 	isPending$: Observable<boolean>;
@@ -59,7 +61,7 @@ export class Home implements OnInit {
 		})
 
 		this.status$.subscribe((status: Status) => {
-		//	console.log(status);
+			status && status.failure ? this.failureRef.showFailure(status.description) : null;
 		})
 	}
 

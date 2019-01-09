@@ -5,9 +5,9 @@ import { Status } from '../../Models/Status.model';
 
 const initialState: AuthState = {
     logged: false,
-    user: {} as User,
+    user: null,
     isPending: false,
-    status: {} as Status,
+    status: null,
 }
 
 export function AuthReducer(state = initialState, action: Actions): AuthState {

@@ -19,17 +19,12 @@ export class Entrance implements OnInit {
 	@ViewChild('loaderRef') loaderRef: Loader;
 	@ViewChild('failureRef') failureRef: Failure;
 
-	user$: Observable<User>;
 	isPending$: Observable<boolean>;
 	status$: Observable<Status>;
 
 	constructor(
 		private store$: Store<AppState>,
 	) {
-		this.user$ = this.store$.select (
-			AuthSelectors.getLoggedUser
-		);
-		
 		this.isPending$ = this.store$.select (
 			AuthSelectors.getAuthIsPending,
 		);
@@ -41,16 +36,12 @@ export class Entrance implements OnInit {
 
 	ngOnInit(){
 		this.status$.subscribe((status: Status) => {
-			status.failure ? this.handleFailure(status) : null;
+			status && status.failure ? this.handleFailure(status) : null;
 		});
 
 		this.isPending$.subscribe((isPending: boolean) => {
 			isPending ? this.loaderRef.showLoader() : this.loaderRef.hideLoader();
 		});
-
-		this.status$.subscribe((status: Status) => {
-			console.log(status);
-		})
 	}
 
 	handleSubmit(login: LoginAuth): void {

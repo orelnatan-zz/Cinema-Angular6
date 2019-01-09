@@ -1,7 +1,7 @@
-import { Component, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { LocalStorage } from '../../Services/LocalStorage.service';
 import { Store } from '@ngrx/store';
-import { AuthActions, MoviesSelectors, AuthSelectors } from '../../Store';
+import { AuthActions } from '../../Store';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppState } from '../../Store/AppState.model';
 import { Status } from '../../Models/Status.model';
@@ -31,7 +31,6 @@ export class Cinema {
       private store$: Store<AppState>,
       private router: Router,
 	  private activatedRoute: ActivatedRoute,
-	  private changeDetectorRef: ChangeDetectorRef
 	) {
 		if(this.localStorage.isAuthenticated()) {
 			this.activatedRoute.queryParams.subscribe((params: object) => {
@@ -49,10 +48,6 @@ export class Cinema {
 				);
 			})
 		}
-
-		// this.isPending$ = this.store$.select (
-		// 	MoviesSelectors.getMoviesIsPending,
-		// );
 	}
 
 
