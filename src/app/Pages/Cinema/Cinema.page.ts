@@ -1,18 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { LocalStorage } from '../../Services/LocalStorage.service';
 import { Store } from '@ngrx/store';
-import { AuthActions } from '../../Store';
+import { AuthActions, AuthSelectors } from '../../Store';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppState } from '../../Store/AppState.model';
-import { Status } from '../../Models/Status.model';
 import { Loader } from '../../Modals/Loader';
 import { Observable } from 'rxjs';
+import { Alert } from '../../Models/Alert.model';
 
-const SUCCESS: Status = {
-	number: 200,
-	description: 'Server responded with status code 200!, Success!.',
-	failure: false
-};
 
 @Component({
   selector: 'cinema',
@@ -21,16 +16,14 @@ const SUCCESS: Status = {
 })
 
 export class Cinema {
-	DISCONNECT_ALERT: string = 'Are you sure you want to logout?';
+  inProgress$: Observable<boolean>;
+  dialog$: Observable<Alert>;
 
-	@ViewChild('loaderRef') loaderRef: Loader;
-	isPending$: Observable<boolean>;
-	
 	constructor(
       private localStorage: LocalStorage,
       private store$: Store<AppState>,
       private router: Router,
-	  private activatedRoute: ActivatedRoute,
+	    private activatedRoute: ActivatedRoute,
 	) {
 		if(this.localStorage.isAuthenticated()) {
 			this.activatedRoute.queryParams.subscribe((params: object) => {
@@ -43,17 +36,30 @@ export class Cinema {
 								movieId: params['movieId'],
 							}
 						},
-						success: SUCCESS
+						failure: { isShown: false } as Alert
 					})
 				);
 			})
-		}
-	}
+    }
 
+    this.dialog$ = this.store$.select (
+			AuthSelectors.getAuthDialog,
+		);
+	}
 
 	handleLogout(): void {
 		this.store$.dispatch(
 			new AuthActions.Logout(),
+    );
+  }
+
+  hideDialog(): void {
+    this.store$.dispatch(
+			new AuthActions.AuthDialog({
+        dialog: { isShown: false }
+      }),
 		);
-	}
+  }
+
+
 }

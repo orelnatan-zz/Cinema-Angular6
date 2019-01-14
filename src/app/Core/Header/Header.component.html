@@ -4,8 +4,8 @@
         <span class="header-title">C i n e m a</span>
 		<span class="header-logo icon icon-play"></span>
 		<div class="header-authentication" *ngIf="router.url != '/Cinema/Login'">
-			<span> Logged in as&nbsp;{{username}}&ensp;&nbsp;</span>
-			<span class="header-logout" (click)="onLogout.emit()">Log Out</span>
+			<span> Logged in as&nbsp;{{ (user$ | async)?.username }}&ensp;&nbsp;</span>
+			<span class="header-logout" (click)="showLogoutDialog()">Log Out</span>
 		</div>
 		<div class="header-authentication" *ngIf="router.url == '/Cinema/Login'">
 			<span>Hello Guest</span>

@@ -1,9 +1,10 @@
 import { User } from "../../Models/User.model";
-import { Status } from "../../Models/Status.model";
+import { Alert } from "../../Models/Alert.model";
 
 export interface AuthState {
     logged: boolean,
     user: User,
-    isPending: boolean,
-    status: Status
+    inProgress: boolean,
+    failure: Alert,
+    dialog: Alert
 }

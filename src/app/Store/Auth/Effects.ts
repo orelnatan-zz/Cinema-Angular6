@@ -6,33 +6,33 @@ import { Action } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Users } from '../../Services/Users.service';
 import { LocalStorage } from '../../Services/LocalStorage.service';
-import { Status } from '../../Models/Status.model';
 import { User } from '../../Models/User.model';
 import { Route } from '../../Models/Route.model';
+import { Alert } from '../../Models/Alert.model';
 
 import * as AuthActions from './Actions';
 
 const ENTRANCE_URL: string = 'Cinema/Login';
-
-const SUCCESS: Status = {
-	number: 200,
-	description: 'Server responded with status code 200!, Success!.',
-	failure: false
-};
 
 const HOME_ROUTE: Route = {
 	path: '/Cinema/Home',
 	queryParams: {},
 };
 
+const LOGIN_SUCCESS: Alert = {
+  message: '',
+  isShown: false,
+  code: 200,
+}
+
 @Injectable()
 export class AuthEffects {
 
 	constructor(
-		private router: Router,
-		private users: Users,
-		private localStorage: LocalStorage,
-        private actions$: Actions
+      private router: Router,
+      private users: Users,
+      private localStorage: LocalStorage,
+      private actions$: Actions
     ) {}
 
 	@Effect()
@@ -45,16 +45,14 @@ export class AuthEffects {
 					return new AuthActions.LoginSuccess({
 						user: user,
 						navigateTo: HOME_ROUTE,
-						success: SUCCESS
+						failure: null
 					})
 				}),
-				catchError((error: Status) => {
-					return observableOf(new AuthActions.LoginFailed({
-						error: error
-					}))
-				})
-            )
-        )
+        catchError((error: Alert) => {
+          return observableOf(new AuthActions.LoginFailure({
+              failure: error
+          }))
+        })))
 	);
 
 	@Effect({ dispatch: false })

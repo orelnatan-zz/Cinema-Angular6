@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from '../../Models/Movie.model';
 import { AppState } from '../../Store/AppState.model';
-import { Status } from '../../Models/Status.model';
 import { Loader } from '../../Modals/Loader';
 import { Failure } from '../../Modals/Failure';
 import { Success } from '../../Modals/Success';
@@ -23,7 +22,7 @@ export class MovieSummary implements OnInit {
   @ViewChild('loaderRef') loaderRef: Loader;
   @ViewChild('failureRef') failureRef: Failure;
 
-  isPending$: Observable<boolean>;
+  inProgress$: Observable<boolean>;
 
   movie: Movie;
   renderPage: boolean;
@@ -36,21 +35,21 @@ export class MovieSummary implements OnInit {
 		this.activatedRoute.queryParams.subscribe((params: object) => {
 			this.store$.select(MoviesSelectors.getAllMovies)
 				.subscribe((movies: Array<Movie>) => {
-					if(!movies.length) return; 	  
+					if(!movies.length) return;
 					console.log(movies)
 					const shownMovie: Movie = movies.find((movie: Movie) => movie.id == params['movieId']);
 					this.movie = params['movieId'] ? shownMovie ? { ...shownMovie } : null : {} as Movie;
 
 					if(!this.movie){
-						this.failureRef.showFailure(ERROR_NOTIFICATION);
+						// this.failureRef.showFailure(ERROR_NOTIFICATION);
 						return;
 					}
 					this.renderPage = true;
 				})
 		})
 
-		this.isPending$ = this.store$.select (
-			MoviesSelectors.getMoviesIsPending,
+		this.inProgress$ = this.store$.select (
+			MoviesSelectors.getMoviesinProgress,
 		);
     }
 
@@ -59,9 +58,6 @@ export class MovieSummary implements OnInit {
 			new MoviesActions.LoadMovies(),
 		);
 
-		this.isPending$.subscribe((isPending: boolean) => {
-			isPending ? this.loaderRef.showLoader() : this.loaderRef.hideLoader();
-		})
 	}
 
 	private redirectHome(): void {

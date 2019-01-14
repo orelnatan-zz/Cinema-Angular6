@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Movie } from '../../Models/Movie.model';
-import { Status } from '../../Models/Status.model';
 import { AppState } from '../../Store/AppState.model';
 import { MovieTitle } from '../../Pips/MovieTitle';
 import { Loader } from '../../Modals/Loader';
@@ -21,15 +20,9 @@ const MOVIE_SUMMARY_URL: string = 'Cinema/MovieSummary';
 })
 
 export class Home implements OnInit {
-	DELETION_ALERT: string = 'Sure you want to delete this movie?';
-
-	@ViewChild('loaderRef') loaderRef: Loader;
-	@ViewChild('successRef') successRef: Success;
-	@ViewChild('failureRef') failureRef: Failure;
-
 	moviesList$: Observable<Movie[]>;
-	isPending$: Observable<boolean>;
-	status$: Observable<Status>;
+  inProgress$: Observable<boolean>;
+  failure$: Observable<boolean>;
 
 	movieId: number;
 
@@ -42,12 +35,12 @@ export class Home implements OnInit {
 			MoviesSelectors.getAllMovies,
 		);
 
-		this.isPending$ = this.store$.select (
-			MoviesSelectors.getMoviesIsPending,
-		);
+		this.inProgress$ = this.store$.select (
+			MoviesSelectors.getMoviesinProgress,
+    );
 
-		this.status$ = this.store$.select (
-			MoviesSelectors.getMoviesStatus,
+    this.failure$ = this.store$.select (
+			MoviesSelectors.getMoviesFailure,
 		);
 	}
 
@@ -55,14 +48,6 @@ export class Home implements OnInit {
 		this.store$.dispatch(
 			new MoviesActions.LoadMovies(),
 		);
-
-		this.isPending$.subscribe((isPending: boolean) => {
-			isPending ? this.loaderRef.showLoader() : this.loaderRef.hideLoader();
-		})
-
-		this.status$.subscribe((status: Status) => {
-			status && status.failure ? this.failureRef.showFailure(status.description) : null;
-		})
 	}
 
 	handleRemove(movieId: number): void {
@@ -71,8 +56,7 @@ export class Home implements OnInit {
 				movieId: movieId,
 			})
 		);
-		this.successRef.showSuccess('Done!');
-    }
+  }
 
 	handleEdit(movieId: number): void {
 		this.router.navigate([MOVIE_SUMMARY_URL], {
@@ -80,7 +64,15 @@ export class Home implements OnInit {
 				movieId: movieId
 			}
 		})
-	}
+  }
+
+  hideFailure(): void {
+    this.store$.dispatch(
+			new MoviesActions.MoviesLoadFailure({
+        showFailure: false,
+			})
+		);
+  }
 
 }
 

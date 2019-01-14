@@ -1,5 +1,4 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { Status } from '../../Models/Status.model';
 import { MoviesState } from './MoviesState.model';
 import { Movie } from '../../Models/Movie.model';
 
@@ -12,16 +11,16 @@ export const getAllMovies = createSelector(
     }
 );
 
-export const getMoviesIsPending = createSelector(
+export const getMoviesinProgress = createSelector(
     getMoviesState,
     (state: MoviesState): boolean => {
-        return state.isPending;
+        return state.inProgress;
     }
 );
 
-export const getMoviesStatus = createSelector(
+export const getMoviesFailure = createSelector(
     getMoviesState,
-    (state: MoviesState): Status => {
-        return state.status;
+    (state: MoviesState): boolean => {
+        return state.failure;
     }
 );

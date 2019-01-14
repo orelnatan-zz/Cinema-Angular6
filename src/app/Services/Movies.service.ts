@@ -34,7 +34,7 @@ export class Movies {
     }
 
     private _handleError(error: any): Observable<Error> {               // On error, throw exception
-        return Observable.throw(error);
+        return Observable.throw(true);
     }
 
     private normalizeData(data: Array<Movie>): Array<Movie> {

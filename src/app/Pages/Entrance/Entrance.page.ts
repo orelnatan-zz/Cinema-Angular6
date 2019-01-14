@@ -1,13 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { AuthSelectors, AuthActions, MoviesSelectors } from '../../Store';
+import { AuthSelectors, AuthActions } from '../../Store';
 import { LoginAuth } from '../../Models/LoginAuth.model';
 import { AppState } from '../../Store/AppState.model';
-import { User } from '../../Models/User.model';
-import { Status } from '../../Models/Status.model';
-import { Loader } from '../../Modals/Loader';
-import { Failure } from '../../Modals/Failure';
+import { Alert } from '../../Models/Alert.model';
 
 @Component({
   selector: 'entrance',
@@ -15,33 +12,20 @@ import { Failure } from '../../Modals/Failure';
   styleUrls: ['./Entrance.page.scss'],
 })
 
-export class Entrance implements OnInit {
-	@ViewChild('loaderRef') loaderRef: Loader;
-	@ViewChild('failureRef') failureRef: Failure;
-
-	isPending$: Observable<boolean>;
-	status$: Observable<Status>;
+export class Entrance {
+  inProgress$: Observable<boolean>;
+  failure$: Observable<Alert>;
 
 	constructor(
 		private store$: Store<AppState>,
 	) {
-		this.isPending$ = this.store$.select (
-			AuthSelectors.getAuthIsPending,
-		);
+		this.inProgress$ = this.store$.select (
+			AuthSelectors.getAuthInProgress,
+    );
 
-		this.status$ = this.store$.select (
-			AuthSelectors.getLoginStatus
-		);
-	}
-
-	ngOnInit(){
-		this.status$.subscribe((status: Status) => {
-			status && status.failure ? this.handleFailure(status) : null;
-		});
-
-		this.isPending$.subscribe((isPending: boolean) => {
-			isPending ? this.loaderRef.showLoader() : this.loaderRef.hideLoader();
-		});
+    this.failure$ = this.store$.select (
+			AuthSelectors.getAuthFailure,
+    );
 	}
 
 	handleSubmit(login: LoginAuth): void {
@@ -52,11 +36,14 @@ export class Entrance implements OnInit {
 		);
 	}
 
-	handleFailure(status: Status): void {
-		this.failureRef.showFailure(status.description);
-	}
+  hideFailure(): void {
+    this.store$.dispatch(
+			new AuthActions.LoginFailure({
+				failure: {} as Alert
+			})
+		);
+  }
 
-	
 
 }
 

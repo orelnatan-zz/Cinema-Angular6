@@ -2,8 +2,8 @@ import { Http, } from '@angular/http';
 import { Injectable, }  from '@angular/core';
 import { Observable, } from 'rxjs/Rx';   // npm install rxjs-compat
 import { User } from '../Models/User.model';
-import { Status } from '../Models/Status.model';
 import { LoginAuth } from '../Models/LoginAuth.model';
+import { Alert } from '../Models/Alert.model';
 
 const USERS: Array<User> = [
 	{
@@ -43,16 +43,16 @@ const USERS: Array<User> = [
 	}
 ];
 
-const USER_NOT_EXIST: Status = {
-	number: 404,
-	description: 'Server responded with status code 401, The username is not exist.',
-	failure: true,
+const USER_NOT_EXIST: Alert = {
+	code: 404,
+	message: 'Server responded with status code 401, The username is not exist.',
+	isShown: true,
 }
 
-const WRONG_PASSWORD: Status = {
-	number: 401,
-	description: 'Server responded with status code 401, The password you provided is invalid.', 
-	failure: true,
+const WRONG_PASSWORD: Alert = {
+	code: 401,
+	message: 'Server responded with status code 401, The password you provided is invalid.',
+	isShown: true,
 }
 
 @Injectable()
@@ -62,20 +62,20 @@ export class Users {
 	constructor(private http: Http){}
 /* This function simulates a real Ajax GET requst(with a duration of 3s), that returns specific user or a relevant error if necessary */
 	public getRegisteredUser(login: LoginAuth): Observable<User | Error> {
-		const user = USERS.find((user: User) => { 
-								return user.username == login.username 
+		const user = USERS.find((user: User) => {
+								return user.username == login.username
 							});
 
-		return user ? (user.password == login.password) 
+		return user ? (user.password == login.password)
 					? Observable.of(user).delay(3000) : this._handleError(WRONG_PASSWORD)
-		 			  								  : this._handleError(USER_NOT_EXIST);			
+		 			  								  : this._handleError(USER_NOT_EXIST);
     }
 
-	private _handleError(error: Status): Observable<Error> {               //On error, throw exception
-        return Observable
-		.throw({ ... error })
-		.materialize()
-		.delay(3000)
-		.dematerialize();
+    private _handleError(error: Alert): Observable<Error> {               //On error, throw exception
+      return Observable
+        .throw({ ... error })
+        .materialize()
+        .delay(3000)
+        .dematerialize();
     }
 }

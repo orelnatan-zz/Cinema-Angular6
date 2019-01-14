@@ -1,5 +1,4 @@
-import { Component, Input, EventEmitter, ViewChild } from '@angular/core';
-import { Modal } from '../../Core/Modal';
+import { Component, Input, Output, EventEmitter, } from '@angular/core';
 
 @Component({
   selector: 'failure',
@@ -8,16 +7,7 @@ import { Modal } from '../../Core/Modal';
 })
 
 export class Failure {
-	@ViewChild('modalRef') modalRef: Modal;
-	
-	notification: string;
-	
-	public showFailure(notification: string): void {
-		this.notification = notification;
-		this.modalRef.openModal();
-	}
+  @Input() message: string;
+  @Output() onClose: EventEmitter<void> = new EventEmitter();
 
-	public hideFailure(): void {
-		this.modalRef.closeModal();
-	}
 }

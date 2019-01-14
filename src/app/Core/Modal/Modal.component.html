@@ -1,6 +1,6 @@
 
-<div class="modal-main" *ngIf="renderModal" (click)="allowManualClose ? closeModal() : null">
-    <span *ngIf="allowManualClose" class="modal-close icon icon-close" (click)="allowManualClose ? closeModal() : null"> </span>
+<div class="modal-main" (click)="allowManualClose ? onClose.emit() : null">
+    <span *ngIf="allowManualClose" class="modal-close icon icon-close" (click)="allowManualClose ? onClose.emit() : null"> </span>
     <div class="modal-body" [ngClass]="{'modal-bodyfallDown': !showBackwardsAnimation, 'modal-bodyfallUp': showBackwardsAnimation}">
           <div class="modal-content">
                 <ng-content></ng-content>

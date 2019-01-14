@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { AuthState } from './AuthState.model';
 import { User } from '../../Models/User.model';
-import { Status } from '../../Models/Status.model';
+import { Alert } from '../../Models/Alert.model';
 
 export const getAuthState = createFeatureSelector<AuthState>('auth');
 
@@ -12,23 +12,32 @@ export const getLoggedUser = createSelector(
     }
 );
 
-export const getAuthIsPending = createSelector(
+export const getAuthInProgress = createSelector(
     getAuthState,
     (state: AuthState): boolean => {
-        return state.isPending;
+        return state.inProgress;
     }
 );
 
-export const getLoginStatus = createSelector(
-    getAuthState,
-	(state: AuthState): Status => {
-		return state.status;
+export const getAuthDialog = createSelector(
+  getAuthState,
+  (state: AuthState): Alert => {
+    return state.dialog;
+  }
+);
+
+export const getAuthFailure = createSelector(
+  getAuthState,
+	(state: AuthState): Alert => {
+		return state.failure;
     }
 );
 
-export const getIsLogged = createSelector(
+export const getIsAuthenticated = createSelector(
     getAuthState,
-	(state: AuthState): boolean => {
+	  (state: AuthState): boolean => {
 		return state.logged;
     }
 );
+
+

@@ -1,4 +1,4 @@
-import { Component, Input, } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'modal',
@@ -7,7 +7,8 @@ import { Component, Input, } from '@angular/core';
 })
 
 export class Modal {
-	@Input() allowManualClose: boolean = true;
+  @Input() allowManualClose: boolean = true;
+  @Output() onClose: EventEmitter<void> = new EventEmitter();
 
 	showBackwardsAnimation: boolean = false;
 	public renderModal: boolean;
@@ -17,11 +18,12 @@ export class Modal {
 		this.renderModal = true;
 	}
 
-	public closeModal(): void {    
+	public closeModal(): void {
 		this.showBackwardsAnimation = true;
-		
+
 		setTimeout(() => {
-			this.renderModal = false;
+      this.onClose.emit();
+      this.renderModal = false;
 		}, 300);
 	}
 }

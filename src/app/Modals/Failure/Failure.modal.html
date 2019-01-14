@@ -1,9 +1,9 @@
 
 
-<modal #modalRef >
-    <div class="failure-main"  *ngIf="modalRef.renderModal">
+<modal (onClose)="onClose.emit()">
+    <div class="failure-main">
         <notification
-            [notification]="notification"
+            [notification]="message"
             [iconClass]="'icon-close'"
             [alertColor]="'#c40000'" >
         </notification>

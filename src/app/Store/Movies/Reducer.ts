@@ -1,34 +1,33 @@
 import { Actions, ActionTypes } from './Actions';
 import { MoviesState } from './MoviesState.model';
-import { Status } from '../../Models/Status.model';
 import { Movie } from '../../Models/Movie.model';
 
 const initialState: MoviesState = {
 	movies: [],
-	isPending: false,
-	status: null,
+	inProgress: null,
+	failure: null,
 }
 
 export function MoviesReducer(state = initialState, action: Actions): MoviesState {
 	switch(action.type){
 		case ActionTypes.LOAD_MOVIES: {
 			return {
-				... state,
-        		isPending: true,
+				    ... state,
+        		inProgress: true,
 			}
 		};
 		case ActionTypes.MOVIES_LOAD_SUCCESS: {
 			return {
 				movies: action.payload.movies,
-				isPending: false,
-				status: action.payload.success
+				inProgress: false,
+				failure: action.payload.showFailure
 			}
 		};
-		case ActionTypes.MOVIES_LOAD_FAILED: {
+		case ActionTypes.MOVIES_LOAD_FAILURE: {
 			return {
 				movies: [],
-				isPending: false,
-				status: action.payload.error
+				inProgress: false,
+				failure: action.payload.showFailure
 			}
 		};
 		case ActionTypes.REMOVE_MOVIE: {

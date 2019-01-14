@@ -1,18 +1,18 @@
-<modal #modalRef >
-    <div class="dialog-main" *ngIf="modalRef.renderModal" (click)="$event.stopPropagation()">
+<modal (onClose)="onCancel.emit()" >
+    <div class="dialog-main" (click)="$event.stopPropagation()">
 		<div class="block-container">
 			<notification
-				[notification]="notification"
+				[notification]="message"
 				[iconClass]="'icon-warning'"
 				[alertColor]="'#000080'">
 			</notification>
 		</div>
 		<div class="dialog-controls flex-container row full">
 			<div class="dialog-button block-container half">
-				<button class="global-button global-button-secondary" (click)="onCancel.emit()">Cancel</button> 
+				<button class="global-button global-button-secondary" (click)="onCancel.emit()">Cancel</button>
 			</div>
-			<div class="dialog-button  block-container half"> 
-				<button class="global-button global-button-primary" (click)="onApprove.emit()">Ok</button> 
+			<div class="dialog-button  block-container half">
+				<button class="global-button global-button-primary" (click)="onApprove.emit()">Ok</button>
 			</div>
 		</div>
     </div>

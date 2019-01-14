@@ -1,11 +1,10 @@
 
-<header
-	(onLogout)="dialogRef.showDialog(DISCONNECT_ALERT)" > 
-</header>
+<header> </header>
 
-<dialog #dialogRef 
-	(onCancel)="dialogRef.hideDialog()"
-	(onApprove)="dialogRef.hideDialog(); handleLogout()"> 
+<dialog *ngIf="(dialog$ | async)?.isShown"
+    (onCancel)="hideDialog()"
+    (onApprove)="handleLogout()"
+    [message]="(dialog$ | async)?.message" >
 </dialog>
 
 <div class="page">

@@ -9,19 +9,7 @@ import { LocalStorage } from '../../Services/LocalStorage.service';
 
 import * as MoviesActions from './Actions';
 import { Movie } from '../../Models/Movie.model';
-import { Status } from '../../Models/Status.model';
 
-const SUCCESS: Status = {
-	number: 200, 
-	description: 'Server responded with status code 200!, Success!.', 
-	failure: false
-};
-
-const FAILURE: Status = {
-	number: 401, 
-	description: 'Server responded with status code 401!, Unauthorized!.', 
-	failure: true
-};
 
 @Injectable()
 export class MoviesEffects {
@@ -42,18 +30,17 @@ export class MoviesEffects {
 				map((movies: Array<Movie>) => {
 					return new MoviesActions.MoviesLoadSuccess({
 						movies: movies,
-						success: SUCCESS,
+						showFailure: false,
 					})
 				}),
-				catchError((error: Status) => {
-					return observableOf(new MoviesActions.MoviesLoadFailed({ 
-						error: FAILURE
+				catchError((error: boolean) => {
+          console.log('effects', error)
+					return observableOf(new MoviesActions.MoviesLoadFailure({
+            showFailure: true,
 					}))
-				})
-            )
-        )
+				})))
 	);
 
-	
+
 
 }

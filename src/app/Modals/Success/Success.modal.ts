@@ -8,7 +8,7 @@ import { Modal } from '../../Core/Modal';
 })
 
 export class Success {
-  	@ViewChild('modalRef') modalRef: Modal;
+  @ViewChild('modalRef') modalRef: Modal;
 
 	notification: string;
 
