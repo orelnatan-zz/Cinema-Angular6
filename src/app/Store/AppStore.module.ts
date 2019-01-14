@@ -9,12 +9,12 @@ import { MoviesStoreModule } from './Movies/MoviesStore.module';
 
 @NgModule({
     imports: [
-      CommonModule,
-	  AuthStoreModule,
-	  MoviesStoreModule,
-      StoreModule.forRoot({}),
-      EffectsModule.forRoot([]),
-      StoreDevtoolsModule.instrument({
+		CommonModule,
+		AuthStoreModule,
+		MoviesStoreModule,
+		StoreModule.forRoot({}),
+		EffectsModule.forRoot([]),
+		StoreDevtoolsModule.instrument({
         maxAge: 25, // Retains last 25 states
       }),
     ],
