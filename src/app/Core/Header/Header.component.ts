@@ -24,15 +24,15 @@ export class Header {
 		);
 	}
 
-  showLogoutDialog() {
-    this.store$.dispatch(
+	showLogoutDialog() {
+		this.store$.dispatch(
 			new AuthActions.AuthDialog({
-        dialog: {
-          message: 'Logout from system?',
-          isShown: true,
-        },
-      }),
-		);
-  }
-
+				dialog: {
+					message: 'Sure you want to logout?',
+					isShown: true,
+				}
+			})
+		)
+	}
 }
+

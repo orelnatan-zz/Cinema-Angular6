@@ -3,15 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  apis: {
-    movies: {
-      moviesData: "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.descmovie&api_key=cfe422613b250f702980a3bbf9e90716",
-    },
-    users: {
-      usersData: "../assets/Files/Users.json",
-    }
-  }
+	production: false,
+	apis: {
+		movies: {
+			moviesData: "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.descmovie&api_key=cfe422613b250f702980a3bbf9e90716",
+		},
+		users: {
+			usersData: "../assets/Files/Users.json",
+		}
+	}
 };
 
 /*

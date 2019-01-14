@@ -1,15 +1,26 @@
 
-<!-- <loader [isActive]="inProgress$ | async" > </loader>
+<loader *ngIf="inProgress$ | async" > </loader>
+
+<failure *ngIf="(failure$ | async)?.isShown"
+    (onClose)="hideFailure()"
+    [message]="(failure$ | async)?.message" >
+</failure>
+
+<dialog *ngIf="(dialog$ | async)?.isShown"
+    (onCancel)="hideDialog()"
+    (onApprove)="handleRemove(movieId)"
+    [message]="(dialog$ | async)?.message" >
+</dialog>
 
 <div class="page">
     <div class="body">
       <movies-list
           [movies]="moviesList$ | async"
-          (onEdit)="handleEdit($event)" >
+		  (onRemove)="movieId=$event; showDeletionAlert()"
+		  (onEdit)="handleEdit($event)" >
       </movies-list>
     </div>
-</div> -->
+</div>
 
-Home!!!
 
 

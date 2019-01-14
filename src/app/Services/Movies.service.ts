@@ -2,12 +2,19 @@ import { Injectable, OnInit }  from '@angular/core';
 import { Http, } from '@angular/http';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';   // npm install rxjs-compat
-import { Movie } from '../Models/Movie.model';
-import { AppState } from '../Store/AppState.model';
 import { MoviesActions, MoviesSelectors } from '../Store';
 import { environment } from '../../environments/environment';
+import { Alert } from '../Models/Alert.model';
+import { Movie } from '../Models/Movie.model';
+import { AppState } from '../Store/AppState.model';
 
 const IMAGE_PREFIX: string = "https://image.tmdb.org/t/p/w500";
+
+const UNAUTHORIZED: Alert = {
+	code: 401,
+	message: '401 (Unauthorized) Invalid API key: You must be granted a valid key.',
+	isShown: true,
+}
 
 @Injectable()
 export class Movies {
@@ -28,13 +35,13 @@ export class Movies {
         return this.movies.length ? new Observable((observer) => {
             observer.next(this.movies);
             observer.complete();
-         }) : this.http.get(environment.apis.movies.moviesData).map((response) => {
+        }) : this.http.get(environment.apis.movies.moviesData).map((response) => {
             	return this.normalizeData(response.json().results);
         }).catch(this._handleError).delay(2000);
     }
 
     private _handleError(error: any): Observable<Error> {               // On error, throw exception
-        return Observable.throw(true);
+		return Observable.throw(UNAUTHORIZED);
     }
 
     private normalizeData(data: Array<Movie>): Array<Movie> {

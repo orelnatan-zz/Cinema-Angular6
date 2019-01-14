@@ -19,12 +19,6 @@ const HOME_ROUTE: Route = {
 	queryParams: {},
 };
 
-const LOGIN_SUCCESS: Alert = {
-  message: '',
-  isShown: false,
-  code: 200,
-}
-
 @Injectable()
 export class AuthEffects {
 
@@ -41,18 +35,19 @@ export class AuthEffects {
             AuthActions.ActionTypes.LOGIN
         ),
         switchMap((action) => this.users.getRegisteredUser(action.payload.loginAuth).pipe(
-				map((user: User) => {
-					return new AuthActions.LoginSuccess({
-						user: user,
-						navigateTo: HOME_ROUTE,
-						failure: null
-					})
-				}),
-        catchError((error: Alert) => {
-          return observableOf(new AuthActions.LoginFailure({
-              failure: error
-          }))
-        })))
+			map((user: User) => {
+				return new AuthActions.LoginSuccess({
+					user: user,
+					navigateTo: HOME_ROUTE,
+					failure: { isShown: false } as Alert
+				})
+			}),
+			catchError((error: Alert) => {
+				return observableOf(new AuthActions.LoginFailure({
+					failure: error
+				}))
+			})
+		)),
 	);
 
 	@Effect({ dispatch: false })
@@ -63,7 +58,10 @@ export class AuthEffects {
 		tap((result: AuthActions.LoginSuccess) => {
 			this.localStorage.setUser(result.payload.user);
 			this.router.navigate([result.payload.navigateTo.path], {
-				queryParams: result.payload.navigateTo.queryParams,
+				queryParams: result.
+								payload.
+									navigateTo.
+										queryParams
 			});
 		})
 	);

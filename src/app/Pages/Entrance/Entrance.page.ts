@@ -13,19 +13,19 @@ import { Alert } from '../../Models/Alert.model';
 })
 
 export class Entrance {
-  inProgress$: Observable<boolean>;
-  failure$: Observable<Alert>;
+	inProgress$: Observable<boolean>;
+	failure$: Observable<Alert>;
 
 	constructor(
 		private store$: Store<AppState>,
 	) {
 		this.inProgress$ = this.store$.select (
-			AuthSelectors.getAuthInProgress,
-    );
+				AuthSelectors.getAuthInProgress,
+    	);
 
-    this.failure$ = this.store$.select (
-			AuthSelectors.getAuthFailure,
-    );
+		this.failure$ = this.store$.select (
+				AuthSelectors.getAuthFailure,
+		);
 	}
 
 	handleSubmit(login: LoginAuth): void {
@@ -36,13 +36,13 @@ export class Entrance {
 		);
 	}
 
-  hideFailure(): void {
-    this.store$.dispatch(
+	hideFailure(): void {
+		this.store$.dispatch(
 			new AuthActions.LoginFailure({
-				failure: {} as Alert
+				failure: { isShown: false } as Alert
 			})
 		);
-  }
+	}
 
 
 }

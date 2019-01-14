@@ -48,8 +48,8 @@ export class AuthDialog implements Action {
 	readonly type = ActionTypes.AUTH_DIALOG;
 
 	constructor(public payload: {
-    dialog: Alert
-  }){}
+    	dialog: Alert
+  	}){}
 }
 
 

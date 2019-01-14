@@ -45,7 +45,7 @@ const USERS: Array<User> = [
 
 const USER_NOT_EXIST: Alert = {
 	code: 404,
-	message: 'Server responded with status code 401, The username is not exist.',
+	message: 'Server responded with status code 404, The username is not exist.',
 	isShown: true,
 }
 

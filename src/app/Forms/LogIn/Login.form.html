@@ -1,52 +1,50 @@
 
 <form class="block-container" #form="ngForm" (ngSubmit)="form.valid && onSubmit.emit(login)" novalidate >
+		<h2>Sigh in:</h2>
+		<span class="global-separator"> </span>
 
-    <h2>Sigh in:</h2>
-    <span class="global-separator"> </span>
+		<div class="block-container">
+			<input-text
+				[type]="'text'"
+				[title]="'User Name:'"
+				[value]="login?.username"
+				[validation]="'invalide user name.'"
+				[placeholder]="'Insert user name'"
+				[submitted]="form.submitted"
+				[invalid]="username.invalid"
+				[ngModel]="login?.username"
+				(onChange)="login.username=$event"
+				name="username"
+				#username="ngModel"
+				ngDefaultControl
+				minlength="1"
+				required >
+			</input-text>
+		</div>
 
-    <div class="block-container">
+		<span class="global-separator"> </span>
+
+		<div class="block-container">
 		<input-text
-			[type]="'text'"
-            [title]="'User Name:'"
-            [value]="login?.username"
-            [validation]="'invalide user name.'"
-            [placeholder]="'Insert user name'"
-            [submitted]="form.submitted"
-            [invalid]="username.invalid"
-            [ngModel]="login?.username"
-            (onChange)="login.username=$event"
-            name="username"
-            #username="ngModel"
-            ngDefaultControl
-            minlength="1"
-            required >
-        </input-text>
-    </div>
+			[type]="'password'"
+			[title]="'Password:'"
+			[value]="login?.password"
+			[validation]="'invalide password.'"
+			[placeholder]="'Insert password'"
+			[submitted]="form.submitted"
+			[invalid]="password.invalid"
+			[ngModel]="login?.password"
+			(onChange)="login.password=$event"
+			name="password"
+			#password="ngModel"
+			ngDefaultControl
+			minlength="1"
+			type="password"
+			required >
+		</input-text>
+	</div>
 
-    <span class="global-separator"> </span>
-
-    <div class="block-container">
-	  <input-text
-	  	  [type]="'password'"
-          [title]="'Password:'"
-          [value]="login?.password"
-          [validation]="'invalide password.'"
-          [placeholder]="'Insert password'"
-          [submitted]="form.submitted"
-          [invalid]="password.invalid"
-          [ngModel]="login?.password"
-          (onChange)="login.password=$event"
-          name="password"
-          #password="ngModel"
-          ngDefaultControl
-		  minlength="1"
-		  type="password"
-          required >
-      </input-text>
-  </div>
-
-  <div class="login-submit">
-      <button type="submit" class="global-button global-button-primary">Login</button>
-  </div>
-
+	<div class="login-submit">
+		<button type="submit" class="global-button global-button-primary">Login</button>
+	</div>
 </form>

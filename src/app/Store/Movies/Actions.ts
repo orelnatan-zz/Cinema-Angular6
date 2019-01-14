@@ -2,13 +2,15 @@ import { Action } from '@ngrx/store';
 import { User } from '../../Models/User.model';
 import { Route } from '../../Models/Route.model';
 import { Movie } from '../../Models/Movie.model';
+import { Alert } from '../../Models/Alert.model';
 
 export enum ActionTypes {
-  LOAD_MOVIES = '[MOVIES] Load',
-  MOVIES_LOAD_FAILURE = '[MOVIES] failure',
-  MOVIES_LOAD_SUCCESS = '[MOVIES] Success',
-  CREATE_MOVIE = '[MOVIES] Create',
-  REMOVE_MOVIE = '[MOVIES] Remove',
+	LOAD_MOVIES = '[MOVIES] Load',
+	MOVIES_LOAD_FAILURE = '[MOVIES] failure',
+	MOVIES_LOAD_SUCCESS = '[MOVIES] Success',
+	MOVIES_DIALOG = '[MOVIES] Dialog',
+	CREATE_MOVIE = '[MOVIES] Create',
+	REMOVE_MOVIE = '[MOVIES] Remove',
 	UPDATE_MOVIE = '[MOVIES] Update',
 	ADD_FAVORITE = '[MOVIES] AddFavorite',
 	REMOVE_FAVORITE = '[MOVIES] RemoveFavorite',
@@ -24,7 +26,7 @@ export class MoviesLoadFailure implements Action {
     readonly type = ActionTypes.MOVIES_LOAD_FAILURE;
 
     constructor(public payload: {
-      showFailure: boolean,
+      	failure: Alert,
 	}){}
 }
 
@@ -32,8 +34,7 @@ export class MoviesLoadSuccess implements Action {
     readonly type = ActionTypes.MOVIES_LOAD_SUCCESS;
 
     constructor(public payload: {
-		  movies: Array<Movie>,
-      showFailure: boolean
+		movies: Array<Movie>,
     }){}
 }
 
@@ -45,4 +46,12 @@ export class RemoveMovie implements Action {
 	}){}
 }
 
-export type Actions = LoadMovies | MoviesLoadFailure | MoviesLoadSuccess | RemoveMovie;
+export class MoviesDialog implements Action {
+	readonly type = ActionTypes.MOVIES_DIALOG;
+
+	constructor(public payload: {
+		dialog: Alert,
+	}){}
+}
+
+export type Actions = MoviesDialog | LoadMovies | MoviesLoadFailure | MoviesLoadSuccess | RemoveMovie;

@@ -4,10 +4,8 @@ import { Store } from '@ngrx/store';
 import { AuthActions, AuthSelectors } from '../../Store';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppState } from '../../Store/AppState.model';
-import { Loader } from '../../Modals/Loader';
 import { Observable } from 'rxjs';
 import { Alert } from '../../Models/Alert.model';
-
 
 @Component({
   selector: 'cinema',
@@ -23,7 +21,7 @@ export class Cinema {
       private localStorage: LocalStorage,
       private store$: Store<AppState>,
       private router: Router,
-	    private activatedRoute: ActivatedRoute,
+	  private activatedRoute: ActivatedRoute,
 	) {
 		if(this.localStorage.isAuthenticated()) {
 			this.activatedRoute.queryParams.subscribe((params: object) => {
@@ -40,9 +38,9 @@ export class Cinema {
 					})
 				);
 			})
-    }
+    	}
 
-    this.dialog$ = this.store$.select (
+    	this.dialog$ = this.store$.select (
 			AuthSelectors.getAuthDialog,
 		);
 	}
@@ -50,16 +48,16 @@ export class Cinema {
 	handleLogout(): void {
 		this.store$.dispatch(
 			new AuthActions.Logout(),
-    );
-  }
+    	);
+  	}
 
-  hideDialog(): void {
-    this.store$.dispatch(
+	hideDialog(): void {
+		this.store$.dispatch(
 			new AuthActions.AuthDialog({
-        dialog: { isShown: false }
-      }),
+				dialog: { isShown: false } as Alert
+			})
 		);
-  }
+	}
 
 
 }

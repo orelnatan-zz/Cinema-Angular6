@@ -7,8 +7,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 
 export class Modal {
-  @Input() allowManualClose: boolean = true;
-  @Output() onClose: EventEmitter<void> = new EventEmitter();
+	@Input() allowManualClose: boolean = true;
+	@Output() onClose: EventEmitter<void> = new EventEmitter();
 
 	showBackwardsAnimation: boolean = false;
 	public renderModal: boolean;
@@ -22,8 +22,8 @@ export class Modal {
 		this.showBackwardsAnimation = true;
 
 		setTimeout(() => {
-      this.onClose.emit();
-      this.renderModal = false;
+			this.onClose.emit();
+			this.renderModal = false;
 		}, 300);
 	}
 }
