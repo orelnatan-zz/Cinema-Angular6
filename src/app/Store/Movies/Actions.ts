@@ -6,7 +6,7 @@ import { Alert } from '../../Models/Alert.model';
 
 export enum ActionTypes {
 	LOAD_MOVIES = '[MOVIES] Load',
-	MOVIES_LOAD_FAILURE = '[MOVIES] failure',
+	MOVIES_LOAD_FAILURE = '[MOVIES] Failure',
 	MOVIES_LOAD_SUCCESS = '[MOVIES] Success',
 	MOVIES_DIALOG = '[MOVIES] Dialog',
 	CREATE_MOVIE = '[MOVIES] Create',

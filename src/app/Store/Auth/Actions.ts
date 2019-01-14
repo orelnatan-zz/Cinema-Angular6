@@ -7,7 +7,7 @@ import { Alert } from '../../Models/Alert.model';
 export enum ActionTypes {
     LOGIN = '[AUTH] Login',
     LOGOUT = '[AUTH] Logout',
-    LOGIN_FAILURE = '[AUTH] Fail',
+    LOGIN_FAILURE = '[AUTH] Failure',
     LOGIN_SUCCESS = '[AUTH] Success',
     AUTH_DIALOG = '[AUTH] Dialog',
 }

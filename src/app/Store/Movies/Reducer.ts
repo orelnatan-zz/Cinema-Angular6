@@ -47,9 +47,7 @@ export function MoviesReducer(state = initialState, action: Actions): MoviesStat
 						}), 1);
 			return {
 				... state,
-				dialog: {
-					isShown: false
-				} as Alert
+				dialog: { isShown: false } 
 			};
 		};
 		default: {
