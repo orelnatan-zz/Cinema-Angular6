@@ -15,7 +15,6 @@ import { AppState } from '../AppState.model';
 
 @Injectable()
 export class MoviesEffects {
-
 	constructor(
 		private router: Router,
 		private movies: Movies,
@@ -43,6 +42,23 @@ export class MoviesEffects {
 		))
 	);
 
+	// @Effect()
+    // Submit$: Observable<Action> = this.actions$.pipe(
+    //     ofType<MoviesActions.Submit>(
+    //         MoviesActions.ActionTypes.SUBMIT
+    //     ),
+    //     switchMap((action) => this.movies.getMovies().pipe(
+	// 		map((movies: Array<Movie>) => {
+	// 			console.log(action.payload.movie);
+	// 			// ...
+	// 		}),
+	// 		catchError((error: Alert) => {
+	// 			return observableOf(new MoviesActions.MoviesFailure({
+    //                 failure: error
+    //             }))
+	// 		})
+	// 	))
+	// );
 
 
 }

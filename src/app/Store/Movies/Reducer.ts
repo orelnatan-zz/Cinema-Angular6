@@ -33,6 +33,12 @@ export function MoviesReducer(state = initialState, action: Actions): MoviesStat
                 failure: action.payload.failure
 			};
 		};
+		case ActionTypes.SUBMIT: {
+			return {
+				... state,
+                inProgress: true,
+			};
+		};
 		case ActionTypes.REMOVE_MOVIE: {
 			state.movies.splice(state.movies
 						.findIndex((movie: Movie) => {

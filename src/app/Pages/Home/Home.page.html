@@ -1,11 +1,6 @@
 
 <loader *ngIf="inProgress$ | async" > </loader>
 
-<failure *ngIf="(failure$ | async)?.isShown"
-    (onClose)="hideFailure()"
-    [message]="(failure$ | async)?.message" >
-</failure>
-
 <dialog *ngIf="(dialog$ | async)?.isShown"
     (onCancel)="hideDialog()"
     (onApprove)="handleRemove(movieId)"

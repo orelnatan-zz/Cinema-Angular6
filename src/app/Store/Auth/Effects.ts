@@ -21,7 +21,6 @@ const HOME_ROUTE: Route = {
 
 @Injectable()
 export class AuthEffects {
-
 	constructor(
       private router: Router,
       private users: Users,

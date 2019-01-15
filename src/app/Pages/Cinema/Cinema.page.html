@@ -6,6 +6,11 @@
     [message]="(dialog$ | async)?.message" >
 </dialog>
 
+<failure *ngIf="(failure$ | async)?.isShown"
+    (onClose)="hideFailure()"
+    [message]="(failure$ | async)?.message" >
+</failure>
+
 <div class="page">
 		<div class="body">
 				<router-outlet> </router-outlet>

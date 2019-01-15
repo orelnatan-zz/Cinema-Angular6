@@ -20,7 +20,6 @@ const MOVIE_SUMMARY_URL: string = 'Cinema/MovieSummary';
 export class Home {
 	moviesList$: Observable<Movie[]>;
 	inProgress$: Observable<boolean>;
-	failure$: Observable<Alert>;
     dialog$: Observable<Alert>;
     success$: Observable<Alert>;
 
@@ -37,10 +36,6 @@ export class Home {
 		this.inProgress$ = this.store$.select (
 			MoviesSelectors.getMoviesinProgress,
     	);
-
-    	this.failure$ = this.store$.select (
-			MoviesSelectors.getMoviesFailure,
-		);
 
 		this.dialog$ = this.store$.select (
 			MoviesSelectors.getMoviesDialog,
@@ -89,14 +84,6 @@ export class Home {
             }
         })
   	}
-
-	hideFailure(): void {
-		this.store$.dispatch(
-			new MoviesActions.MoviesFailure({
-				failure: { isShown: false } as Alert,
-			})
-		);
-    }
 
     hideSuccess(): void {
 		this.store$.dispatch(

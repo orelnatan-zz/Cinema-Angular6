@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalStorage } from '../../Services/LocalStorage.service';
 import { Store } from '@ngrx/store';
-import { AuthActions, AuthSelectors, MoviesActions } from '../../Store';
+import { AuthActions, AuthSelectors, MoviesActions, MoviesSelectors } from '../../Store';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppState } from '../../Store/AppState.model';
 import { Observable } from 'rxjs';
@@ -15,7 +15,8 @@ import { Alert } from '../../Models/Alert.model';
 
 export class Cinema implements OnInit {
     inProgress$: Observable<boolean>;
-    dialog$: Observable<Alert>;
+	dialog$: Observable<Alert>;
+	failure$: Observable<Alert>;
 
 	constructor(
       private localStorage: LocalStorage,
@@ -42,6 +43,10 @@ export class Cinema implements OnInit {
     	this.dialog$ = this.store$.select (
 			AuthSelectors.getAuthDialog,
 		);
+
+		this.failure$ = this.store$.select (
+			MoviesSelectors.getMoviesFailure,
+		);
 	}
 
     ngOnInit() {
@@ -64,5 +69,12 @@ export class Cinema implements OnInit {
 		);
 	}
 
+	hideFailure(): void {
+		this.store$.dispatch(
+			new MoviesActions.MoviesFailure({
+				failure: { isShown: false } as Alert,
+			})
+		);
+    }
 
 }

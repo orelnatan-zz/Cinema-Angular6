@@ -31,30 +31,26 @@ export class MovieSummary {
                 this.renderPage = true;
                 return;
             }
-
-			this.store$.select(MoviesSelectors.getAllMovies)
-				.subscribe((movies: Array<Movie>) => {
-                    if(!movies.length) return;
-
-					this.movie = movies.find((movie: Movie) => movie.id == params['movieId']);
-
-                    if(!this.movie){
-                        this.redirectHome();
-
-                        this.store$.dispatch(
-                            new MoviesActions.MoviesFailure({
-                                failure: {
-                                    isShown: true,
-                                    message: ERROR_NOTIFICATION,
-                                    code: 401,
-                                },
-                            })
-                        );
-                        return;
-                    }
-
-					this.renderPage = true;
-				})
+			this.store$.select(MoviesSelectors.getAllMovies).subscribe((movies: Array<Movie>) => {
+				if(!movies.length) return;
+				
+				this.movie = movies.find((movie: Movie) => movie.id == params['movieId']);
+				if(!this.movie){
+					this.redirectHome();
+					
+					this.store$.dispatch(
+						new MoviesActions.MoviesFailure({
+							failure: {
+								isShown: true,
+								message: ERROR_NOTIFICATION,
+								code: 401,
+							},
+						})
+					);
+					return;
+				}
+				this.renderPage = true;
+			})
 		})
 
 		this.inProgress$ = this.store$.select (
@@ -69,7 +65,11 @@ export class MovieSummary {
     }
 
     handleSubmit(movie: Movie): void {
-        console.log(movie);
+		this.store$.dispatch(
+			new MoviesActions.Submit({
+				movie: movie
+			})
+		);
     }
 
 }

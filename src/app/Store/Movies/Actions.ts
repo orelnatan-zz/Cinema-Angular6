@@ -6,6 +6,7 @@ export enum ActionTypes {
 	LOAD = '[MOVIES] Load',
 	REJECTED = '[MOVIES] Rejected',
 	READY = '[MOVIES] Ready',
+	SUBMIT = '[MOVIES] Submit',
     MOVIES_DIALOG = '[MOVIES] Dialog',
     MOVIES_FAILURE = '[MOVIES] Failure',
     MOVIES_SUCCESS = '[MOVIES] Success',
@@ -35,6 +36,14 @@ export class Ready implements Action {
 
     constructor(public payload: {
 		movies: Array<Movie>,
+    }){}
+}
+
+export class Submit implements Action {
+    readonly type = ActionTypes.SUBMIT;
+
+    constructor(public payload: {
+		movie: Movie,
     }){}
 }
 
@@ -72,4 +81,4 @@ export class MoviesSuccess implements Action {
 }
 
 
-export type Actions = Load | Rejected | Ready | RemoveMovie | MoviesDialog | MoviesFailure | MoviesSuccess;
+export type Actions = Load | Rejected | Ready | Submit | RemoveMovie | MoviesDialog | MoviesFailure | MoviesSuccess;
