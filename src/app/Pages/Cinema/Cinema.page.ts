@@ -26,7 +26,7 @@ export class Cinema {
 		if(this.localStorage.isAuthenticated()) {
 			this.activatedRoute.queryParams.subscribe((params: object) => {
 				this.store$.dispatch(
-					new AuthActions.LoginSuccess({
+					new AuthActions.Authenticated({
 						user: this.localStorage.getAuthenticatedUser(),
 						navigateTo: {
 							path: this.router.url.split('?')[0],
@@ -34,7 +34,6 @@ export class Cinema {
 								movieId: params['movieId'],
 							}
 						},
-						failure: { isShown: false } as Alert
 					})
 				);
 			})

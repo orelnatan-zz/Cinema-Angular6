@@ -12,13 +12,18 @@
     [message]="(dialog$ | async)?.message" >
 </dialog>
 
+<success *ngIf="(success$ | async)?.isShown"
+    (onClose)="hideSuccess()"
+    [message]="(success$ | async)?.message" >
+</success>
+
 <div class="page">
     <div class="body">
-      <movies-list
-          [movies]="moviesList$ | async"
-		  (onRemove)="movieId=$event; showDeletionAlert()"
-		  (onEdit)="handleEdit($event)" >
-      </movies-list>
+        <movies-list
+            [movies]="moviesList$ | async"
+            (onRemove)="movieId=$event; showDeletionAlert()"
+            (onEdit)="navigateToMovieSummary($event)" >
+        </movies-list>
     </div>
 </div>
 

@@ -36,14 +36,13 @@ export class AuthEffects {
         ),
         switchMap((action) => this.users.getRegisteredUser(action.payload.loginAuth).pipe(
 			map((user: User) => {
-				return new AuthActions.LoginSuccess({
+				return new AuthActions.Authenticated({
 					user: user,
 					navigateTo: HOME_ROUTE,
-					failure: { isShown: false } as Alert
 				})
 			}),
 			catchError((error: Alert) => {
-				return observableOf(new AuthActions.LoginFailure({
+				return observableOf(new AuthActions.AuthFailure({
 					failure: error
 				}))
 			})
@@ -51,11 +50,11 @@ export class AuthEffects {
 	);
 
 	@Effect({ dispatch: false })
-	LogInSuccess: Observable<Action> = this.actions$.pipe(
-		ofType<AuthActions.LoginSuccess>(
-				AuthActions.ActionTypes.LOGIN_SUCCESS
+	Authenticated: Observable<Action> = this.actions$.pipe(
+		ofType<AuthActions.Authenticated>(
+				AuthActions.ActionTypes.AUTHENTICATED
 		),
-		tap((result: AuthActions.LoginSuccess) => {
+		tap((result: AuthActions.Authenticated) => {
 			this.localStorage.setUser(result.payload.user);
 			this.router.navigate([result.payload.navigateTo.path], {
 				queryParams: result.

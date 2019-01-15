@@ -1,8 +1,8 @@
 
-<modal #modalRef (onClose)="onClose.emit()">
-    <div class="success-main" *ngIf="modalRef.renderModal">
+<modal (onClose)="onClose.emit()">
+    <div class="success-main">
         <notification
-            [notification]="'Done!'"
+            [notification]="message"
             [iconClass]="'icon-checkmark'"
             [alertColor]="'#4CAF50'" >
         </notification>

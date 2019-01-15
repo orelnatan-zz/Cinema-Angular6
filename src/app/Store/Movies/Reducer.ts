@@ -13,33 +13,26 @@ const initialState: MoviesState = {
 
 export function MoviesReducer(state = initialState, action: Actions): MoviesState {
 	switch(action.type){
-		case ActionTypes.LOAD_MOVIES: {
+		case ActionTypes.LOAD: {
 			return {
 				... state,
         		inProgress: true,
 			};
 		};
-		case ActionTypes.MOVIES_LOAD_SUCCESS: {
+		case ActionTypes.READY: {
 			return {
 				... state,
 				movies: action.payload.movies,
 				inProgress: false,
 			};
 		};
-		case ActionTypes.MOVIES_LOAD_FAILURE: {
+		case ActionTypes.REJECTED: {
 			return {
 				... state,
-				movies: [],
-				inProgress: false,
-				failure: action.payload.failure
+                inProgress: false,
+                failure: action.payload.failure
 			};
 		};
-		case ActionTypes.MOVIES_DIALOG: {
-			return {
-				... state,
-				dialog: action.payload.dialog
-			};
-		}
 		case ActionTypes.REMOVE_MOVIE: {
 			state.movies.splice(state.movies
 						.findIndex((movie: Movie) => {
@@ -47,7 +40,26 @@ export function MoviesReducer(state = initialState, action: Actions): MoviesStat
 						}), 1);
 			return {
 				... state,
-				dialog: { isShown: false } 
+                dialog: { isShown: false },
+                success: action.payload.success
+			};
+        };
+        case ActionTypes.MOVIES_DIALOG: {
+			return {
+				... state,
+				dialog: action.payload.dialog
+			};
+        };
+        case ActionTypes.MOVIES_FAILURE: {
+			return {
+				... state,
+				failure: action.payload.failure
+			};
+        };
+        case ActionTypes.MOVIES_SUCCESS: {
+			return {
+				... state,
+				success: action.payload.success
 			};
 		};
 		default: {

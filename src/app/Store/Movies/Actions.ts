@@ -1,37 +1,37 @@
 import { Action } from '@ngrx/store';
-import { User } from '../../Models/User.model';
-import { Route } from '../../Models/Route.model';
 import { Movie } from '../../Models/Movie.model';
 import { Alert } from '../../Models/Alert.model';
 
 export enum ActionTypes {
-	LOAD_MOVIES = '[MOVIES] Load',
-	MOVIES_LOAD_FAILURE = '[MOVIES] Failure',
-	MOVIES_LOAD_SUCCESS = '[MOVIES] Success',
-	MOVIES_DIALOG = '[MOVIES] Dialog',
-	CREATE_MOVIE = '[MOVIES] Create',
-	REMOVE_MOVIE = '[MOVIES] Remove',
-	UPDATE_MOVIE = '[MOVIES] Update',
+	LOAD = '[MOVIES] Load',
+	REJECTED = '[MOVIES] Rejected',
+	READY = '[MOVIES] Ready',
+    MOVIES_DIALOG = '[MOVIES] Dialog',
+    MOVIES_FAILURE = '[MOVIES] Failure',
+    MOVIES_SUCCESS = '[MOVIES] Success',
+	CREATE_MOVIE = '[MOVIES] CreateMovie',
+	REMOVE_MOVIE = '[MOVIES] RemoveMovie',
+	UPDATE_MOVIE = '[MOVIES] UpdateMovie',
 	ADD_FAVORITE = '[MOVIES] AddFavorite',
 	REMOVE_FAVORITE = '[MOVIES] RemoveFavorite',
 }
 
-export class LoadMovies implements Action {
-	readonly type = ActionTypes.LOAD_MOVIES;
+export class Load implements Action {
+	readonly type = ActionTypes.LOAD;
 
 	constructor(){}
 }
 
-export class MoviesLoadFailure implements Action {
-    readonly type = ActionTypes.MOVIES_LOAD_FAILURE;
+export class Rejected implements Action {
+    readonly type = ActionTypes.REJECTED;
 
     constructor(public payload: {
       	failure: Alert,
 	}){}
 }
 
-export class MoviesLoadSuccess implements Action {
-    readonly type = ActionTypes.MOVIES_LOAD_SUCCESS;
+export class Ready implements Action {
+    readonly type = ActionTypes.READY;
 
     constructor(public payload: {
 		movies: Array<Movie>,
@@ -42,7 +42,8 @@ export class RemoveMovie implements Action {
 	readonly type = ActionTypes.REMOVE_MOVIE;
 
 	constructor(public payload: {
-		movieId: number,
+        movieId: number,
+        success: Alert
 	}){}
 }
 
@@ -54,4 +55,21 @@ export class MoviesDialog implements Action {
 	}){}
 }
 
-export type Actions = MoviesDialog | LoadMovies | MoviesLoadFailure | MoviesLoadSuccess | RemoveMovie;
+export class MoviesFailure implements Action {
+	readonly type = ActionTypes.MOVIES_FAILURE;
+
+	constructor(public payload: {
+		failure: Alert,
+	}){}
+}
+
+export class MoviesSuccess implements Action {
+	readonly type = ActionTypes.MOVIES_SUCCESS;
+
+	constructor(public payload: {
+		success: Alert,
+	}){}
+}
+
+
+export type Actions = Load | Rejected | Ready | RemoveMovie | MoviesDialog | MoviesFailure | MoviesSuccess;

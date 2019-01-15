@@ -1,4 +1,4 @@
-<!-- <loader #loaderRef > </loader>
+<loader *ngIf="inProgress$ | async" > </loader>
 
 <div class="page" *ngIf="renderPage">
     <div class="body">
@@ -7,6 +7,5 @@
 			(onExit)="redirectHome()" >
 		</movie-editor>
     </div>
-</div> -->
+</div>
 
-Movie summaryyy

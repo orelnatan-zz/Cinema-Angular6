@@ -30,7 +30,7 @@ export function AuthReducer(state = initialState, action: Actions): AuthState {
                 dialog: action.payload.dialog,
             };
         };
-        case ActionTypes.LOGIN_FAILURE: {
+        case ActionTypes.AUTH_FAILURE: {
             return {
                 ... state,
                 logged: false,
@@ -38,13 +38,12 @@ export function AuthReducer(state = initialState, action: Actions): AuthState {
                 failure: action.payload.failure
             };
         };
-        case ActionTypes.LOGIN_SUCCESS: {
+        case ActionTypes.AUTHENTICATED: {
             return {
                 ... state,
                 user: action.payload.user,
                 logged: true,
                 inProgress: false,
-                failure: action.payload.failure,
             }
 		}
 		default: {

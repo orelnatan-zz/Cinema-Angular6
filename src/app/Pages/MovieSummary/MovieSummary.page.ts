@@ -8,9 +8,10 @@ import { AppState } from '../../Store/AppState.model';
 import { Loader } from '../../Modals/Loader';
 import { Failure } from '../../Modals/Failure';
 import { Success } from '../../Modals/Success';
+import { Alert } from '../../Models/Alert.model';
 
 const Home_URL: string = 'Cinema/Home';
-const ERROR_NOTIFICATION: string = 'Server Error: unable to find movie, click to redirect home page.';
+const ERROR_NOTIFICATION: string = 'Server Error: unable to find movie, redirect home page.';
 
 @Component({
   selector: 'movie-summary',
@@ -19,12 +20,9 @@ const ERROR_NOTIFICATION: string = 'Server Error: unable to find movie, click to
 })
 
 export class MovieSummary implements OnInit {
-  @ViewChild('loaderRef') loaderRef: Loader;
-  @ViewChild('failureRef') failureRef: Failure;
-
   inProgress$: Observable<boolean>;
 
-  movie: Movie;
+  movie: Movie = {} as Movie;
   renderPage: boolean;
 
   constructor(
@@ -33,17 +31,32 @@ export class MovieSummary implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
 		this.activatedRoute.queryParams.subscribe((params: object) => {
+            if(!params['movieId']){
+                this.renderPage = true;
+                return;
+            }
+
 			this.store$.select(MoviesSelectors.getAllMovies)
 				.subscribe((movies: Array<Movie>) => {
-					if(!movies.length) return;
-					console.log(movies)
-					const shownMovie: Movie = movies.find((movie: Movie) => movie.id == params['movieId']);
-					this.movie = params['movieId'] ? shownMovie ? { ...shownMovie } : null : {} as Movie;
+                    if(!movies.length) return;
 
-					if(!this.movie){
-						// this.failureRef.showFailure(ERROR_NOTIFICATION);
-						return;
-					}
+					this.movie = movies.find((movie: Movie) => movie.id == params['movieId']);
+
+                    if(!this.movie){
+                        this.redirectHome();
+
+                        this.store$.dispatch(
+                            new MoviesActions.MoviesFailure({
+                                failure: {
+                                    isShown: true,
+                                    message: ERROR_NOTIFICATION,
+                                    code: 401,
+                                },
+                            })
+                        );
+                        return;
+                    }
+
 					this.renderPage = true;
 				})
 		})
@@ -55,9 +68,8 @@ export class MovieSummary implements OnInit {
 
 	ngOnInit() {
 		this.store$.dispatch(
-			new MoviesActions.LoadMovies(),
+			new MoviesActions.Load(),
 		);
-
 	}
 
 	private redirectHome(): void {
@@ -65,8 +77,6 @@ export class MovieSummary implements OnInit {
 			queryParams: {}
 		});
 	}
-
-
 
 }
 

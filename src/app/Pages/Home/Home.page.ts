@@ -21,7 +21,8 @@ export class Home implements OnInit {
 	moviesList$: Observable<Movie[]>;
 	inProgress$: Observable<boolean>;
 	failure$: Observable<Alert>;
-	dialog$: Observable<Alert>;
+    dialog$: Observable<Alert>;
+    success$: Observable<Alert>;
 
 	movieId: number;
 
@@ -43,12 +44,16 @@ export class Home implements OnInit {
 
 		this.dialog$ = this.store$.select (
 			MoviesSelectors.getMoviesDialog,
+        );
+
+        this.success$ = this.store$.select (
+			MoviesSelectors.getMoviesSuccess,
 		);
 	}
 
 	ngOnInit(){
 		this.store$.dispatch(
-			new MoviesActions.LoadMovies(),
+			new MoviesActions.Load(),
 		);
 	}
 
@@ -62,7 +67,7 @@ export class Home implements OnInit {
 			})
 		)
 	}
-	  
+
 	hideDialog(): void {
 		this.store$.dispatch(
 			new MoviesActions.MoviesDialog({
@@ -74,23 +79,35 @@ export class Home implements OnInit {
 	handleRemove(movieId: number): void {
 		this.store$.dispatch(
 			new MoviesActions.RemoveMovie({
-				movieId: movieId,
+                movieId: movieId,
+                success: {
+                    isShown: true,
+                    message: 'Done! :)'
+                }
 			})
 		);
   	}
 
-	handleEdit(movieId: number): void {
-		this.router.navigate([MOVIE_SUMMARY_URL], {
-			queryParams: {
-				movieId: movieId
-			}
-		})
+    navigateToMovieSummary(movieId: number): void {
+        this.router.navigate([MOVIE_SUMMARY_URL], {
+            queryParams: {
+                movieId: movieId
+            }
+        })
   	}
 
 	hideFailure(): void {
 		this.store$.dispatch(
-			new MoviesActions.MoviesLoadFailure({
+			new MoviesActions.MoviesFailure({
 				failure: { isShown: false } as Alert,
+			})
+		);
+    }
+
+    hideSuccess(): void {
+		this.store$.dispatch(
+			new MoviesActions.MoviesSuccess({
+				success: { isShown: false } as Alert,
 			})
 		);
 	}

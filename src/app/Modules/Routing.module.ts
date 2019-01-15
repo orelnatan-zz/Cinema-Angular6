@@ -8,12 +8,12 @@ import { MovieSummary } from '../Pages/MovieSummary';
 import { Home } from '../Pages/Home';
 import { NotFound } from '../Pages/NotFound';
 
-const routes: Routes = [                                                  
-	{ path: '', redirectTo: 'Cinema', pathMatch: 'full' },                  
-    { path: 'Cinema', component: Cinema, 
+const routes: Routes = [
+	{ path: '', redirectTo: 'Cinema', pathMatch: 'full' },
+    { path: 'Cinema', component: Cinema,
       children: [
-		{ path: '', redirectTo: 'Login', pathMatch: 'full' },
-		{ path: 'Login', component: Entrance, }, 
+		{ path: '', redirectTo: 'Home', pathMatch: 'full' },
+		{ path: 'Login', component: Entrance, },
         { path: 'Home', component: Home, canActivate: [ AuthGuard ] },
 		{ path: 'MovieSummary', component: MovieSummary, canActivate: [ AuthGuard ] },
 		{ path: 'User-Details', component: UserDetails },
@@ -27,6 +27,5 @@ const routes: Routes = [
   imports: [ RouterModule.forRoot(routes) ],
   exports: [ RouterModule ]
 })
-
 
 export class RoutingModule {}

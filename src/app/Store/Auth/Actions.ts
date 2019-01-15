@@ -7,15 +7,15 @@ import { Alert } from '../../Models/Alert.model';
 export enum ActionTypes {
     LOGIN = '[AUTH] Login',
     LOGOUT = '[AUTH] Logout',
-    LOGIN_FAILURE = '[AUTH] Failure',
-    LOGIN_SUCCESS = '[AUTH] Success',
+    AUTHENTICATED = '[AUTH] Authenticated',
     AUTH_DIALOG = '[AUTH] Dialog',
+    AUTH_FAILURE = '[AUTH] Failure',
 }
 
 export class Login implements Action {
     readonly type = ActionTypes.LOGIN;
 
-  constructor(public payload: {
+    constructor(public payload: {
 		loginAuth: LoginAuth
 	}){}
 }
@@ -26,20 +26,11 @@ export class Logout implements Action {
 	constructor(){}
 }
 
-export class LoginFailure implements Action {
-	readonly type = ActionTypes.LOGIN_FAILURE;
-
-	constructor(public payload: {
-		failure: Alert
-	}){}
-}
-
-export class LoginSuccess implements Action {
-	readonly type = ActionTypes.LOGIN_SUCCESS;
+export class Authenticated implements Action {
+	readonly type = ActionTypes.AUTHENTICATED;
 
 	constructor(public payload: {
 		user: User,
-		failure: Alert,
 		navigateTo: Route
 	}){}
 }
@@ -52,5 +43,12 @@ export class AuthDialog implements Action {
   	}){}
 }
 
+export class AuthFailure implements Action {
+	readonly type = ActionTypes.AUTH_FAILURE;
 
-export type Actions = AuthDialog | Login | Logout | LoginFailure | LoginSuccess;
+	constructor(public payload: {
+		failure: Alert
+	}){}
+}
+
+export type Actions = AuthDialog | Login | Logout | AuthFailure | Authenticated;

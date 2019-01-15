@@ -52,7 +52,7 @@
   .cbx:hover span:first-child {
     border-color: $color-grass;
   }
-  
+
   .inp-cbx:checked + .cbx span:first-child {
     background: $color-grass;
     border-color: $color-grass;
@@ -71,10 +71,9 @@
     position: absolute;
     top: 2px;
   }
-  
+
   @keyframes wave {
     50% {
       transform: scale(0.9);
     }
   }
-  

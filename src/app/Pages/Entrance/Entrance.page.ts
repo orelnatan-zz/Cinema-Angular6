@@ -38,7 +38,7 @@ export class Entrance {
 
 	hideFailure(): void {
 		this.store$.dispatch(
-			new AuthActions.LoginFailure({
+			new AuthActions.AuthFailure({
 				failure: { isShown: false } as Alert
 			})
 		);

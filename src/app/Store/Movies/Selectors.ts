@@ -19,6 +19,13 @@ export const getMoviesinProgress = createSelector(
     }
 );
 
+export const getMoviesSuccess = createSelector(
+    getMoviesState,
+    (state: MoviesState): Alert => {
+        return state.success;
+    }
+);
+
 export const getMoviesFailure = createSelector(
     getMoviesState,
     (state: MoviesState): Alert => {
