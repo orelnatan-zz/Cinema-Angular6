@@ -4,7 +4,8 @@
     <div class="body">
 		<movie-editor
 			[movie]="movie"
-			(onExit)="redirectHome()" >
+            (onExit)="redirectHome()"
+            (onSubmit)="handleSubmit($event)" >
 		</movie-editor>
     </div>
 </div>

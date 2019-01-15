@@ -1,7 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LocalStorage } from '../../Services/LocalStorage.service';
 import { Store } from '@ngrx/store';
-import { AuthActions, AuthSelectors } from '../../Store';
+import { AuthActions, AuthSelectors, MoviesActions } from '../../Store';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppState } from '../../Store/AppState.model';
 import { Observable } from 'rxjs';
@@ -13,9 +13,9 @@ import { Alert } from '../../Models/Alert.model';
   styleUrls: ['./Cinema.page.scss'],
 })
 
-export class Cinema {
-  inProgress$: Observable<boolean>;
-  dialog$: Observable<Alert>;
+export class Cinema implements OnInit {
+    inProgress$: Observable<boolean>;
+    dialog$: Observable<Alert>;
 
 	constructor(
       private localStorage: LocalStorage,
@@ -43,6 +43,12 @@ export class Cinema {
 			AuthSelectors.getAuthDialog,
 		);
 	}
+
+    ngOnInit() {
+        this.store$.dispatch(
+			new MoviesActions.Load(),
+		);
+    }
 
 	handleLogout(): void {
 		this.store$.dispatch(

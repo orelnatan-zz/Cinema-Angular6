@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { MoviesSelectors, MoviesActions } from '../../Store';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -17,7 +17,7 @@ const MOVIE_SUMMARY_URL: string = 'Cinema/MovieSummary';
   providers: [ MovieTitle, ]
 })
 
-export class Home implements OnInit {
+export class Home {
 	moviesList$: Observable<Movie[]>;
 	inProgress$: Observable<boolean>;
 	failure$: Observable<Alert>;
@@ -48,12 +48,6 @@ export class Home implements OnInit {
 
         this.success$ = this.store$.select (
 			MoviesSelectors.getMoviesSuccess,
-		);
-	}
-
-	ngOnInit(){
-		this.store$.dispatch(
-			new MoviesActions.Load(),
 		);
 	}
 

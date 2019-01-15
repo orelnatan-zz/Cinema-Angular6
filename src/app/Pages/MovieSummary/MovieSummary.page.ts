@@ -1,14 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, } from '@angular/core';
 import { MoviesSelectors, MoviesActions } from '../../Store';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from '../../Models/Movie.model';
 import { AppState } from '../../Store/AppState.model';
-import { Loader } from '../../Modals/Loader';
-import { Failure } from '../../Modals/Failure';
-import { Success } from '../../Modals/Success';
-import { Alert } from '../../Models/Alert.model';
 
 const Home_URL: string = 'Cinema/Home';
 const ERROR_NOTIFICATION: string = 'Server Error: unable to find movie, redirect home page.';
@@ -19,7 +15,7 @@ const ERROR_NOTIFICATION: string = 'Server Error: unable to find movie, redirect
   styleUrls: ['./MovieSummary.page.scss']
 })
 
-export class MovieSummary implements OnInit {
+export class MovieSummary {
   inProgress$: Observable<boolean>;
 
   movie: Movie = {} as Movie;
@@ -66,17 +62,15 @@ export class MovieSummary implements OnInit {
 		);
     }
 
-	ngOnInit() {
-		this.store$.dispatch(
-			new MoviesActions.Load(),
-		);
-	}
-
-	private redirectHome(): void {
+	redirectHome(): void {
 		this.router.navigate([Home_URL], {
 			queryParams: {}
 		});
-	}
+    }
+
+    handleSubmit(movie: Movie): void {
+        console.log(movie);
+    }
 
 }
 

@@ -9,10 +9,10 @@ import { Movie } from '../../Models/Movie.model';
 
 export class MovieEditor {
     @Output() onExit: EventEmitter<any> = new EventEmitter();
-    @Output() onSubmit: EventEmitter<any> = new EventEmitter();
-  
+    @Output() onSubmit: EventEmitter<Movie> = new EventEmitter();
+
     @Input() movie: Movie;
-  
+
     languages: Array<string> = ['en', 'es', 'fr', 'de', 'ja', 'hi', 'he', 'ru', 'sv', 'it', 'cn'];
 }
 
