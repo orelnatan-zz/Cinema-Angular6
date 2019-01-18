@@ -51,7 +51,9 @@ export class Cinema implements OnInit {
 
     ngOnInit() {
         this.store$.dispatch(
-			new MoviesActions.Load(),
+			new MoviesActions.Load({
+				type: 'Default'
+			}),
 		);
     }
 

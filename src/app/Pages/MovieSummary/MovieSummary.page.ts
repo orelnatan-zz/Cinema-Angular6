@@ -1,13 +1,19 @@
-import { Component, } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { MoviesSelectors, MoviesActions } from '../../Store';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from '../../Models/Movie.model';
 import { AppState } from '../../Store/AppState.model';
+import { Alert } from '../../Models/Alert.model';
 
-const Home_URL: string = 'Cinema/Home';
-const ERROR_NOTIFICATION: string = 'Server Error: unable to find movie, redirect home page.';
+const HOME_URL: string = 'Cinema/Home';
+
+const NOT_FOUND_EXCEPTION: Alert = {
+	isShown: true,
+	message: 'Server Error: unable to find movie, redirect home page.',
+	code: 404,
+}
 
 @Component({
   selector: 'movie-summary',
@@ -15,7 +21,7 @@ const ERROR_NOTIFICATION: string = 'Server Error: unable to find movie, redirect
   styleUrls: ['./MovieSummary.page.scss']
 })
 
-export class MovieSummary {
+export class MovieSummary implements OnInit {
   inProgress$: Observable<boolean>;
 
   movie: Movie = {} as Movie;
@@ -33,18 +39,15 @@ export class MovieSummary {
             }
 			this.store$.select(MoviesSelectors.getAllMovies).subscribe((movies: Array<Movie>) => {
 				if(!movies.length) return;
-				console.log(movies);
+				
 				this.movie = { ... movies.find((movie: Movie) => movie.id == params['movieId']) };
-				if(!this.movie){
+
+				if(!Object.keys(this.movie).length){
 					this.redirectHome();
 					
 					this.store$.dispatch(
 						new MoviesActions.MoviesFailure({
-							failure: {
-								isShown: true,
-								message: ERROR_NOTIFICATION,
-								code: 401,
-							},
+							failure: NOT_FOUND_EXCEPTION,
 						})
 					);
 					return;
@@ -56,10 +59,16 @@ export class MovieSummary {
 		this.inProgress$ = this.store$.select (
 			MoviesSelectors.getMoviesinProgress,
 		);
-    }
+	}
+	
+	ngOnInit() {
+		this.router.events.subscribe(() => {
+			this.movie = {} as Movie;
+		})
+	}
 
 	redirectHome(): void {
-		this.router.navigate([Home_URL], {
+		this.router.navigate([HOME_URL], {
 			queryParams: {}
 		});
     }

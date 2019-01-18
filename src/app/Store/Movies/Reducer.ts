@@ -3,12 +3,6 @@ import { MoviesState } from './MoviesState.model';
 import { Movie } from '../../Models/Movie.model';
 import { Alert } from '../../Models/Alert.model';
 
-const SUCCESSFULLY_UPDATED: Alert = {
-	isShown: true,
-	message: 'movie successfully updated',
-	code: 200
-}
-
 const initialState: MoviesState = {
 	movies: [],
 	inProgress: false,
@@ -45,29 +39,7 @@ export function MoviesReducer(state = initialState, action: Actions): MoviesStat
                 inProgress: true,
 			};
 		};
-		case ActionTypes.UPDATE_MOVIE: {
-			state.movies[state.movies.findIndex(
-				(movie: Movie) => movie.id == action.payload.submitedMovie.id
-			)] = { ... action.payload.submitedMovie };
-
-			return {
-				... state,
-				inProgress: false,
-				success: SUCCESSFULLY_UPDATED
-			};
-		};
-		case ActionTypes.REMOVE_MOVIE: {
-			state.movies.splice(state.movies
-						.findIndex((movie: Movie) => {
-							return movie.id == action.payload.movieId;
-						}), 1);
-			return {
-				... state,
-                dialog: { isShown: false },
-                success: action.payload.success
-			};
-        };
-        case ActionTypes.MOVIES_DIALOG: {
+		case ActionTypes.MOVIES_DIALOG: {
 			return {
 				... state,
 				dialog: action.payload.dialog
@@ -86,6 +58,40 @@ export function MoviesReducer(state = initialState, action: Actions): MoviesStat
 				success: action.payload.success
 			};
 		};
+		case ActionTypes.UPDATE_MOVIE: {
+			state.movies[state.movies.findIndex(
+								(movie: Movie) => movie.id == action.payload.submitedMovie.id
+							)] = { ... action.payload.submitedMovie };
+			return {
+				... state,
+				inProgress: false,
+				success: action.payload.success
+			};
+		};
+		case ActionTypes.CREATE_MOVIE: {
+			state.movies.unshift({
+							... action.payload.submitedMovie,
+							id: Math.max.apply(Math, state.movies.map(
+								(movie: Movie) => movie.id)
+							) + 1
+						});
+			return {
+				... state,
+				inProgress: false,
+				success: action.payload.success
+			};
+		};
+		case ActionTypes.REMOVE_MOVIE: {
+			state.movies.splice(state.movies
+						.findIndex((movie: Movie) => {
+							return movie.id == action.payload.movieId;
+						}), 1);
+			return {
+				... state,
+                dialog: { isShown: false },
+                success: action.payload.success
+			};
+        };
 		default: {
       		return {
 				... state

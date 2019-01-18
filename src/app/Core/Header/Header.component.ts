@@ -5,6 +5,13 @@ import { AppState } from '../../Store/AppState.model';
 import { AuthSelectors, AuthActions } from '../../Store';
 import { Router } from '@angular/router';
 import { User } from '../../Models/User.model';
+import { Alert } from '../../Models/Alert.model';
+
+const LOGOUT_ALERT: Alert = {
+	message: 'Sure you want to logout?',
+	isShown: true,
+	code: null
+}
 
 @Component({
   selector: 'header',
@@ -27,10 +34,7 @@ export class Header {
 	showLogoutDialog() {
 		this.store$.dispatch(
 			new AuthActions.AuthDialog({
-				dialog: {
-					message: 'Sure you want to logout?',
-					isShown: true,
-				}
+				dialog: LOGOUT_ALERT
 			})
 		)
 	}

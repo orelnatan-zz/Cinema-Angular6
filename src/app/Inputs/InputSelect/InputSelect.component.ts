@@ -9,7 +9,6 @@ import { remoteSelection } from './source';
 })
 
 export class InputSelect implements OnInit, AfterViewInit {
-
     @ViewChild('inputReference') inputReference: ElementRef;
     @ViewChild('subtitleReference') subtitleReference: ElementRef;
 

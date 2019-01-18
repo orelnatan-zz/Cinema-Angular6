@@ -101,6 +101,11 @@
     }
   }
 
+  .movieitem-favorite {
+    &:hover {
+      color: $color-warning;
+    }
+  }
 }
 
 .movieitem-slideUp {

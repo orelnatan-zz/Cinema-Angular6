@@ -20,7 +20,9 @@ export enum ActionTypes {
 export class Load implements Action {
 	readonly type = ActionTypes.LOAD;
 
-	constructor(){}
+	constructor(public payload: {
+		type: string
+	}){}
 }
 
 export class Rejected implements Action {
@@ -52,6 +54,7 @@ export class UpdateMovie implements Action {
 
     constructor(public payload: {
 		submitedMovie: Movie,
+		success: Alert
     }){}
 }
 
@@ -60,6 +63,7 @@ export class CreateMovie implements Action {
 
     constructor(public payload: {
 		submitedMovie: Movie,
+		success: Alert
     }){}
 }
 

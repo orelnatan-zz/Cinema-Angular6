@@ -10,6 +10,18 @@ import { Alert } from '../../Models/Alert.model';
 
 const MOVIE_SUMMARY_URL: string = 'Cinema/MovieSummary';
 
+const REMOVE_ALERT: Alert = {
+	message: 'Sure you want to delete this movie?',
+	isShown: true,
+	code: null,
+}
+
+const SUCCESSFULLY_REMOVED: Alert = {
+	isShown: true,
+	message: 'movie successfully removed!',
+	code: 200
+}
+
 @Component({
   selector: 'home',
   templateUrl: './Home.page.html',
@@ -49,10 +61,7 @@ export class Home {
 	showDeletionAlert(): void {
 		this.store$.dispatch(
 			new MoviesActions.MoviesDialog({
-				dialog: {
-					message: 'Sure you want to delete this movie?',
-			 		isShown: true,
-				}
+				dialog: REMOVE_ALERT
 			})
 		)
 	}
@@ -69,10 +78,7 @@ export class Home {
 		this.store$.dispatch(
 			new MoviesActions.RemoveMovie({
                 movieId: movieId,
-                success: {
-                    isShown: true,
-                    message: 'Done! :)'
-                }
+                success: SUCCESSFULLY_REMOVED
 			})
 		);
   	}

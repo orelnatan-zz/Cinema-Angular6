@@ -18,6 +18,18 @@ const TITLE_IS_ALREADY_EXIST_EXCEPTION: Alert = {
 	code: 409
 }
 
+const SUCCESSFULLY_UPDATED: Alert = {
+	isShown: true,
+	message: 'movie successfully updated!',
+	code: 200
+}
+
+const SUCCESSFULLY_CREATED: Alert = {
+	isShown: true,
+	message: 'movie successfully created!',
+	code: 201
+}
+
 const HOME_URL: string = 'Cinema/Home';
 
 @Injectable()
@@ -34,19 +46,35 @@ export class MoviesEffects {
     Load$: Observable<Action> = this.actions$.pipe(
         ofType<MoviesActions.Load>(
             MoviesActions.ActionTypes.LOAD
-        ),
-        switchMap(() => this.movies.getMovies().pipe(
-			map((movies: Array<Movie>) => {
-				return new MoviesActions.Ready({
-					movies: movies,
+		),
+		switchMap((action: MoviesActions.Load): Observable<Action> => {
+			let observerType: Observable<Movie[] | Error>;
+			switch(action.payload.type) {
+				case 'Default':
+					observerType = this.movies.getMovies();
+				 break;
+
+				case 'Favorites': 
+				 // observerType = this.localStorage.getFavorites();
+				 break;
+
+				default:
+					observerType = this.movies.getMovies();
+			};
+
+			return observerType.pipe(
+				map((movies: Array<Movie>) => {
+					return new MoviesActions.Ready({
+						movies: movies,
+					})
+				}),
+				catchError((error: Alert) => {
+					return observableOf(new MoviesActions.Rejected({
+						failure: error
+					}))
 				})
-			}),
-			catchError((error: Alert) => {
-				return observableOf(new MoviesActions.Rejected({
-                    failure: error
-                }))
-			})
-		))
+			)
+		})
 	);
 
 	@Effect()
@@ -63,6 +91,7 @@ export class MoviesEffects {
 					return !this.isTitleExist(movies,  submitedMovie.title, originMovie.title) ? 
 						   new MoviesActions.UpdateMovie({
 								submitedMovie,
+								success: SUCCESSFULLY_UPDATED
 						   }) : new MoviesActions.MoviesFailure({
 							   failure: TITLE_IS_ALREADY_EXIST_EXCEPTION
 						   })
@@ -70,6 +99,7 @@ export class MoviesEffects {
 					return !this.isTitleExist(movies,  submitedMovie.title) ? 
 							new MoviesActions.CreateMovie({
 								submitedMovie,
+								success: SUCCESSFULLY_CREATED
 							}) : new MoviesActions.MoviesFailure({
 								failure: TITLE_IS_ALREADY_EXIST_EXCEPTION
 							})
@@ -84,9 +114,10 @@ export class MoviesEffects {
 	);
 
 	@Effect({ dispatch: false })
-	Update: Observable<Action> = this.actions$.pipe(
-		ofType<MoviesActions.UpdateMovie>(
-			MoviesActions.ActionTypes.UPDATE_MOVIE
+	UpdateOrCreated: Observable<Action> = this.actions$.pipe(
+		ofType<MoviesActions.UpdateMovie | MoviesActions.CreateMovie>(
+			MoviesActions.ActionTypes.UPDATE_MOVIE,
+			MoviesActions.ActionTypes.CREATE_MOVIE
 		),
 		tap(() => {
 			this.router.navigate([HOME_URL]);
@@ -107,9 +138,10 @@ export class MoviesEffects {
 		title: string, 
 		exclude: string = null
 	): boolean {
-		const titles: Array<string> = exclude ? movies.map((movie: Movie) => movie.title)
-													  .filter((title: string) => title != exclude) : 
-												movies.map((movie: Movie) => movie.title);
+		const titles: Array<string> = exclude ? 
+			  movies.map((movie: Movie) => movie.title)
+					.filter((title: string) => title != exclude) : 
+			  movies.map((movie: Movie) => movie.title);
 		return titles.indexOf(title) != -1;
 	}
 

@@ -10,7 +10,7 @@ import { AppState } from '../Store/AppState.model';
 
 const IMAGE_PREFIX: string = "https://image.tmdb.org/t/p/w500";
 
-const UNAUTHORIZED: Alert = {
+const UNAUTHORIZED_EXCEPTION: Alert = {
 	code: 401,
 	message: '401 (Unauthorized) Invalid API key: You must be granted a valid key.',
 	isShown: true,
@@ -41,7 +41,7 @@ export class Movies {
     }
 
     private _handleError(error: any): Observable<Error> {               // On error, throw exception
-		return Observable.throw(UNAUTHORIZED);
+		return Observable.throw(UNAUTHORIZED_EXCEPTION);
     }
 
     private normalizeData(data: Array<Movie>): Array<Movie> {
