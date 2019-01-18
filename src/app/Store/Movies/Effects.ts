@@ -12,6 +12,13 @@ import { Alert } from '../../Models/Alert.model';
 import * as MoviesActions from './Actions';
 import { AppState } from '../AppState.model';
 
+const TITLE_IS_ALREADY_EXIST_EXCEPTION: Alert = {
+	isShown: true,
+	message: 'Sorry, this title is already exist, try another...',
+	code: 409
+}
+
+const HOME_URL: string = 'Cinema/Home';
 
 @Injectable()
 export class MoviesEffects {
@@ -42,23 +49,68 @@ export class MoviesEffects {
 		))
 	);
 
-	// @Effect()
-    // Submit$: Observable<Action> = this.actions$.pipe(
-    //     ofType<MoviesActions.Submit>(
-    //         MoviesActions.ActionTypes.SUBMIT
-    //     ),
-    //     switchMap((action) => this.movies.getMovies().pipe(
-	// 		map((movies: Array<Movie>) => {
-	// 			console.log(action.payload.movie);
-	// 			// ...
-	// 		}),
-	// 		catchError((error: Alert) => {
-	// 			return observableOf(new MoviesActions.MoviesFailure({
-    //                 failure: error
-    //             }))
-	// 		})
-	// 	))
-	// );
+	@Effect()
+    Submit$: Observable<Action> = this.actions$.pipe(
+        ofType<MoviesActions.Submit>(
+            MoviesActions.ActionTypes.SUBMIT
+        ),
+        switchMap((action: MoviesActions.Submit) => this.movies.getMovies().pipe(
+			map((movies: Array<Movie>) => {
+				const submitedMovie: Movie = action.payload.movie;
+				const originMovie: Movie = this.getMovieById(movies, submitedMovie.id);
 
+				if(originMovie){
+					return !this.isTitleExist(movies,  submitedMovie.title, originMovie.title) ? 
+						   new MoviesActions.UpdateMovie({
+								submitedMovie,
+						   }) : new MoviesActions.MoviesFailure({
+							   failure: TITLE_IS_ALREADY_EXIST_EXCEPTION
+						   })
+				} else {
+					return !this.isTitleExist(movies,  submitedMovie.title) ? 
+							new MoviesActions.CreateMovie({
+								submitedMovie,
+							}) : new MoviesActions.MoviesFailure({
+								failure: TITLE_IS_ALREADY_EXIST_EXCEPTION
+							})
+				}
+			}),
+			catchError((error: Alert) => {
+				return observableOf(new MoviesActions.Rejected({
+                    failure: error
+                }))
+			})
+		))
+	);
+
+	@Effect({ dispatch: false })
+	Update: Observable<Action> = this.actions$.pipe(
+		ofType<MoviesActions.UpdateMovie>(
+			MoviesActions.ActionTypes.UPDATE_MOVIE
+		),
+		tap(() => {
+			this.router.navigate([HOME_URL]);
+		})
+	);
+
+	private getMovieById(
+		movies:Array<Movie>, 
+		movieId: number
+	): Movie {
+		return movies.find((
+			movie: Movie) => movie.id == movieId
+		);
+	}
+
+	private isTitleExist(
+		movies: Array<Movie>, 
+		title: string, 
+		exclude: string = null
+	): boolean {
+		const titles: Array<string> = exclude ? movies.map((movie: Movie) => movie.title)
+													  .filter((title: string) => title != exclude) : 
+												movies.map((movie: Movie) => movie.title);
+		return titles.indexOf(title) != -1;
+	}
 
 }

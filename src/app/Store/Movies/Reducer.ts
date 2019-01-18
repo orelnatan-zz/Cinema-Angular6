@@ -3,6 +3,12 @@ import { MoviesState } from './MoviesState.model';
 import { Movie } from '../../Models/Movie.model';
 import { Alert } from '../../Models/Alert.model';
 
+const SUCCESSFULLY_UPDATED: Alert = {
+	isShown: true,
+	message: 'movie successfully updated',
+	code: 200
+}
+
 const initialState: MoviesState = {
 	movies: [],
 	inProgress: false,
@@ -39,6 +45,17 @@ export function MoviesReducer(state = initialState, action: Actions): MoviesStat
                 inProgress: true,
 			};
 		};
+		case ActionTypes.UPDATE_MOVIE: {
+			state.movies[state.movies.findIndex(
+				(movie: Movie) => movie.id == action.payload.submitedMovie.id
+			)] = { ... action.payload.submitedMovie };
+
+			return {
+				... state,
+				inProgress: false,
+				success: SUCCESSFULLY_UPDATED
+			};
+		};
 		case ActionTypes.REMOVE_MOVIE: {
 			state.movies.splice(state.movies
 						.findIndex((movie: Movie) => {
@@ -59,7 +76,8 @@ export function MoviesReducer(state = initialState, action: Actions): MoviesStat
         case ActionTypes.MOVIES_FAILURE: {
 			return {
 				... state,
-				failure: action.payload.failure
+				failure: action.payload.failure,
+				inProgress: false,
 			};
         };
         case ActionTypes.MOVIES_SUCCESS: {

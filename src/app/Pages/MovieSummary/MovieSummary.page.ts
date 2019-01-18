@@ -33,8 +33,8 @@ export class MovieSummary {
             }
 			this.store$.select(MoviesSelectors.getAllMovies).subscribe((movies: Array<Movie>) => {
 				if(!movies.length) return;
-				
-				this.movie = movies.find((movie: Movie) => movie.id == params['movieId']);
+				console.log(movies);
+				this.movie = { ... movies.find((movie: Movie) => movie.id == params['movieId']) };
 				if(!this.movie){
 					this.redirectHome();
 					

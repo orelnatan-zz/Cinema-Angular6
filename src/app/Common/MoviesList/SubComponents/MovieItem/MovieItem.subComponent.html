@@ -4,7 +4,7 @@
 
         <div class="flex-container row full space-between">
             <div class="block-container global-overflowEllipsis">
-                <span class="movieitem-title">{{movie.title | movieTitle}}</span>
+                <span class="movieitem-title">{{movie.title}}</span>
             </div>
             <div class="movieitem-controls">
                 <span class="movieitem-icon movieitem-pencil icon icon-pencil" (click)="onEdit.emit(movie.id)"></span>
@@ -27,7 +27,7 @@
             </div>
             <div class="movieitem-field global-overflowEllipsis">
                 <span class="movieitem-property">Title:&ensp;</span>
-                <span class="movieitem-value">{{movie.title | movieTitle}}</span>
+                <span class="movieitem-value">{{movie.title}}</span>
             </div>
         </div>
     </div>

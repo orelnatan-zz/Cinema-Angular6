@@ -47,6 +47,22 @@ export class Submit implements Action {
     }){}
 }
 
+export class UpdateMovie implements Action {
+    readonly type = ActionTypes.UPDATE_MOVIE;
+
+    constructor(public payload: {
+		submitedMovie: Movie,
+    }){}
+}
+
+export class CreateMovie implements Action {
+    readonly type = ActionTypes.CREATE_MOVIE;
+
+    constructor(public payload: {
+		submitedMovie: Movie,
+    }){}
+}
+
 export class RemoveMovie implements Action {
 	readonly type = ActionTypes.REMOVE_MOVIE;
 
@@ -81,4 +97,13 @@ export class MoviesSuccess implements Action {
 }
 
 
-export type Actions = Load | Rejected | Ready | Submit | RemoveMovie | MoviesDialog | MoviesFailure | MoviesSuccess;
+export type Actions = Load 				| 
+					  Rejected 			| 
+					  Ready 			| 
+					  Submit 			| 
+					  UpdateMovie 		| 
+					  CreateMovie 		| 
+					  RemoveMovie 		| 
+					  MoviesDialog 		| 
+					  MoviesFailure 	| 
+					  MoviesSuccess;

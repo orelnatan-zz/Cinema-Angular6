@@ -22,10 +22,10 @@ const HOME_ROUTE: Route = {
 @Injectable()
 export class AuthEffects {
 	constructor(
-      private router: Router,
-      private users: Users,
-      private localStorage: LocalStorage,
-      private actions$: Actions
+		private router: Router,
+		private users: Users,
+		private localStorage: LocalStorage,
+		private actions$: Actions
     ) {}
 
 	@Effect()
@@ -53,10 +53,10 @@ export class AuthEffects {
 		ofType<AuthActions.Authenticated>(
 				AuthActions.ActionTypes.AUTHENTICATED
 		),
-		tap((result: AuthActions.Authenticated) => {
-			this.localStorage.setUser(result.payload.user);
-			this.router.navigate([result.payload.navigateTo.path], {
-				queryParams: result.
+		tap((action: AuthActions.Authenticated) => {
+			this.localStorage.setUser(action.payload.user);
+			this.router.navigate([action.payload.navigateTo.path], {
+				queryParams: action.
 								payload.
 									navigateTo.
 										queryParams
