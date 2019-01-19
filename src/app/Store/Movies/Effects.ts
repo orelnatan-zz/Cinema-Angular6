@@ -8,9 +8,10 @@ import { Movies } from '../../Services/Movies.service';
 import { LocalStorage } from '../../Services/LocalStorage.service';
 import { Movie } from '../../Models/Movie.model';
 import { Alert } from '../../Models/Alert.model';
+import { AppState } from '../AppState.model';
 
 import * as MoviesActions from './Actions';
-import { AppState } from '../AppState.model';
+import * as MoviesSelectors from './Selectors';
 
 const TITLE_IS_ALREADY_EXIST_EXCEPTION: Alert = {
 	isShown: true,
@@ -154,17 +155,27 @@ export class MoviesEffects {
 		})
 	);
 
-	@Effect({ dispatch: false })
-	unFavorite: Observable<Action> = this.actions$.pipe(
-		ofType<MoviesActions.UnFavorite>(
-			MoviesActions.ActionTypes.UNFAVORITE
-		),
-		tap((action: MoviesActions.UnFavorite) => {
-			this.localStorage.removeFavorite(
-				action.payload.favoriteId
+	@Effect()
+    unFavorite$: Observable<Action> = this.actions$.pipe(
+        ofType<MoviesActions.UnFavorite>(
+            MoviesActions.ActionTypes.UNFAVORITE
+        ),
+        switchMap((action: MoviesActions.UnFavorite): Observable<Action> => {
+			this.localStorage.removeFavorite(action.payload.favoriteId);
+			return this.localStorage.getUserFavorites().pipe(
+				map((movies: Array<Movie>) => {
+					return new MoviesActions.Ready({
+						movies: movies,
+					})
+				}),
+				catchError((error: Alert) => {
+					return observableOf(new MoviesActions.Rejected({
+						failure: error
+					}))
+				})
 			)
-		})
-	);
+		} 
+	))
 
 	private getMovieById(
 		movies:Array<Movie>, 

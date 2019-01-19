@@ -60,10 +60,6 @@ export function MoviesReducer(state = initialState, action: Actions): MoviesStat
 			};
 		};
 		case ActionTypes.UNFAVORITE: {
-			state.movies.splice(state.movies
-						.findIndex((movie: Movie) => {
-							return movie.id == action.payload.favoriteId;
-						}), 1);
 			return {
 				... state,
 				inProgress: false,
@@ -91,8 +87,8 @@ export function MoviesReducer(state = initialState, action: Actions): MoviesStat
 		};
 		case ActionTypes.UPDATE: {
 			state.movies[state.movies.findIndex(
-							(movie: Movie) => movie.id == action.payload.submitedMovie.id
-						)] = { ... action.payload.submitedMovie };
+						(movie: Movie) => movie.id == action.payload.submitedMovie.id
+					)] = { ... action.payload.submitedMovie };
 			return {
 				... state,
 				inProgress: false,
@@ -101,11 +97,11 @@ export function MoviesReducer(state = initialState, action: Actions): MoviesStat
 		};
 		case ActionTypes.CREATE: {
 			state.movies.unshift({
-							... action.payload.submitedMovie,
-							id: Math.max.apply(Math, state.movies.map(
-								(movie: Movie) => movie.id)
-							) + 1
-						});
+						... action.payload.submitedMovie,
+						id: Math.max.apply(Math, state.movies.map(
+							(movie: Movie) => movie.id)
+						) + 1
+					});
 			return {
 				... state,
 				inProgress: false,
@@ -115,8 +111,8 @@ export function MoviesReducer(state = initialState, action: Actions): MoviesStat
 		case ActionTypes.REMOVE: {
 			state.trash.push(action.payload.movieId);
 			const movies = state.movies.filter((movie: Movie) => {
-							return state.trash.indexOf(movie.id) == -1;
-						});
+						return state.trash.indexOf(movie.id) == -1;
+					});
 			return {
 				... state,
 				movies: movies,

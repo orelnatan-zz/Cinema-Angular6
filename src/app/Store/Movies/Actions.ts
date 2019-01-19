@@ -71,7 +71,7 @@ export class UnFavorite implements Action {
     readonly type = ActionTypes.UNFAVORITE;
 
     constructor(public payload: {
-		favoriteId: number
+		favoriteId: number,
     }){}
 }
 

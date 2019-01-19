@@ -16,7 +16,6 @@ export class LocalStorage {
 		const localData: Cinema = {
 			user: {} as User,
 		}
-
 		if(typeof(Storage) !== "undefined"){
 		  if(localStorage.getItem("Cinima") != null) {
 				try{
