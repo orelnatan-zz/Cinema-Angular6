@@ -46,7 +46,7 @@ export class MovieSummary implements OnInit {
 					this.redirectHome();
 					
 					this.store$.dispatch(
-						new MoviesActions.MoviesFailure({
+						new MoviesActions.Failure({
 							failure: NOT_FOUND_EXCEPTION,
 						})
 					);

@@ -4,8 +4,9 @@
       <div class="movieslist-movie" *ngFor="let movie of movies">
           <movie-item
               [movie]="movie"
-              (onRemove)="onRemove.emit($event)"
-              (onEdit)="onEdit.emit($event)">
+              (remove)="remove.emit($event)"
+			  (edit)="edit.emit($event)"
+			  (stared)="stared.emit($event)">
           </movie-item>
       </div>
   </div>

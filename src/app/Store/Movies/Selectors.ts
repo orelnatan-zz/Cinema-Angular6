@@ -12,6 +12,13 @@ export const getAllMovies = createSelector(
     }
 );
 
+export const displayMode = createSelector(
+    getMoviesState,
+    (state: MoviesState): string => {
+        return state.displayMode;
+    }
+);
+
 export const getMoviesinProgress = createSelector(
     getMoviesState,
     (state: MoviesState): boolean => {
@@ -19,21 +26,21 @@ export const getMoviesinProgress = createSelector(
     }
 );
 
-export const getMoviesSuccess = createSelector(
+export const getSuccess = createSelector(
     getMoviesState,
     (state: MoviesState): Alert => {
         return state.success;
     }
 );
 
-export const getMoviesFailure = createSelector(
+export const getFailure = createSelector(
     getMoviesState,
     (state: MoviesState): Alert => {
         return state.failure;
     }
 );
 
-export const getMoviesDialog = createSelector(
+export const getDialog = createSelector(
     getMoviesState,
     (state: MoviesState): Alert => {
         return state.dialog;

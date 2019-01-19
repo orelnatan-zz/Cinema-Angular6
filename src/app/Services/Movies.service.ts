@@ -18,24 +18,14 @@ const UNAUTHORIZED_EXCEPTION: Alert = {
 
 @Injectable()
 export class Movies {
-    movies: Array<Movie>;
 
 	constructor(
 		private http: Http,
 		private store$: Store<AppState>
-	) {
-		this.store$.select(							// Listening to movies state changes ...
-			MoviesSelectors.getAllMovies
-		).subscribe((movies: Array<Movie>) => {
-			this.movies = movies;
-		});
-	}
+	) {}
 
     public getMovies(): Observable<Movie[] | Error> {
-        return this.movies.length ? new Observable((observer) => {
-            observer.next(this.movies);
-            observer.complete();
-        }) : this.http.get(environment.apis.movies.moviesData).map((response) => {
+        return this.http.get(environment.apis.movies.moviesData).map((response) => {
             	return this.normalizeData(response.json().results);
         }).catch(this._handleError).delay(2000);
     }

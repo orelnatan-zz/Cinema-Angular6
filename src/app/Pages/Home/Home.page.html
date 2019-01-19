@@ -16,8 +16,9 @@
     <div class="body">
         <movies-list
             [movies]="moviesList$ | async"
-            (onRemove)="movieId=$event; showDeletionAlert()"
-            (onEdit)="navigateToMovieSummary($event)" >
+            (remove)="movieId=$event; showDeletionAlert()"
+			(edit)="navigateToMovieSummary($event)"
+			(stared)="toggleFavorite($event)" >
         </movies-list>
     </div>
 </div>

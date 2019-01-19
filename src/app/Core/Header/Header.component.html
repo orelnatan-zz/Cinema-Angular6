@@ -12,7 +12,8 @@
 		</div>
     </div>
     <div class="header-section" *ngIf="router.url != '/Cinema/Login'">
-		<span class="header-icon header-favorite icon icon-star-full"></span>
+		<span class="header-icon header-favorite icon icon-star-full" *ngIf="(mode$ | async) == 'Default'" (click)="switchDisplayMode('Favorites')"></span>
+		<span class="header-icon header-favorite icon icon-star-empty" *ngIf="(mode$ | async) == 'Favorites'" (click)="switchDisplayMode('Default')"></span>
 		<span class="header-icon header-plus icon icon-plus" (click)="router.navigate(['Cinema/MovieSummary'])"></span>
     </div>
 </div>

@@ -41,18 +41,18 @@ export class Cinema implements OnInit {
     	}
 
     	this.dialog$ = this.store$.select (
-			AuthSelectors.getAuthDialog,
+			AuthSelectors.getDialog,
 		);
 
 		this.failure$ = this.store$.select (
-			MoviesSelectors.getMoviesFailure,
+			MoviesSelectors.getFailure,
 		);
 	}
 
     ngOnInit() {
         this.store$.dispatch(
 			new MoviesActions.Load({
-				type: 'Default'
+				displayMode: 'Default'
 			}),
 		);
     }
@@ -65,7 +65,7 @@ export class Cinema implements OnInit {
 
 	hideDialog(): void {
 		this.store$.dispatch(
-			new AuthActions.AuthDialog({
+			new AuthActions.Dialog({
 				dialog: { isShown: false } as Alert
 			})
 		);
@@ -73,7 +73,7 @@ export class Cinema implements OnInit {
 
 	hideFailure(): void {
 		this.store$.dispatch(
-			new MoviesActions.MoviesFailure({
+			new MoviesActions.Failure({
 				failure: { isShown: false } as Alert,
 			})
 		);

@@ -10,7 +10,7 @@ import { Movie } from '../../Models/Movie.model';
 export class MoviesList {
   @Input() movies: Array<Movie>;
 
-  @Output() onRemove: EventEmitter<number> = new EventEmitter();
-  @Output() onEdit: EventEmitter<number> = new EventEmitter();
-
+  @Output() remove: EventEmitter<number> = new EventEmitter();
+  @Output() edit: EventEmitter<number> = new EventEmitter();
+  @Output() stared: EventEmitter<Movie> = new EventEmitter();
 }

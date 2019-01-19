@@ -24,13 +24,13 @@ export function AuthReducer(state = initialState, action: Actions): AuthState {
                 ... initialState,
             };
         };
-        case ActionTypes.AUTH_DIALOG: {
+        case ActionTypes.DIALOG: {
             return {
                 ... state,
                 dialog: action.payload.dialog,
             };
         };
-        case ActionTypes.AUTH_FAILURE: {
+        case ActionTypes.FAILURE: {
             return {
                 ... state,
                 logged: false,

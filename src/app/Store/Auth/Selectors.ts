@@ -19,14 +19,14 @@ export const getAuthInProgress = createSelector(
     }
 );
 
-export const getAuthDialog = createSelector(
+export const getDialog = createSelector(
   getAuthState,
   (state: AuthState): Alert => {
     return state.dialog;
   }
 );
 
-export const getAuthFailure = createSelector(
+export const getFailure = createSelector(
   getAuthState,
 	(state: AuthState): Alert => {
 		return state.failure;

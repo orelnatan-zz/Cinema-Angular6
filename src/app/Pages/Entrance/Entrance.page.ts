@@ -24,7 +24,7 @@ export class Entrance {
     	);
 
 		this.failure$ = this.store$.select (
-				AuthSelectors.getAuthFailure,
+				AuthSelectors.getFailure,
 		);
 	}
 
@@ -38,7 +38,7 @@ export class Entrance {
 
 	hideFailure(): void {
 		this.store$.dispatch(
-			new AuthActions.AuthFailure({
+			new AuthActions.Failure({
 				failure: { isShown: false } as Alert
 			})
 		);

@@ -8,8 +8,8 @@ export enum ActionTypes {
     LOGIN = '[AUTH] Login',
     LOGOUT = '[AUTH] Logout',
     AUTHENTICATED = '[AUTH] Authenticated',
-    AUTH_DIALOG = '[AUTH] Dialog',
-    AUTH_FAILURE = '[AUTH] Failure',
+    DIALOG = '[AUTH] Dialog',
+    FAILURE = '[AUTH] Failure',
 }
 
 export class Login implements Action {
@@ -35,20 +35,20 @@ export class Authenticated implements Action {
 	}){}
 }
 
-export class AuthDialog implements Action {
-	readonly type = ActionTypes.AUTH_DIALOG;
+export class Dialog implements Action {
+	readonly type = ActionTypes.DIALOG;
 
 	constructor(public payload: {
     	dialog: Alert
   	}){}
 }
 
-export class AuthFailure implements Action {
-	readonly type = ActionTypes.AUTH_FAILURE;
+export class Failure implements Action {
+	readonly type = ActionTypes.FAILURE;
 
 	constructor(public payload: {
-		failure: Alert
+		failure: Alert,
 	}){}
 }
 
-export type Actions = AuthDialog | Login | Logout | AuthFailure | Authenticated;
+export type Actions = Dialog | Login | Logout | Failure | Authenticated;

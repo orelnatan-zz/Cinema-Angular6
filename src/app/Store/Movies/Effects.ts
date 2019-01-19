@@ -20,14 +20,20 @@ const TITLE_IS_ALREADY_EXIST_EXCEPTION: Alert = {
 
 const SUCCESSFULLY_UPDATED: Alert = {
 	isShown: true,
-	message: 'movie successfully updated!',
+	message: 'Movie successfully updated!',
 	code: 200
 }
 
 const SUCCESSFULLY_CREATED: Alert = {
 	isShown: true,
-	message: 'movie successfully created!',
+	message: 'Movie successfully created!',
 	code: 201
+}
+
+const NEW_FAVORITE_ADDED: Alert = {
+	isShown: true,
+	message: 'New favorite added!',
+	code: 200
 }
 
 const HOME_URL: string = 'Cinema/Home';
@@ -48,21 +54,10 @@ export class MoviesEffects {
             MoviesActions.ActionTypes.LOAD
 		),
 		switchMap((action: MoviesActions.Load): Observable<Action> => {
-			let observerType: Observable<Movie[] | Error>;
-			switch(action.payload.type) {
-				case 'Default':
-					observerType = this.movies.getMovies();
-				 break;
-
-				case 'Favorites': 
-				 // observerType = this.localStorage.getFavorites();
-				 break;
-
-				default:
-					observerType = this.movies.getMovies();
-			};
-
-			return observerType.pipe(
+			const observer: Observable<Movie[] | Error> = this.getObserverByMode(
+				action.payload.displayMode
+			);
+			return observer.pipe(
 				map((movies: Array<Movie>) => {
 					return new MoviesActions.Ready({
 						movies: movies,
@@ -89,18 +84,18 @@ export class MoviesEffects {
 
 				if(originMovie){
 					return !this.isTitleExist(movies,  submitedMovie.title, originMovie.title) ? 
-						   new MoviesActions.UpdateMovie({
+						   new MoviesActions.Update({
 								submitedMovie,
 								success: SUCCESSFULLY_UPDATED
-						   }) : new MoviesActions.MoviesFailure({
+						   }) : new MoviesActions.Failure({
 							   failure: TITLE_IS_ALREADY_EXIST_EXCEPTION
 						   })
 				} else {
 					return !this.isTitleExist(movies,  submitedMovie.title) ? 
-							new MoviesActions.CreateMovie({
+							new MoviesActions.Create({
 								submitedMovie,
 								success: SUCCESSFULLY_CREATED
-							}) : new MoviesActions.MoviesFailure({
+							}) : new MoviesActions.Failure({
 								failure: TITLE_IS_ALREADY_EXIST_EXCEPTION
 							})
 				}
@@ -115,12 +110,59 @@ export class MoviesEffects {
 
 	@Effect({ dispatch: false })
 	UpdateOrCreated: Observable<Action> = this.actions$.pipe(
-		ofType<MoviesActions.UpdateMovie | MoviesActions.CreateMovie>(
-			MoviesActions.ActionTypes.UPDATE_MOVIE,
-			MoviesActions.ActionTypes.CREATE_MOVIE
+		ofType<MoviesActions.Update | MoviesActions.Create>(
+			MoviesActions.ActionTypes.UPDATE,
+			MoviesActions.ActionTypes.CREATE
 		),
 		tap(() => {
 			this.router.navigate([HOME_URL]);
+		})
+	);
+
+	@Effect()
+    ToggleFavorite$: Observable<Action> = this.actions$.pipe(
+        ofType<MoviesActions.Toggle>(
+            MoviesActions.ActionTypes.TOGGLE
+        ),
+        switchMap((action: MoviesActions.Toggle) => this.localStorage.getUserFavorites().pipe(
+			map((movies: Array<Movie>) => {
+				return this.getMovieById(movies ,action.payload.movie.id) ? 
+						new MoviesActions.UnFavorite({
+							favoriteId: action.payload.movie.id,
+						}) : new MoviesActions.Favorite({
+							movie: action.payload.movie,
+							success: NEW_FAVORITE_ADDED
+						})
+			}),
+			catchError((error: Alert) => {
+				return observableOf(new MoviesActions.Rejected({
+                    failure: error
+                }))
+			})
+		))
+	);
+
+	@Effect({ dispatch: false })
+	Favorite: Observable<Action> = this.actions$.pipe(
+		ofType<MoviesActions.Favorite>(
+			MoviesActions.ActionTypes.FAVORITE
+		),
+		tap((action: MoviesActions.Favorite) => {
+			this.localStorage.addFavorite(
+				action.payload.movie
+			)
+		})
+	);
+
+	@Effect({ dispatch: false })
+	unFavorite: Observable<Action> = this.actions$.pipe(
+		ofType<MoviesActions.UnFavorite>(
+			MoviesActions.ActionTypes.UNFAVORITE
+		),
+		tap((action: MoviesActions.UnFavorite) => {
+			this.localStorage.removeFavorite(
+				action.payload.favoriteId
+			)
 		})
 	);
 
@@ -143,6 +185,22 @@ export class MoviesEffects {
 					.filter((title: string) => title != exclude) : 
 			  movies.map((movie: Movie) => movie.title);
 		return titles.indexOf(title) != -1;
+	}
+
+	private getObserverByMode(
+		payloadType: string
+	): Observable<Movie[] | Error> {
+		switch(payloadType) {
+			case 'Default':{
+				return this.movies.getMovies();
+			};			 
+			case 'Favorites': {
+				 return this.localStorage.getUserFavorites();
+			}; 
+			default: {
+				return this.movies.getMovies();
+			};
+		};
 	}
 
 }

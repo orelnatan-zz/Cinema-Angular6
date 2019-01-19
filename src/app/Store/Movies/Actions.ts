@@ -7,21 +7,22 @@ export enum ActionTypes {
 	REJECTED = '[MOVIES] Rejected',
 	READY = '[MOVIES] Ready',
 	SUBMIT = '[MOVIES] Submit',
-    MOVIES_DIALOG = '[MOVIES] Dialog',
-    MOVIES_FAILURE = '[MOVIES] Failure',
-    MOVIES_SUCCESS = '[MOVIES] Success',
-	CREATE_MOVIE = '[MOVIES] CreateMovie',
-	REMOVE_MOVIE = '[MOVIES] RemoveMovie',
-	UPDATE_MOVIE = '[MOVIES] UpdateMovie',
-	ADD_FAVORITE = '[MOVIES] AddFavorite',
-	REMOVE_FAVORITE = '[MOVIES] RemoveFavorite',
+    DIALOG = '[MOVIES] Dialog',
+    FAILURE = '[MOVIES] Failure',
+    SUCCESS = '[MOVIES] Success',
+	CREATE = '[MOVIES] Create',
+	REMOVE = '[MOVIES] Remove',
+	UPDATE = '[MOVIES] Update',
+	TOGGLE = '[MOVIES] Toggle',
+	FAVORITE = '[MOVIES] Favorite',
+	UNFAVORITE = '[MOVIES] UnFavorite',
 }
 
 export class Load implements Action {
 	readonly type = ActionTypes.LOAD;
 
 	constructor(public payload: {
-		type: string
+		displayMode: string,
 	}){}
 }
 
@@ -49,8 +50,33 @@ export class Submit implements Action {
     }){}
 }
 
-export class UpdateMovie implements Action {
-    readonly type = ActionTypes.UPDATE_MOVIE;
+export class Toggle implements Action {
+    readonly type = ActionTypes.TOGGLE;
+
+    constructor(public payload: {
+		movie: Movie
+    }){}
+}
+
+export class Favorite implements Action {
+    readonly type = ActionTypes.FAVORITE;
+
+    constructor(public payload: {
+		movie: Movie,
+		success: Alert
+    }){}
+}
+
+export class UnFavorite implements Action {
+    readonly type = ActionTypes.UNFAVORITE;
+
+    constructor(public payload: {
+		favoriteId: number
+    }){}
+}
+
+export class Update implements Action {
+    readonly type = ActionTypes.UPDATE;
 
     constructor(public payload: {
 		submitedMovie: Movie,
@@ -58,8 +84,8 @@ export class UpdateMovie implements Action {
     }){}
 }
 
-export class CreateMovie implements Action {
-    readonly type = ActionTypes.CREATE_MOVIE;
+export class Create implements Action {
+    readonly type = ActionTypes.CREATE;
 
     constructor(public payload: {
 		submitedMovie: Movie,
@@ -67,8 +93,8 @@ export class CreateMovie implements Action {
     }){}
 }
 
-export class RemoveMovie implements Action {
-	readonly type = ActionTypes.REMOVE_MOVIE;
+export class Remove implements Action {
+	readonly type = ActionTypes.REMOVE;
 
 	constructor(public payload: {
         movieId: number,
@@ -76,24 +102,24 @@ export class RemoveMovie implements Action {
 	}){}
 }
 
-export class MoviesDialog implements Action {
-	readonly type = ActionTypes.MOVIES_DIALOG;
+export class Dialog implements Action {
+	readonly type = ActionTypes.DIALOG;
 
 	constructor(public payload: {
 		dialog: Alert,
 	}){}
 }
 
-export class MoviesFailure implements Action {
-	readonly type = ActionTypes.MOVIES_FAILURE;
+export class Failure implements Action {
+	readonly type = ActionTypes.FAILURE;
 
 	constructor(public payload: {
 		failure: Alert,
 	}){}
 }
 
-export class MoviesSuccess implements Action {
-	readonly type = ActionTypes.MOVIES_SUCCESS;
+export class Success implements Action {
+	readonly type = ActionTypes.SUCCESS;
 
 	constructor(public payload: {
 		success: Alert,
@@ -101,13 +127,17 @@ export class MoviesSuccess implements Action {
 }
 
 
-export type Actions = Load 				| 
-					  Rejected 			| 
-					  Ready 			| 
-					  Submit 			| 
-					  UpdateMovie 		| 
-					  CreateMovie 		| 
-					  RemoveMovie 		| 
-					  MoviesDialog 		| 
-					  MoviesFailure 	| 
-					  MoviesSuccess;
+export type Actions = Load 			| 
+					  Rejected 		| 
+					  Ready 		| 
+					  Submit 		| 
+					  Update 		| 
+					  Create 		| 
+					  Remove 		|
+					  Dialog 		|
+					  Success		|
+					  Failure 		|
+					  Toggle		|	 
+					  Favorite		|
+					  UnFavorite; 
+					  

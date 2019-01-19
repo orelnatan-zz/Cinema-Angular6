@@ -5,6 +5,8 @@ import { Alert } from '../../Models/Alert.model';
 
 const initialState: MoviesState = {
 	movies: [],
+	trash: [],
+	displayMode: null,
 	inProgress: false,
 	failure: { isShown: false } as Alert,
 	dialog: { isShown: false } as Alert,
@@ -16,13 +18,18 @@ export function MoviesReducer(state = initialState, action: Actions): MoviesStat
 		case ActionTypes.LOAD: {
 			return {
 				... state,
-        		inProgress: true,
+				inProgress: true,
+				displayMode: action.payload.displayMode
 			};
 		};
 		case ActionTypes.READY: {
+			const movies = action.payload.movies.filter((movie: Movie) => {
+				return state.trash.indexOf(movie.id) == -1;
+			});
+
 			return {
 				... state,
-				movies: action.payload.movies,
+				movies: movies,
 				inProgress: false,
 			};
 		};
@@ -39,36 +46,60 @@ export function MoviesReducer(state = initialState, action: Actions): MoviesStat
                 inProgress: true,
 			};
 		};
-		case ActionTypes.MOVIES_DIALOG: {
+		case ActionTypes.TOGGLE: {
+			return {
+				... state,
+                inProgress: true,
+			};
+		};
+		case ActionTypes.FAVORITE: {
+			return {
+				... state,
+				inProgress: false,
+				success: action.payload.success
+			};
+		};
+		case ActionTypes.UNFAVORITE: {
+			state.movies.splice(state.movies
+						.findIndex((movie: Movie) => {
+							return movie.id == action.payload.favoriteId;
+						}), 1);
+			return {
+				... state,
+				inProgress: false,
+			};
+		};
+		case ActionTypes.DIALOG: {
 			return {
 				... state,
 				dialog: action.payload.dialog
 			};
         };
-        case ActionTypes.MOVIES_FAILURE: {
+        case ActionTypes.FAILURE: {
 			return {
 				... state,
 				failure: action.payload.failure,
 				inProgress: false,
 			};
         };
-        case ActionTypes.MOVIES_SUCCESS: {
+        case ActionTypes.SUCCESS: {
 			return {
 				... state,
-				success: action.payload.success
+				success: action.payload.success,
+				inProgress: false,
 			};
 		};
-		case ActionTypes.UPDATE_MOVIE: {
+		case ActionTypes.UPDATE: {
 			state.movies[state.movies.findIndex(
-								(movie: Movie) => movie.id == action.payload.submitedMovie.id
-							)] = { ... action.payload.submitedMovie };
+							(movie: Movie) => movie.id == action.payload.submitedMovie.id
+						)] = { ... action.payload.submitedMovie };
 			return {
 				... state,
 				inProgress: false,
 				success: action.payload.success
 			};
 		};
-		case ActionTypes.CREATE_MOVIE: {
+		case ActionTypes.CREATE: {
 			state.movies.unshift({
 							... action.payload.submitedMovie,
 							id: Math.max.apply(Math, state.movies.map(
@@ -81,13 +112,14 @@ export function MoviesReducer(state = initialState, action: Actions): MoviesStat
 				success: action.payload.success
 			};
 		};
-		case ActionTypes.REMOVE_MOVIE: {
-			state.movies.splice(state.movies
-						.findIndex((movie: Movie) => {
-							return movie.id == action.payload.movieId;
-						}), 1);
+		case ActionTypes.REMOVE: {
+			state.trash.push(action.payload.movieId);
+			const movies = state.movies.filter((movie: Movie) => {
+							return state.trash.indexOf(movie.id) == -1;
+						});
 			return {
 				... state,
+				movies: movies,
                 dialog: { isShown: false },
                 success: action.payload.success
 			};
@@ -101,3 +133,9 @@ export function MoviesReducer(state = initialState, action: Actions): MoviesStat
 
 
 }
+
+
+// state.movies.splice(state.movies
+			// 			.findIndex((movie: Movie) => {
+			// 				return movie.id == action.payload.movieId;
+			// 			}), 1);

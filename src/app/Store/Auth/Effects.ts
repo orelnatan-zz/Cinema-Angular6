@@ -41,7 +41,7 @@ export class AuthEffects {
 				})
 			}),
 			catchError((error: Alert) => {
-				return observableOf(new AuthActions.AuthFailure({
+				return observableOf(new AuthActions.Failure({
 					failure: error
 				}))
 			})

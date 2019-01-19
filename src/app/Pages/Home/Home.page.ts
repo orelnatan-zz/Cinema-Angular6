@@ -50,17 +50,17 @@ export class Home {
     	);
 
 		this.dialog$ = this.store$.select (
-			MoviesSelectors.getMoviesDialog,
+			MoviesSelectors.getDialog,
         );
 
         this.success$ = this.store$.select (
-			MoviesSelectors.getMoviesSuccess,
+			MoviesSelectors.getSuccess,
 		);
 	}
 
 	showDeletionAlert(): void {
 		this.store$.dispatch(
-			new MoviesActions.MoviesDialog({
+			new MoviesActions.Dialog({
 				dialog: REMOVE_ALERT
 			})
 		)
@@ -68,7 +68,7 @@ export class Home {
 
 	hideDialog(): void {
 		this.store$.dispatch(
-			new MoviesActions.MoviesDialog({
+			new MoviesActions.Dialog({
 				dialog: { isShown: false, } as Alert
 			})
 		);
@@ -76,7 +76,7 @@ export class Home {
 
 	handleRemove(movieId: number): void {
 		this.store$.dispatch(
-			new MoviesActions.RemoveMovie({
+			new MoviesActions.Remove({
                 movieId: movieId,
                 success: SUCCESSFULLY_REMOVED
 			})
@@ -93,8 +93,16 @@ export class Home {
 
     hideSuccess(): void {
 		this.store$.dispatch(
-			new MoviesActions.MoviesSuccess({
+			new MoviesActions.Success({
 				success: { isShown: false } as Alert,
+			})
+		);
+	}
+
+	toggleFavorite(movie: Movie): void {
+		this.store$.dispatch(
+			new MoviesActions.Toggle({
+				movie: movie,
 			})
 		);
 	}
