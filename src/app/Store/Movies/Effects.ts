@@ -41,13 +41,19 @@ const HOME_URL: string = 'Cinema/Home';
 
 @Injectable()
 export class MoviesEffects {
+	mode$: Observable<string>;
+
 	constructor(
 		private router: Router,
 		private movies: Movies,
 		private localStorage: LocalStorage,
         private actions$: Actions,
         private store$: Store<AppState>,
-    ) {}
+    ) {
+		this.mode$ = this.store$.select (
+			MoviesSelectors.getDisplayMode,
+		);
+	}
 
 	@Effect()
     Load$: Observable<Action> = this.actions$.pipe(
@@ -110,7 +116,7 @@ export class MoviesEffects {
 	);
 
 	@Effect({ dispatch: false })
-	UpdateOrCreated: Observable<Action> = this.actions$.pipe(
+	UpdateOrCreate: Observable<Action> = this.actions$.pipe(
 		ofType<MoviesActions.Update | MoviesActions.Create>(
 			MoviesActions.ActionTypes.UPDATE,
 			MoviesActions.ActionTypes.CREATE
@@ -155,28 +161,31 @@ export class MoviesEffects {
 		})
 	);
 
-	@Effect()
-    unFavorite$: Observable<Action> = this.actions$.pipe(
-        ofType<MoviesActions.UnFavorite>(
-            MoviesActions.ActionTypes.UNFAVORITE
-        ),
-        switchMap((action: MoviesActions.UnFavorite): Observable<Action> => {
+	@Effect({ dispatch: false })
+	unFavorite: Observable<Action> = this.actions$.pipe(
+		ofType<MoviesActions.UnFavorite>(
+			MoviesActions.ActionTypes.UNFAVORITE
+		),
+		tap((action: MoviesActions.UnFavorite) => {
 			this.localStorage.removeFavorite(action.payload.favoriteId);
-			return this.localStorage.getUserFavorites().pipe(
-				map((movies: Array<Movie>) => {
-					return new MoviesActions.Ready({
-						movies: movies,
-					})
-				}),
+			this.mode$.subscribe((mode: string) => {
+				if(mode != 'Favorites') return;
+				this.localStorage.getUserFavorites().subscribe((movies: Array<Movie>) => {
+					this.store$.dispatch(
+						new MoviesActions.Ready({
+							movies
+						}),
+					);
+				},
 				catchError((error: Alert) => {
 					return observableOf(new MoviesActions.Rejected({
 						failure: error
 					}))
-				})
-			)
-		} 
-	))
-
+				}))
+			})
+		})
+	);
+	
 	private getMovieById(
 		movies:Array<Movie>, 
 		movieId: number

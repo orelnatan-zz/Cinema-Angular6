@@ -12,7 +12,7 @@ export const getAllMovies = createSelector(
     }
 );
 
-export const displayMode = createSelector(
+export const getDisplayMode = createSelector(
     getMoviesState,
     (state: MoviesState): string => {
         return state.displayMode;

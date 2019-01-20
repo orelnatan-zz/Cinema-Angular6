@@ -32,7 +32,7 @@ export class Header {
 		);
 
 		this.mode$ = this.store$.select (
-			MoviesSelectors.displayMode
+			MoviesSelectors.getDisplayMode
 		);
 	}
 
